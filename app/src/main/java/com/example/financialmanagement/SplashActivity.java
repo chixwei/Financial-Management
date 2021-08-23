@@ -18,7 +18,7 @@ public class SplashActivity extends AppCompatActivity {
         handler.postDelayed(new Runnable() {
             @Override
             public void run() {
-                startActivity(new Intent(SplashActivity.this , MainActivity.class));
+                startActivity(new Intent(SplashActivity.this , Welcome1.class));
                 finish();
             }
         } , 3000); // go to main activity after 3 seconds

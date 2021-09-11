@@ -1,3 +1,11 @@
 <resources>
     <string name="app_name">Financial Management</string>
+    <string name="uname">Username</string>
+    <string name="email">Email</string>
+    <string name="pswd">Password</string>
+    <string name="rePswd">Re-Password</string>
+    <string name="enterName">Enter Your Name</string>
+    <string name="enterPswd">Enter Your Password</string>
+    <string name="enterRePswd">Re Enter Your Password</string>
+    <string name="enterEmail">Enter Your Email</string>
 </resources>

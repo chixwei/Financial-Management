@@ -9,8 +9,6 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.FinancialManagement">
-        <activity android:name=".Login"></activity>
-        <activity android:name=".SignUp" />
         <activity android:name=".Welcome1" />
         <activity android:name=".SplashActivity">
             <intent-filter>
@@ -19,6 +17,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".Login"></activity>
+        <activity android:name=".SignUp" />
         <activity android:name=".MainActivity" />
     </application>
 

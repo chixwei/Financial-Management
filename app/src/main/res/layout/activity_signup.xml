@@ -23,8 +23,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/uname"
-        app:layout_constraintStart_toStartOf="@+id/signupUname"
-        tools:layout_editor_absoluteY="129dp" />
+        app:layout_constraintBottom_toTopOf="@+id/signupUname"
+        app:layout_constraintStart_toStartOf="@+id/signupUname" />
 
     <EditText
         android:id="@+id/signupUname"
@@ -43,8 +43,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/email"
-        app:layout_constraintStart_toStartOf="@+id/signupEmail"
-        tools:layout_editor_absoluteY="243dp" />
+        app:layout_constraintBottom_toTopOf="@+id/signupEmail"
+        app:layout_constraintStart_toStartOf="@+id/signupEmail" />
 
     <EditText
         android:id="@+id/signupEmail"
@@ -63,8 +63,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/pswd"
-        app:layout_constraintStart_toStartOf="@+id/signupPassword"
-        tools:layout_editor_absoluteY="356dp" />
+        app:layout_constraintBottom_toTopOf="@+id/signupPassword"
+        app:layout_constraintStart_toStartOf="@+id/signupPassword" />
 
     <EditText
         android:id="@+id/signupPassword"
@@ -82,8 +82,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/rePswd"
-        app:layout_constraintStart_toStartOf="@+id/editTextTextPassword2"
-        tools:layout_editor_absoluteY="480dp" />
+        app:layout_constraintBottom_toTopOf="@+id/editTextTextPassword2"
+        app:layout_constraintStart_toStartOf="@+id/editTextTextPassword2" />
 
     <EditText
         android:id="@+id/editTextTextPassword2"

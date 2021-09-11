@@ -9,7 +9,7 @@
         android:id="@+id/viewLogin"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="152dp"
+        android:layout_marginBottom="104dp"
         android:text="Login"
         android:textSize="30sp"
         app:layout_constraintBottom_toTopOf="@+id/editUname"
@@ -17,15 +17,15 @@
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintVertical_bias="1.0" />
 
     <TextView
         android:id="@+id/viewUname"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/uname"
-        app:layout_constraintStart_toStartOf="@+id/editUname"
-        tools:layout_editor_absoluteY="243dp" />
+        app:layout_constraintBottom_toTopOf="@+id/editUname"
+        app:layout_constraintStart_toStartOf="@+id/editUname" />
 
     <EditText
         android:id="@+id/editUname"
@@ -44,17 +44,17 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/pswd"
-        app:layout_constraintStart_toStartOf="@+id/editPassword"
-        tools:layout_editor_absoluteY="381dp" />
+        app:layout_constraintBottom_toTopOf="@+id/editPassword"
+        app:layout_constraintStart_toStartOf="@+id/editPassword" />
 
     <EditText
         android:id="@+id/editPassword"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="72dp"
+        android:layout_marginBottom="80dp"
         android:ems="10"
-        android:inputType="textPassword"
         android:hint="@string/enterPswd"
+        android:inputType="textPassword"
         app:layout_constraintBottom_toTopOf="@+id/loginButton"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
@@ -63,7 +63,7 @@
         android:id="@+id/loginButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="152dp"
+        android:layout_marginBottom="160dp"
         android:text="Sign In"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

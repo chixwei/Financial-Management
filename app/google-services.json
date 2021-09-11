@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "525729238871",
+    "project_id": "financial-management-diitfyp",
+    "storage_bucket": "financial-management-diitfyp.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:525729238871:android:cf1e11d1c026f499553812",
+        "android_client_info": {
+          "package_name": "com.example.financialmanagement"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "525729238871-v709hiispec1it7olv6oemq8e1v69jlj.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDABGtPMk9gzWH16WPnNL4gtgRvnqA9Ack"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "525729238871-v709hiispec1it7olv6oemq8e1v69jlj.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

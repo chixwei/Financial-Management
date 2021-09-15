@@ -1,36 +1,39 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:android="http://schemas.android.com/apk/res/android">
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
 
-    //single means will select the item until we unselect it
+    //single means only select single item
     <group android:checkableBehavior="single">
         <item
             android:id="@+id/nav_home"
-            android:title="Home"
+            android:title="@string/home"
             android:icon="@drawable/ic_nav_home"/>
 
         <item
             android:id="@+id/nav_income"
-            android:title="Incomes"
+            android:title="@string/income"
             android:icon="@drawable/ic_nav_income"/>
 
         <item
             android:id="@+id/nav_expenses"
-            android:title="Expenses"
+            android:title="@string/expenses"
             android:icon="@drawable/ic_nav_expenses"/>
 
     </group>
+
 
     <item android:title="Profile">
         <menu>
             <group android:checkableBehavior="single">
                 <item
                     android:id="@+id/nav_login"
-                    android:title="Login"
+                    android:title="@string/login"
                     android:icon="@drawable/ic_nav_login"/>
 
                 <item
                     android:id="@+id/nav_logout"
-                    android:title="Logout"
+                    android:title="@string/logout"
                     android:icon="@drawable/ic_nav_logout"/>
 
             </group>

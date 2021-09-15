@@ -8,4 +8,15 @@
     <string name="enterPswd">Enter Your Password</string>
     <string name="enterRePswd">Re Enter Your Password</string>
     <string name="enterEmail">Enter Your Email</string>
+    <string name="signup">Sign Up</string>
+    <string name="signin">Sign In</string>
+    <string name="home">Home</string>
+    <string name="income">Income</string>
+    <string name="expenses">Expenses</string>
+    <string name="login">Login</string>
+    <string name="logout">Logout</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+
 </resources>

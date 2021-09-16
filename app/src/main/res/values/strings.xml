@@ -4,7 +4,10 @@
     <string name="welcome1.2">Manage your finance easily with Piggy and get to know about your financial status.</string>
     <string name="welcome2.1">Add Income &amp; Expense</string>
     <string name="welcome2.2">Record your daily expenses and income to know the balance you have.</string>
-    <string name="welcome3">Let's Get Started!</string>
+    <string name="welcome3">Let\'s Get Started!</string>
+    <string name="signin">Login</string>
+    <string name="asksignup">Don\'t have any account? Sign Up</string>
+
     <string name="uname">Username</string>
     <string name="email">Email</string>
     <string name="pswd">Password</string>
@@ -14,7 +17,7 @@
     <string name="enterRePswd">Re Enter Your Password</string>
     <string name="enterEmail">Enter Your Email</string>
     <string name="signup">Sign Up</string>
-    <string name="signin">Sign In</string>
+
     <string name="home">Home</string>
     <string name="income">Income</string>
     <string name="expenses">Expenses</string>

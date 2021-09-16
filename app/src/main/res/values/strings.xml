@@ -1,5 +1,10 @@
 <resources>
-    <string name="app_name">Financial Management</string>
+    <string name="app_name">Piggy</string>
+    <string name="welcome1.1">Welcome to Piggy</string>
+    <string name="welcome1.2">Manage your finance easily with Piggy and get to know about your financial status.</string>
+    <string name="welcome2.1">Add Income &amp; Expense</string>
+    <string name="welcome2.2">Record your daily expenses and income to know the balance you have.</string>
+    <string name="welcome3">Let's Get Started!</string>
     <string name="uname">Username</string>
     <string name="email">Email</string>
     <string name="pswd">Password</string>
@@ -17,6 +22,4 @@
     <string name="logout">Logout</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
-
-
 </resources>

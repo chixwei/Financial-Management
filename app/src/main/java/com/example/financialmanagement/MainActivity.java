@@ -1,7 +1,9 @@
 package com.example.financialmanagement;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
@@ -25,16 +27,21 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     //Drawer Menu
     DrawerLayout drawerLayout;
     NavigationView navigationView;
-    ImageView menuButton;
     ConstraintLayout contentView;
+
+    Toolbar toolbar;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        //Menu Button
-        menuButton = findViewById(R.id.menuButton);
+
+        //toolbar
+        toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setTitle(null);
 
         //Menu Hooks
         drawerLayout = findViewById(R.id.drawer_layout);
@@ -42,10 +49,58 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         contentView = findViewById(R.id.content);
 
         navigationDrawer();
-
+        actionBarDrawerToggle();
 
     }
 
+
+    //sync navigation bar and menu button
+    private void actionBarDrawerToggle() {
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar,
+                R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+        drawerLayout.addDrawerListener(toggle);
+        toggle.syncState();
+
+
+        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
+                new Home()).commit();
+        navigationView.setCheckedItem(R.id.nav_home);
+    }
+
+    //back button will close the navigation if opened, not close the whole app
+    public void onBackPressed() {
+        if (drawerLayout.isDrawerVisible(GravityCompat.START)) {
+            drawerLayout.closeDrawer(GravityCompat.START);
+        } else {
+            super.onBackPressed();
+        }
+    }
+
+    //Navigation Lead to Page
+    @Override
+    public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
+
+        switch (menuItem.getItemId()) {
+            case R.id.nav_home:
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
+                        new Home()).commit();
+                break;
+
+            case R.id.nav_income:
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
+                        new Income()).commit();
+                break;
+
+            case R.id.nav_expenses:
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
+                        new Expenses()).commit();
+                break;
+        }
+
+        //if choose one to open then will close drawer
+        drawerLayout.closeDrawer(GravityCompat.START);
+        return true;
+    }
 
     //Navigation Drawer Functions
     private void navigationDrawer() {
@@ -58,19 +113,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         //Navigation Drawer
         navigationView.bringToFront();
         navigationView.setNavigationItemSelectedListener(this);
-        navigationView.setCheckedItem(R.id.nav_home);
 
-        menuButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (drawerLayout.isDrawerVisible(GravityCompat.START)) {
-                    drawerLayout.closeDrawer(GravityCompat.START);
-
-                } else {
-                    drawerLayout.openDrawer(GravityCompat.START);
-                }
-            }
-        });
 
         animateNavigationDrawer();
     }
@@ -98,35 +141,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         });
     }
 
-    //back button will close the navigation if opened, not close the whole app
-    public void onBackPressed() {
-        if (drawerLayout.isDrawerVisible(GravityCompat.START)) {
-            drawerLayout.closeDrawer(GravityCompat.START);
-        } else {
-            super.onBackPressed();
-        }
-    }
 
-    @Override
-    public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
-
-        switch (menuItem.getItemId()) {
-            case R.id.nav_home:
-                break;
-
-            case R.id.nav_income:
-                Intent income = new Intent(MainActivity.this, Income.class);
-                startActivity(income);
-
-            case R.id.nav_expenses:
-                Intent expenses = new Intent(MainActivity.this, Expenses.class);
-                startActivity(expenses);
-        }
-
-        //if choose one to open then will close drawer
-        drawerLayout.closeDrawer(GravityCompat.START);
-        return true;
-    }
 
 
 }

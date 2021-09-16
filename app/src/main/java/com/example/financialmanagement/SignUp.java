@@ -9,6 +9,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnFailureListener;
@@ -18,9 +20,10 @@ import com.google.firebase.auth.FirebaseAuth;
 
 public class SignUp extends AppCompatActivity {
 
-    ImageButton back_button;
+    ImageView back_button;
     EditText signupUname, signupEmail, signupPassword, signupRePassword;
     Button signupButton;
+    TextView login_page;
     FirebaseAuth fAuth;
 
     @Override
@@ -101,8 +104,8 @@ public class SignUp extends AppCompatActivity {
             }
         });
 
-        //back button
-        back_button = findViewById(R.id.backButton);
+        // back button
+        back_button = findViewById(R.id.back_button);
         back_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -111,6 +114,15 @@ public class SignUp extends AppCompatActivity {
             }
         });
 
+        // login text
+        login_page = findViewById(R.id.login_page);
+        login_page.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(SignUp.this, Login.class);
+                startActivity(intent);
+            }
+        });
     }
 }
 

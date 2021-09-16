@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -21,6 +22,7 @@ public class Login extends AppCompatActivity {
     Button loginButton;
     EditText loginEmail, loginPassword;
     TextView signup_button;
+    ImageView back_button;
     FirebaseAuth firebaseAuth;
 
     @Override
@@ -74,6 +76,16 @@ public class Login extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent= new Intent(Login.this, SignUp.class);
+                startActivity(intent);
+            }
+        });
+
+        // back button
+        back_button = findViewById(R.id.back_button);
+        back_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent= new Intent(Login.this, Welcome3.class);
                 startActivity(intent);
             }
         });

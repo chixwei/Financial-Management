@@ -54,13 +54,12 @@
         android:id="@+id/layout1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="190dp"
         android:layout_marginLeft="50dp"
         android:layout_marginRight="50dp"
         android:background="@drawable/status_bg"
         android:orientation="horizontal"
-        tools:layout_editor_absoluteX="68dp"
-        tools:layout_editor_absoluteY="189dp"
-        tools:ignore="MissingConstraints">
+        app:layout_constraintTop_toTopOf="parent">
 
         // income
         <LinearLayout

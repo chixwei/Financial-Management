@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#FCC201">
+    android:background="@color/gold">
 
     // back button
     <ImageView
@@ -124,7 +124,7 @@
             android:text="@string/signup"
             android:textSize="18dp"
             android:background="@drawable/skip_button_bg"
-            app:backgroundTint="#FCC201"/>
+            app:backgroundTint="@color/gold"/>
 
         // login
         <TextView

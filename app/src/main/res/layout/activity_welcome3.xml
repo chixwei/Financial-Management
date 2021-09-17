@@ -52,7 +52,7 @@
         android:background="@drawable/skip_button_bg"
         android:text="Login"
         android:textSize="18dp"
-        app:backgroundTint="#FCC201"
+        app:backgroundTint="@color/gold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView"/>
@@ -69,7 +69,7 @@
         android:background="@drawable/skip_button_bg"
         android:text="I'm New Here"
         android:textSize="18dp"
-        app:backgroundTint="#FCC201"
+        app:backgroundTint="@color/gold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/login_button"/>

@@ -7,9 +7,6 @@
     tools:context=".Home">
 
     // amount status layout
-
-    // amount status layout
-
     <LinearLayout
         android:id="@+id/layout1"
         android:layout_width="match_parent"
@@ -25,7 +22,6 @@
         app:layout_constraintTop_toTopOf="parent">
 
         // income
-
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -34,7 +30,6 @@
             android:orientation="vertical">
 
             // income column
-
             <LinearLayout
                 android:id="@+id/layout_income"
                 android:layout_width="match_parent"
@@ -42,7 +37,6 @@
                 android:orientation="vertical">
 
                 // income text
-
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -51,10 +45,9 @@
                     android:text="Income"
                     android:textColor="#605f5e"
                     android:textSize="16dp"
-                    android:textStyle="bold" />
+                    android:textStyle="bold"/>
 
                 // income amount
-
                 <TextView
                     android:id="@+id/txt_income_amount"
                     android:layout_width="wrap_content"
@@ -65,14 +58,12 @@
                     android:text="0"
                     android:textColor="@color/black"
                     android:textSize="30dp"
-                    android:textStyle="bold" />
-            </LinearLayout>
-            // income column
-        </LinearLayout>
-        // income layout
+                    android:textStyle="bold"/>
+
+            </LinearLayout> // income column
+        </LinearLayout> // income layout
 
         // expense
-
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -82,7 +73,6 @@
             android:orientation="vertical">
 
             // expense column
-
             <LinearLayout
                 android:id="@+id/layout_expense"
                 android:layout_width="match_parent"
@@ -90,7 +80,6 @@
                 android:orientation="vertical">
 
                 // expense text
-
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -99,10 +88,9 @@
                     android:text="Expense"
                     android:textColor="#605f5e"
                     android:textSize="16dp"
-                    android:textStyle="bold" />
+                    android:textStyle="bold"/>
 
                 // expense amount
-
                 <TextView
                     android:id="@+id/txt_expense_amount"
                     android:layout_width="wrap_content"
@@ -113,14 +101,11 @@
                     android:text="0"
                     android:textColor="@color/black"
                     android:textSize="30dp"
-                    android:textStyle="bold" />
-            </LinearLayout>
-            // expense column
-        </LinearLayout>
-        // expense layout
+                    android:textStyle="bold"/>
+            </LinearLayout> // expense column
+        </LinearLayout> // expense layout
 
         // balance
-
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -129,7 +114,6 @@
             android:orientation="vertical">
 
             // balance column
-
             <LinearLayout
                 android:id="@+id/layout_balance"
                 android:layout_width="match_parent"
@@ -137,7 +121,6 @@
                 android:orientation="vertical">
 
                 // balance text
-
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -146,10 +129,9 @@
                     android:text="Balance"
                     android:textColor="#605f5e"
                     android:textSize="16dp"
-                    android:textStyle="bold" />
+                    android:textStyle="bold"/>
 
                 // balance amount
-
                 <TextView
                     android:id="@+id/txt_balance_amount"
                     android:layout_width="wrap_content"
@@ -160,21 +142,44 @@
                     android:text="0"
                     android:textColor="@color/black"
                     android:textSize="30dp"
-                    android:textStyle="bold" />
-            </LinearLayout>
-            // balance column
-        </LinearLayout>
-        // balance layout
-
-    </LinearLayout>
+                    android:textStyle="bold"/>
+            </LinearLayout> // balance column
+        </LinearLayout> // balance layout
+    </LinearLayout> // amount status layout
 
     <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Hello World!"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toTopOf="parent"/>
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Hello World!"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
+
+    // add button
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/add_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="30dp"
+        android:layout_marginRight="30dp"
+        android:layout_marginBottom="30dp"
+        android:backgroundTint="#DFE7FD"
+        android:src="@drawable/ic_add"
+        app:borderWidth="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+    // record
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
+        android:nestedScrollingEnabled="true"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/layout1"
+        app:layout_constraintVertical_bias="0.0"
+        tools:layout_editor_absoluteX="-16dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -9,7 +9,9 @@
         android:roundIcon="@mipmap/ic_piggy_logo_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.FinancialManagement">
-        <activity android:name=".Welcome3"></activity>
+        <activity android:name=".IncomeCategory"></activity>
+        <activity android:name=".ExpenseCategory" />
+        <activity android:name=".Welcome3" />
         <activity android:name=".Welcome2" />
         <activity android:name=".Welcome1" />
         <activity android:name=".SplashActivity">

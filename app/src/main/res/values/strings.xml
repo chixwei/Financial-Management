@@ -30,4 +30,9 @@
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="catName">Category Name</string>
     <string name="done">Done</string>
+    <string name="add">Add</string>
+    <string name="amount">Amount</string>
+    <string name="date">Date</string>
+    <string name="memo">Memo</string>
+    <string name="image">Image</string>
 </resources>

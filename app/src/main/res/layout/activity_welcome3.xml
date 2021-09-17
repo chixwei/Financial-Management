@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Welcome1">
+    tools:context=".Welcome3">
 
     <RelativeLayout
         android:id="@+id/relativeLayout"
@@ -13,20 +13,6 @@
         android:background="@drawable/welcome_bg"
         app:layout_constraintTop_toTopOf="parent">
 
-        // skip button
-        <Button
-            android:id="@+id/skip_button"
-            android:layout_width="75dp"
-            android:layout_height="30dp"
-            android:layout_alignParentRight="true"
-            android:layout_marginTop="30dp"
-            android:layout_marginRight="30dp"
-            android:background="@drawable/skip_button_bg"
-            android:padding="0dp"
-            android:text="skip"
-            android:textSize="12dp"
-            app:backgroundTint="#C8A12D"/>
-
     </RelativeLayout>
 
     <TextView
@@ -34,7 +20,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="35dp"
-        android:text="@string/welcome1.1"
+        android:text="@string/welcome3"
         android:textSize="30dp"
         android:textStyle="bold"
         android:textColor="@color/black"
@@ -42,31 +28,50 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/relativeLayout"/>
 
-    <TextView
-        android:id="@+id/textView2"
+    // login button
+    <Button
+        android:id="@+id/login_button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="80dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginRight="80dp"
-        android:text="@string/welcome1.2"
-        android:textColor="@color/black"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="70dp"
+        android:layout_marginLeft="70dp"
+        android:layout_marginTop="30dp"
+        android:background="@drawable/skip_button_bg"
+        android:text="Login"
         android:textSize="18dp"
-        android:justificationMode="inter_word"
+        app:backgroundTint="#FCC201"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView"/>
 
-    // next button
+    // sign up button
+    <Button
+        android:id="@+id/signup_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="70dp"
+        android:layout_marginLeft="70dp"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/skip_button_bg"
+        android:text="I'm New Here"
+        android:textSize="18dp"
+        app:backgroundTint="#FCC201"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/login_button"/>
+
+    // back button
     <ImageView
-        android:id="@+id/next_button"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:layout_marginEnd="50dp"
-        android:layout_marginRight="50dp"
-        android:layout_marginBottom="50dp"
-        android:src="@drawable/ic_next"
+        android:id="@+id/back_button"
+        android:layout_width="33dp"
+        android:layout_height="33dp"
+        android:layout_marginStart="60dp"
+        android:layout_marginLeft="60dp"
+        android:layout_marginBottom="60dp"
+        android:src="@drawable/ic_back"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"/>
+        app:layout_constraintStart_toStartOf="parent"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

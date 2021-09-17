@@ -7,10 +7,10 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 
-public class Welcome1 extends AppCompatActivity {
+public class Welcome2 extends AppCompatActivity {
 
     Button skip_button;
-    ImageView next_button;
+    ImageView back_button, next_button;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,7 +22,17 @@ public class Welcome1 extends AppCompatActivity {
         skip_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(Welcome1.this, Login.class);
+                Intent intent = new Intent(Welcome2.this, Login.class);
+                startActivity(intent);
+            }
+        });
+
+        // back button
+        back_button = findViewById(R.id.back_button);
+        back_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(Welcome2.this, Welcome1.class);
                 startActivity(intent);
             }
         });
@@ -32,7 +42,7 @@ public class Welcome1 extends AppCompatActivity {
         next_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(Welcome1.this, Welcome2.class);
+                Intent intent = new Intent(Welcome2.this, Welcome3.class);
                 startActivity(intent);
             }
         });

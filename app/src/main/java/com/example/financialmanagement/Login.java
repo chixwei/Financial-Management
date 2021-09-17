@@ -8,6 +8,8 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnFailureListener;
@@ -17,8 +19,10 @@ import com.google.firebase.auth.FirebaseAuth;
 
 public class Login extends AppCompatActivity {
 
-    Button signup_button, loginButton;
+    Button loginButton;
     EditText loginEmail, loginPassword;
+    TextView signup_button;
+    ImageView back_button;
     FirebaseAuth firebaseAuth;
 
     @Override
@@ -28,11 +32,11 @@ public class Login extends AppCompatActivity {
 
         firebaseAuth = FirebaseAuth.getInstance();
 
-        //assign variable
+        // assign variable
         loginEmail = findViewById(R.id.loginEmail);
         loginPassword = findViewById(R.id.loginPassword);
 
-        //login Button
+        // login Button
         loginButton = findViewById(R.id.loginButton);
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -48,7 +52,7 @@ public class Login extends AppCompatActivity {
                     return;
                 }
 
-                //login user
+                // login user
                 firebaseAuth.signInWithEmailAndPassword(loginEmail.getText().toString(), loginPassword.getText().toString()).addOnSuccessListener(new OnSuccessListener<AuthResult>() {
                     @Override
                     public void onSuccess(AuthResult authResult) {
@@ -66,7 +70,7 @@ public class Login extends AppCompatActivity {
         });
 
 
-        //go to sign up button
+        // go to sign up button
         signup_button = findViewById(R.id.signupPage);
         signup_button.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -75,9 +79,19 @@ public class Login extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+        // back button
+        back_button = findViewById(R.id.back_button);
+        back_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent= new Intent(Login.this, Welcome3.class);
+                startActivity(intent);
+            }
+        });
     }
 
-    //If login before no need to login again
+    // If login before no need to login again
     @Override
     protected void onStart() {
         super.onStart();

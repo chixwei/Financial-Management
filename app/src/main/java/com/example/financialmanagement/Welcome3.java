@@ -22,8 +22,8 @@ public class Welcome3 extends AppCompatActivity {
         back_button = findViewById(R.id.back_button);
         back_button.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(Welcome3.this, Welcome2.class);
+            public void onClick(View v) {
+                Intent intent= new Intent(Welcome3.this, Welcome2.class);
                 startActivity(intent);
             }
         });

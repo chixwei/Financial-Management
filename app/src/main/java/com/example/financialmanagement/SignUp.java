@@ -109,7 +109,7 @@ public class SignUp extends AppCompatActivity {
         back_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(SignUp.this, Login.class);
+                Intent intent = new Intent(SignUp.this, Welcome3.class);
                 startActivity(intent);
             }
         });

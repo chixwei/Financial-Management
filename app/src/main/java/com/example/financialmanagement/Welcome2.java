@@ -27,15 +27,18 @@ public class Welcome2 extends AppCompatActivity {
             }
         });
 
+        /*
         // back button
         back_button = findViewById(R.id.back_button);
         back_button.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(Welcome2.this, Welcome1.class);
+            public void onClick(View v) {
+                Intent intent= new Intent(Welcome2.this, Welcome1.class);
                 startActivity(intent);
             }
         });
+
+         */
 
         // next button
         next_button = findViewById(R.id.next_button);

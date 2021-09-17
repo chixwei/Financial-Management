@@ -7,6 +7,7 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.fragment.app.Fragment;
 
 import android.content.Intent;
 import android.graphics.Color;
@@ -14,134 +15,89 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.Toast;
 
+import com.etebarian.meowbottomnavigation.MeowBottomNavigation;
 import com.google.android.material.navigation.NavigationView;
 
-public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+public class MainActivity extends AppCompatActivity {
 
-    //Variables
-    static final float END_SCALE = 0.7f;
+    private final static  int ID_INCOME = 1;
+    private final static  int ID_EXPENSES = 2;
+    private final static  int ID_HOME = 3;
+    private final static  int ID_STATISTIC = 4;
+    private final static  int ID_PROFILE = 5;
 
-    //Drawer Menu
-    DrawerLayout drawerLayout;
-    NavigationView navigationView;
-    ConstraintLayout contentView;
 
-    Toolbar toolbar;
-
+    FrameLayout frameLayout;
+    MeowBottomNavigation bottomNavigation;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        frameLayout = findViewById(R.id.frameLayout);
+        bottomNavigation = findViewById(R.id.bottomNavigation);
 
-        //toolbar
-        toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-        getSupportActionBar().setTitle(null);
-
-        //Menu Hooks
-        drawerLayout = findViewById(R.id.drawer_layout);
-        navigationView = findViewById(R.id.navigation_view);
-        contentView = findViewById(R.id.content);
-
-        navigationDrawer();
-        actionBarDrawerToggle();
-
-    }
+        bottomNavigation.add(new MeowBottomNavigation.Model(1,R.drawable.ic_nav_income));
+        bottomNavigation.add(new MeowBottomNavigation.Model(2,R.drawable.ic_nav_expenses));
+        bottomNavigation.add(new MeowBottomNavigation.Model(3,R.drawable.ic_nav_home));
+        bottomNavigation.add(new MeowBottomNavigation.Model(4,R.drawable.ic_nav_statistic));
+        bottomNavigation.add(new MeowBottomNavigation.Model(5,R.drawable.ic_nav_profile));
 
 
-    //sync navigation bar and menu button
-    private void actionBarDrawerToggle() {
-        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar,
-                R.string.navigation_drawer_open, R.string.navigation_drawer_close);
-        drawerLayout.addDrawerListener(toggle);
-        toggle.syncState();
+        getSupportFragmentManager().beginTransaction().replace(R.id.frameLayout, new Home()).commit();
 
-
-        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                new Home()).commit();
-        navigationView.setCheckedItem(R.id.nav_home);
-    }
-
-    //back button will close the navigation if opened, not close the whole app
-    public void onBackPressed() {
-        if (drawerLayout.isDrawerVisible(GravityCompat.START)) {
-            drawerLayout.closeDrawer(GravityCompat.START);
-        } else {
-            super.onBackPressed();
-        }
-    }
-
-    //Navigation Lead to Page
-    @Override
-    public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
-
-        switch (menuItem.getItemId()) {
-            case R.id.nav_home:
-                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                        new Home()).commit();
-                break;
-
-            case R.id.nav_income:
-                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                        new Income()).commit();
-                break;
-
-            case R.id.nav_expenses:
-                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                        new Expenses()).commit();
-                break;
-        }
-
-        //if choose one to open then will close drawer
-        drawerLayout.closeDrawer(GravityCompat.START);
-        return true;
-    }
-
-    //Navigation Drawer Functions
-    private void navigationDrawer() {
-
-        //Hide or show items
-        Menu menu = navigationView.getMenu();
-        menu.findItem(R.id.nav_logout).setVisible(false);
-
-
-        //Navigation Drawer
-        navigationView.bringToFront();
-        navigationView.setNavigationItemSelectedListener(this);
-
-
-        animateNavigationDrawer();
-    }
-
-    private void animateNavigationDrawer() {
-
-        //Can Change color with this code :
-        //drawerLayout.setScrimColor(Color.rgb(158,227,255));
-        drawerLayout.addDrawerListener(new DrawerLayout.SimpleDrawerListener() {
+        bottomNavigation.setOnShowListener(new MeowBottomNavigation.ShowListener() {
             @Override
-            public void onDrawerSlide(View drawerView, float slideOffset) {
+            public void onShowItem(MeowBottomNavigation.Model item) {
+                Fragment fragment = null;
 
-                // Scale the View based on current slide offset
-                final float diffScaledOffset = slideOffset * (1 - END_SCALE);
-                final float offsetScale = 1 - diffScaledOffset;
-                contentView.setScaleX(offsetScale);
-                contentView.setScaleY(offsetScale);
+                switch (item.getId()) {
+                    case ID_INCOME:
 
-                // Translate the View, accounting for the scaled width
-                final float xOffset = drawerView.getWidth() * slideOffset;
-                final float xOffsetDiff = contentView.getWidth() * diffScaledOffset / 2;
-                final float xTranslation = xOffset - xOffsetDiff;
-                contentView.setTranslationX(xTranslation);
+                        fragment = new Income();
+                        break;
+
+                    case ID_EXPENSES:
+
+                        fragment = new Expenses();
+                        break;
+
+                    case ID_HOME:
+
+                        fragment = new Home();
+                        break;
+
+                    case ID_STATISTIC:
+
+                        fragment = new Statistic();
+                        break;
+
+                    case ID_PROFILE:
+
+                        fragment = new Profile();
+                        break;
+
+                }
+                getSupportFragmentManager().beginTransaction().replace(R.id.frameLayout, fragment).commit();
+
             }
         });
+
+        bottomNavigation.show(3,true);
+
+        bottomNavigation.setOnClickMenuListener(new MeowBottomNavigation.ClickListener() {
+            @Override
+            public void onClickItem(MeowBottomNavigation.Model item) {
+                //need this only can change page
+            }
+        });
+
     }
-
-
-
 
 }

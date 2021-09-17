@@ -6,169 +6,169 @@
     android:layout_height="match_parent"
     tools:context=".Home">
 
-            // amount status layout
+    // amount status layout
 
-            // amount status layout
+    // amount status layout
+
+    <LinearLayout
+        android:id="@+id/layout1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="30dp"
+        android:layout_marginTop="40dp"
+        android:layout_marginRight="30dp"
+        android:background="@drawable/status_bg"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        // income
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginRight="10dp"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            // income column
 
             <LinearLayout
-                android:id="@+id/layout1"
+                android:id="@+id/layout_income"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="30dp"
-                android:layout_marginTop="60dp"
-                android:layout_marginRight="30dp"
-                android:background="@drawable/status_bg"
-                android:orientation="horizontal"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="1.0"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent">
+                android:layout_height="match_parent"
+                android:orientation="vertical">
 
-                // income
+                // income text
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_marginRight="10dp"
-                    android:layout_weight="1"
-                    android:orientation="vertical">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="10dp"
+                    android:text="Income"
+                    android:textColor="#605f5e"
+                    android:textSize="16dp"
+                    android:textStyle="bold" />
 
-                    // income column
+                // income amount
 
-                    <LinearLayout
-                        android:id="@+id/layout_income"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:orientation="vertical">
-
-                        // income text
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center"
-                            android:layout_marginTop="10dp"
-                            android:text="Income"
-                            android:textColor="#605f5e"
-                            android:textSize="16dp"
-                            android:textStyle="bold" />
-
-                        // income amount
-
-                        <TextView
-                            android:id="@+id/txt_income_amount"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center"
-                            android:layout_marginTop="3dp"
-                            android:layout_marginBottom="10dp"
-                            android:text="0"
-                            android:textColor="@color/black"
-                            android:textSize="30dp"
-                            android:textStyle="bold" />
-                    </LinearLayout>
-                    // income column
-                </LinearLayout>
-                // income layout
-
-                // expense
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_marginLeft="5dp"
-                    android:layout_marginRight="5dp"
-                    android:layout_weight="1"
-                    android:orientation="vertical">
-
-                    // expense column
-
-                    <LinearLayout
-                        android:id="@+id/layout_expense"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:orientation="vertical">
-
-                        // expense text
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center"
-                            android:layout_marginTop="10dp"
-                            android:text="Expense"
-                            android:textColor="#605f5e"
-                            android:textSize="16dp"
-                            android:textStyle="bold" />
-
-                        // expense amount
-
-                        <TextView
-                            android:id="@+id/txt_expense_amount"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center"
-                            android:layout_marginTop="3dp"
-                            android:layout_marginBottom="10dp"
-                            android:text="0"
-                            android:textColor="@color/black"
-                            android:textSize="30dp"
-                            android:textStyle="bold" />
-                    </LinearLayout>
-                    // expense column
-                </LinearLayout>
-                // expense layout
-
-                // balance
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_marginLeft="10dp"
-                    android:layout_weight="1"
-                    android:orientation="vertical">
-
-                    // balance column
-
-                    <LinearLayout
-                        android:id="@+id/layout_balance"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:orientation="vertical">
-
-                        // balance text
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center"
-                            android:layout_marginTop="10dp"
-                            android:text="Balance"
-                            android:textColor="#605f5e"
-                            android:textSize="16dp"
-                            android:textStyle="bold" />
-
-                        // balance amount
-
-                        <TextView
-                            android:id="@+id/txt_balance_amount"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center"
-                            android:layout_marginTop="3dp"
-                            android:layout_marginBottom="10dp"
-                            android:text="0"
-                            android:textColor="@color/black"
-                            android:textSize="30dp"
-                            android:textStyle="bold" />
-                    </LinearLayout>
-                    // balance column
-                </LinearLayout>
-                // balance layout
-
+                <TextView
+                    android:id="@+id/txt_income_amount"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="3dp"
+                    android:layout_marginBottom="10dp"
+                    android:text="0"
+                    android:textColor="@color/black"
+                    android:textSize="30dp"
+                    android:textStyle="bold" />
             </LinearLayout>
+            // income column
+        </LinearLayout>
+        // income layout
 
-            <TextView
+        // expense
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            // expense column
+
+            <LinearLayout
+                android:id="@+id/layout_expense"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                // expense text
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="10dp"
+                    android:text="Expense"
+                    android:textColor="#605f5e"
+                    android:textSize="16dp"
+                    android:textStyle="bold" />
+
+                // expense amount
+
+                <TextView
+                    android:id="@+id/txt_expense_amount"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="3dp"
+                    android:layout_marginBottom="10dp"
+                    android:text="0"
+                    android:textColor="@color/black"
+                    android:textSize="30dp"
+                    android:textStyle="bold" />
+            </LinearLayout>
+            // expense column
+        </LinearLayout>
+        // expense layout
+
+        // balance
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="10dp"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            // balance column
+
+            <LinearLayout
+                android:id="@+id/layout_balance"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                // balance text
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="10dp"
+                    android:text="Balance"
+                    android:textColor="#605f5e"
+                    android:textSize="16dp"
+                    android:textStyle="bold" />
+
+                // balance amount
+
+                <TextView
+                    android:id="@+id/txt_balance_amount"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="3dp"
+                    android:layout_marginBottom="10dp"
+                    android:text="0"
+                    android:textColor="@color/black"
+                    android:textSize="30dp"
+                    android:textStyle="bold" />
+            </LinearLayout>
+            // balance column
+        </LinearLayout>
+        // balance layout
+
+    </LinearLayout>
+
+    <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Hello World!"

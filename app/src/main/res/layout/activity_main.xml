@@ -6,12 +6,11 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-
-            <FrameLayout
-                android:id="@+id/frameLayout"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_above="@+id/bottomNavigation" />
+    <FrameLayout
+        android:id="@+id/frameLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/bottomNavigation"/>
 
         <com.etebarian.meowbottomnavigation.MeowBottomNavigation
             android:layout_width="match_parent"
@@ -21,7 +20,7 @@
             app:mbn_circleColor="@color/white"
             app:mbn_selectedIconColor="#030361"
             app:mbn_defaultIconColor="@color/white"
-            app:mbn_backgroundBottomColor="#64A8E3"
+            app:mbn_backgroundBottomColor="@color/gold"
             app:mbn_countTextColor="@color/white"
             app:mbn_countBackgroundColor="#DCEAF6"/>
 

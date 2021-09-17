@@ -135,8 +135,7 @@
             android:layout_marginTop="30dp"
             android:layout_centerHorizontal="true"
             android:text="@string/asklogin"
-            android:textColor="@color/black"
-            android:background="@drawable/ask_text_colour"/>
+            android:textColor="@color/black"/>
 
     </RelativeLayout>
 

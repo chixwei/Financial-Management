@@ -13,6 +13,18 @@
         android:background="@drawable/welcome_bg"
         app:layout_constraintTop_toTopOf="parent">
 
+        // back button
+        <ImageView
+            android:id="@+id/back_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="30dp"
+            android:layout_marginLeft="30dp"
+            android:layout_marginTop="30dp"
+            android:src="@drawable/ic_back"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"/>
+
         // skip button
         <Button
             android:id="@+id/skip_button"

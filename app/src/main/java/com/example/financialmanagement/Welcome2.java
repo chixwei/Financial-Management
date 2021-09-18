@@ -15,7 +15,7 @@ public class Welcome2 extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_welcome1);
+        setContentView(R.layout.activity_welcome2);
 
         // skip button
         skip_button = findViewById(R.id.skip_button);
@@ -27,7 +27,6 @@ public class Welcome2 extends AppCompatActivity {
             }
         });
 
-        /*
         // back button
         back_button = findViewById(R.id.back_button);
         back_button.setOnClickListener(new View.OnClickListener() {
@@ -37,8 +36,6 @@ public class Welcome2 extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-
-         */
 
         // next button
         next_button = findViewById(R.id.next_button);

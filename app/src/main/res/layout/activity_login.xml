@@ -32,7 +32,7 @@
         android:id="@+id/relativeLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="200dp"
+        android:layout_marginTop="170dp"
         android:background="@drawable/login_bg"
         app:layout_constraintTop_toTopOf="parent">
 
@@ -48,24 +48,26 @@
             android:textColor="@color/black"/>
 
         // email
+
+        // password
+
         <EditText
             android:id="@+id/loginEmail"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/viewLogin"
-            android:layout_marginTop="80dp"
             android:layout_marginLeft="70dp"
+            android:layout_marginTop="69dp"
             android:layout_marginRight="70dp"
-            android:ems="10"
-            android:inputType="textPersonName"
-            android:hint="@string/email"
-            android:textColor="@color/black"
-            android:padding="10dp"
-            android:drawablePadding="10dp"
+            android:background="@drawable/fill_info_bg"
             android:drawableLeft="@drawable/ic_email"
-            android:background="@drawable/fill_info_bg"/>
+            android:drawablePadding="10dp"
+            android:ems="10"
+            android:hint="@string/email"
+            android:inputType="textPersonName"
+            android:padding="10dp"
+            android:textColor="@color/black" />
 
-        // password
         <EditText
             android:id="@+id/loginPassword"
             android:layout_width="match_parent"
@@ -107,6 +109,18 @@
             android:layout_centerHorizontal="true"
             android:text="@string/asksignup"
             android:textColor="@color/black"/>
+
+        <TextView
+            android:id="@+id/forgotPassword"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/loginPassword"
+            android:layout_alignEnd="@+id/loginPassword"
+            android:layout_alignRight="@+id/loginPassword"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="1dp"
+            android:layout_marginRight="1dp"
+            android:text="@string/forgotPassword" />
 
     </RelativeLayout>
 

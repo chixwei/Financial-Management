@@ -41,13 +41,16 @@
         app:layout_constraintTop_toTopOf="parent">
 
         // username
+
+        // email
+
         <EditText
             android:id="@+id/signupUname"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
             android:layout_marginLeft="70dp"
-            android:layout_marginTop="100dp"
+            android:layout_marginTop="73dp"
             android:layout_marginRight="70dp"
             android:background="@drawable/fill_info_bg"
             android:drawableLeft="@drawable/ic_user"
@@ -58,7 +61,6 @@
             android:padding="10dp"
             android:textColor="@color/black" />
 
-        // email
         <EditText
             android:id="@+id/signupEmail"
             android:layout_width="match_parent"

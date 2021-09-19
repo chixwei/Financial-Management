@@ -9,35 +9,82 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 public class Home extends Fragment {
 
-    FloatingActionButton add_button;
+    FloatingActionButton add_button, add_expense_button, add_income_button;
+    boolean isFABOpen;
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.activity_home, container, false);
-
-        /*
-        final View view = inflater.inflate(R.layout.activity_home, container, false);
+        View v = inflater.inflate(R.layout.activity_home, container, false);
 
         // add button
-        add_button = (FloatingActionButton) view.findViewById(R.id.add_button);
+        add_button = (FloatingActionButton) v.findViewById(R.id.add_button);
         add_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(Home.this, ExpenseCategory.class);
-                startActivity(intent);
+                if(!isFABOpen){
+                    showFABMenu();
+                }else{
+                    closeFABMenu();
+                }
             }
         });
 
-        // Inflate the layout for this fragment
-        return view;
+        // add expense button
+        add_expense_button = (FloatingActionButton) v.findViewById(R.id.add_expense_button);
+        add_expense_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent in = new Intent(getActivity(), ExpenseCategory.class);
+                startActivity(in);
+            }
+        });
 
-         */
+        // add income button
+        add_income_button = (FloatingActionButton) v.findViewById(R.id.add_income_button);
+        add_income_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent in = new Intent(getActivity(), IncomeCategory.class);
+                startActivity(in);
+            }
+        });
 
+        // press anywhere to close the expandable fab
+        v.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                closeFABMenu();
+            }
+        });
+
+        return v;
+    }
+
+    // to display expandable floating action button
+    private void showFABMenu(){
+        isFABOpen = true;
+        // set fab visibility
+        add_expense_button.setVisibility(View.VISIBLE);
+        add_income_button.setVisibility(View.VISIBLE);
+        // set main fab img
+        add_button.setImageResource(R.drawable.ic_close);
+    }
+
+    // to not display expandable floating action button
+    private void closeFABMenu(){
+        isFABOpen = false;
+        // set fab visibility
+        add_expense_button.setVisibility(View.INVISIBLE);
+        add_income_button.setVisibility(View.INVISIBLE);
+        //set main fab img
+        add_button.setImageResource(R.drawable.ic_add);
     }
 }

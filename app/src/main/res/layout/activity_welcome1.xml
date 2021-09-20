@@ -66,6 +66,7 @@
         android:layout_marginRight="50dp"
         android:layout_marginBottom="50dp"
         android:src="@drawable/ic_next"
+        app:tint="@color/gold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"/>
 

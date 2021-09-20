@@ -15,12 +15,13 @@
         // logout button
         <ImageView
             android:id="@+id/logout_button"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:layout_marginTop="30dp"
-            android:layout_marginRight="30dp"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
             android:layout_alignParentRight="true"
-            android:src="@drawable/ic_nav_logout"/>
+            android:layout_marginRight="30dp"
+            android:layout_marginTop="30dp"
+            android:src="@drawable/ic_nav_logout"
+            app:tint="@color/white"/>
 
         // logo
         <ImageView

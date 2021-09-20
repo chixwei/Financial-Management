@@ -1,22 +1,20 @@
 package com.example.financialmanagement;
 
-import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
+import android.widget.TextView;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 public class Home extends Fragment {
 
     FloatingActionButton add_button, add_expense_button, add_income_button;
+    TextView add_expense_text, add_income_text;
     boolean isFABOpen;
 
     @Nullable
@@ -24,8 +22,12 @@ public class Home extends Fragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.activity_home, container, false);
 
+        // define text
+        add_expense_text = v.findViewById(R.id.add_expense_text);
+        add_income_text = v.findViewById(R.id.add_income_text);
+
         // add button
-        add_button = (FloatingActionButton) v.findViewById(R.id.add_button);
+        add_button = v.findViewById(R.id.add_button);
         add_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -38,7 +40,7 @@ public class Home extends Fragment {
         });
 
         // add expense button
-        add_expense_button = (FloatingActionButton) v.findViewById(R.id.add_expense_button);
+        add_expense_button = v.findViewById(R.id.add_expense_button);
         add_expense_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -48,7 +50,7 @@ public class Home extends Fragment {
         });
 
         // add income button
-        add_income_button = (FloatingActionButton) v.findViewById(R.id.add_income_button);
+        add_income_button = v.findViewById(R.id.add_income_button);
         add_income_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -74,6 +76,8 @@ public class Home extends Fragment {
         // set fab visibility
         add_expense_button.setVisibility(View.VISIBLE);
         add_income_button.setVisibility(View.VISIBLE);
+        add_expense_text.setVisibility(View.VISIBLE);
+        add_income_text.setVisibility(View.VISIBLE);
         // set main fab img
         add_button.setImageResource(R.drawable.ic_close);
     }
@@ -84,6 +88,8 @@ public class Home extends Fragment {
         // set fab visibility
         add_expense_button.setVisibility(View.INVISIBLE);
         add_income_button.setVisibility(View.INVISIBLE);
+        add_expense_text.setVisibility(View.INVISIBLE);
+        add_income_text.setVisibility(View.INVISIBLE);
         //set main fab img
         add_button.setImageResource(R.drawable.ic_add);
     }

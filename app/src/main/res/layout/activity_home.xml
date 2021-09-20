@@ -168,14 +168,29 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="30dp"
         android:layout_marginRight="30dp"
-        android:layout_marginBottom="30dp"
+        android:layout_marginBottom="15dp"
         android:backgroundTint="@color/gold"
         android:src="@drawable/ic_add"
-        android:clickable="true"
-        android:focusable="true"
+        app:tint="@color/white"
         app:borderWidth="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"/>
+
+    // expense fab text
+    <TextView
+        android:id="@+id/add_expense_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="28dp"
+        android:layout_marginRight="28dp"
+        android:layout_marginBottom="103dp"
+        android:background="@drawable/fab_txt_bg"
+        android:padding="5dp"
+        android:text="@string/expenses"
+        android:textColor="@color/black"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/add_expense_button" />
 
     // add expense button
     <com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -183,14 +198,29 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="20dp"
-        android:backgroundTint="@color/gold"
-        android:clickable="true"
-        android:focusable="true"
+        android:backgroundTint="@color/lightYellow"
         android:visibility="invisible"
         android:src="@drawable/expenses"
         app:borderWidth="0dp"
         app:layout_constraintBottom_toTopOf="@+id/add_button"
         app:layout_constraintEnd_toEndOf="@+id/add_button"/>
+
+
+    // income fab text
+    <TextView
+        android:id="@+id/add_income_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="28dp"
+        android:layout_marginRight="28dp"
+        android:layout_marginBottom="46dp"
+        android:background="@drawable/fab_txt_bg"
+        android:padding="5dp"
+        android:text="@string/income"
+        android:textColor="@color/black"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toTopOf="@+id/add_expense_text"
+        app:layout_constraintEnd_toStartOf="@+id/add_income_button"/>
 
     // add income button
     <com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -198,9 +228,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="20dp"
-        android:backgroundTint="@color/gold"
-        android:clickable="true"
-        android:focusable="true"
+        android:backgroundTint="@color/lightYellow"
         android:visibility="invisible"
         android:src="@drawable/income"
         app:borderWidth="0dp"

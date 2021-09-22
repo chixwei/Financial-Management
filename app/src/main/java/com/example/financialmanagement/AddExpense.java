@@ -3,12 +3,16 @@ package com.example.financialmanagement;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.Toast;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -17,7 +21,10 @@ public class AddExpense extends AppCompatActivity {
     ImageView back_button;
     EditText expense_amount, expense_date, expense_memo;
     Button add_button;
+    String user_id;
+    FirebaseUser user;
     DatabaseReference ref;
+    Piggy piggy;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,18 +41,29 @@ public class AddExpense extends AppCompatActivity {
             }
         });
 
+        // get user id
+        user = FirebaseAuth.getInstance().getCurrentUser();
+        if (user != null) {
+            boolean emailVerified = user.isEmailVerified();
+            user_id = user.getUid();
+        }
+
         expense_amount = findViewById(R.id.expense_amount);
-        expense_date = findViewById(R.id.expense_date);
         expense_memo = findViewById(R.id.expense_memo);
 
-        ref = FirebaseDatabase.getInstance().getReference().child("Expenses");
+        piggy = new Piggy();
+        ref = FirebaseDatabase.getInstance("https://vax-in-60807-default-rtdb.asia-southeast1.firebasedatabase.app").getReference().child("Expenses");
 
         // add_button
         add_button = findViewById(R.id.add_button);
         add_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                piggy.setUser_id(user_id);
+                piggy.setExpense_amount(Double.parseDouble(expense_amount.getText().toString().trim()));
+                piggy.setExpense_memo(expense_memo.getText().toString().trim());
+                ref.push().setValue(piggy);
+                Toast.makeText(getApplicationContext(),"data inserted successfully",Toast.LENGTH_SHORT).show();
             }
         });
     }

@@ -138,16 +138,16 @@
 
         // add button
         <Button
-            android:id="@+id/add_buttton"
+            android:id="@+id/add_button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/expense_img"
-            android:layout_marginTop="50dp"
             android:layout_marginLeft="70dp"
+            android:layout_marginTop="50dp"
             android:layout_marginRight="70dp"
+            android:background="@drawable/skip_button_bg"
             android:text="@string/add"
             android:textSize="18dp"
-            android:background="@drawable/skip_button_bg"
             app:backgroundTint="@color/gold"/>
 
     </RelativeLayout>

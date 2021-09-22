@@ -200,7 +200,8 @@
         android:layout_marginBottom="20dp"
         android:backgroundTint="@color/lightYellow"
         android:visibility="invisible"
-        android:src="@drawable/expenses"
+        app:srcCompat="@drawable/expenses"
+        app:tint="@null"
         app:borderWidth="0dp"
         app:layout_constraintBottom_toTopOf="@+id/add_button"
         app:layout_constraintEnd_toEndOf="@+id/add_button"/>
@@ -230,7 +231,8 @@
         android:layout_marginBottom="20dp"
         android:backgroundTint="@color/lightYellow"
         android:visibility="invisible"
-        android:src="@drawable/income"
+        app:srcCompat="@drawable/income"
+        app:tint="@null"
         app:borderWidth="0dp"
         app:layout_constraintBottom_toTopOf="@+id/add_expense_button"
         app:layout_constraintEnd_toEndOf="@+id/add_expense_button"/>

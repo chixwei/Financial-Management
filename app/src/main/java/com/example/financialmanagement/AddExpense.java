@@ -36,7 +36,7 @@ public class AddExpense extends AppCompatActivity {
         back_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(AddExpense.this, AddExpenseCategory.class);
+                Intent intent = new Intent(AddExpense.this, ExpenseCategory.class);
                 startActivity(intent);
             }
         });
@@ -59,12 +59,22 @@ public class AddExpense extends AppCompatActivity {
         add_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                piggy.setUser_id(user_id);
-                piggy.setExpense_amount(Double.parseDouble(expense_amount.getText().toString().trim()));
-                piggy.setExpense_memo(expense_memo.getText().toString().trim());
-                ref.push().setValue(piggy);
-                Toast.makeText(getApplicationContext(),"data inserted successfully",Toast.LENGTH_SHORT).show();
+                // error if empty
+                if (expense_amount.getText().toString().length() == 0) {
+                    expense_amount.setError("Expense amount is required");
+                } else {
+                    piggy.setUser_id(user_id);
+                    piggy.setExpense_amount(Double.parseDouble(expense_amount.getText().toString().trim()));
+                    piggy.setExpense_memo(expense_memo.getText().toString().trim());
+                    ref.push().setValue(piggy);
+                    Toast.makeText(getApplicationContext(),"data inserted successfully",Toast.LENGTH_SHORT).show();
+
+                    // back to home page
+                    Intent intent = new Intent(AddExpense.this, Home.class);
+                    startActivity(intent);
+                }
             }
         });
+
     }
 }

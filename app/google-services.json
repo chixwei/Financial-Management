@@ -1,6 +1,7 @@
 {
   "project_info": {
     "project_number": "557948697709",
+    "firebase_url": "https://financial-management-diit-fyp-default-rtdb.firebaseio.com",
     "project_id": "financial-management-diit-fyp",
     "storage_bucket": "financial-management-diit-fyp.appspot.com"
   },
@@ -20,7 +21,7 @@
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyB1OM_bXx3wgoH-Thn0Kted6XUz03RnL2U"
+          "current_key": "AIzaSyAGtmF-XTUw6XHK-1mggjKuhVI8Ssmlliw"
         }
       ],
       "services": {

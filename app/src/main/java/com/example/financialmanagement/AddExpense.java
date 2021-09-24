@@ -52,7 +52,7 @@ public class AddExpense extends AppCompatActivity {
         expense_memo = findViewById(R.id.expense_memo);
 
         piggy = new Piggy();
-        ref = FirebaseDatabase.getInstance("https://vax-in-60807-default-rtdb.asia-southeast1.firebasedatabase.app").getReference().child("Expenses");
+        ref = FirebaseDatabase.getInstance().getReference().child("Expenses");
 
         // add_button
         add_button = findViewById(R.id.add_button);

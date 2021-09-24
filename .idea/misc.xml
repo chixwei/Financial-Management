@@ -3,6 +3,11 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/vivien/AndroidStudioProjects/Financial-Management/app/src/main/res/layout/activity_add_expense.xml" value="0.14719202898550723" />
+        <entry key="..\:/Users/vivien/AndroidStudioProjects/Financial-Management/app/src/main/res/layout/activity_add_expense_category.xml" value="0.14719202898550723" />
+        <entry key="..\:/Users/vivien/AndroidStudioProjects/Financial-Management/app/src/main/res/layout/activity_expense_category.xml" value="0.14719202898550723" />
+        <entry key="..\:/Users/vivien/AndroidStudioProjects/Financial-Management/app/src/main/res/layout/activity_expenses.xml" value="0.14719202898550723" />
+        <entry key="..\:/Users/vivien/AndroidStudioProjects/Financial-Management/app/src/main/res/layout/activity_home.xml" value="0.14719202898550723" />
         <entry key="..\:/Users/vivien/AndroidStudioProjects/Financial-Management/app/src/main/res/layout/logout.xml" value="0.12360688956433637" />
       </map>
     </option>

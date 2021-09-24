@@ -66,7 +66,7 @@
 
         // expense amount
         <EditText
-            android:id="@+id/expenseAmount"
+            android:id="@+id/expense_amount"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/expense_category_name"
@@ -84,10 +84,10 @@
 
         // expense date
         <EditText
-            android:id="@+id/expenseDate"
+            android:id="@+id/expense_date"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/expenseAmount"
+            android:layout_below="@id/expense_amount"
             android:layout_marginTop="30dp"
             android:layout_marginLeft="70dp"
             android:layout_marginRight="70dp"
@@ -102,10 +102,10 @@
 
         // expense memo
         <EditText
-            android:id="@+id/expenseMemo"
+            android:id="@+id/expense_memo"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/expenseDate"
+            android:layout_below="@id/expense_date"
             android:layout_marginTop="30dp"
             android:layout_marginLeft="70dp"
             android:layout_marginRight="70dp"
@@ -120,10 +120,10 @@
 
         // expense image
         <EditText
-            android:id="@+id/expenseImg"
+            android:id="@+id/expense_img"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/expenseMemo"
+            android:layout_below="@id/expense_memo"
             android:layout_marginTop="30dp"
             android:layout_marginLeft="70dp"
             android:layout_marginRight="70dp"
@@ -138,16 +138,16 @@
 
         // add button
         <Button
-            android:id="@+id/add_buttton"
+            android:id="@+id/add_button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/expenseImg"
-            android:layout_marginTop="50dp"
+            android:layout_below="@+id/expense_img"
             android:layout_marginLeft="70dp"
+            android:layout_marginTop="50dp"
             android:layout_marginRight="70dp"
+            android:background="@drawable/skip_button_bg"
             android:text="@string/add"
             android:textSize="18dp"
-            android:background="@drawable/skip_button_bg"
             app:backgroundTint="@color/gold"/>
 
     </RelativeLayout>

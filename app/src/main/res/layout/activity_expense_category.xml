@@ -80,6 +80,7 @@
 
             // food
             <TextView
+                android:id="@+id/food_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="30dp"
@@ -87,6 +88,15 @@
                 android:text="Food"
                 android:textStyle="bold"
                 android:textSize="20dp"/>
+
+            <Button
+                android:id="@+id/go_to_add_expense"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/food_text"
+                android:layout_marginTop="50dp"
+                android:layout_centerHorizontal="true"
+                android:text="go to add expense"/>
 
         </RelativeLayout>
 

@@ -124,17 +124,17 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/expense_memo"
-            android:layout_marginTop="30dp"
             android:layout_marginLeft="70dp"
+            android:layout_marginTop="30dp"
             android:layout_marginRight="70dp"
-            android:ems="10"
-            android:inputType="text"
-            android:hint="@string/image"
-            android:textColor="@color/black"
-            android:padding="10dp"
-            android:drawablePadding="10dp"
+            android:background="@drawable/fill_info_bg"
             android:drawableLeft="@drawable/ic_image"
-            android:background="@drawable/fill_info_bg"/>
+            android:drawablePadding="10dp"
+            android:ems="10"
+            android:hint="@string/image"
+            android:inputType="text"
+            android:padding="10dp"
+            android:textColor="@color/black"/>
 
         // add button
         <Button

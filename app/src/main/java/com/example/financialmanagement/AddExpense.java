@@ -23,7 +23,7 @@ public class AddExpense extends AppCompatActivity {
     Button add_button;
     String user_id;
     FirebaseUser user;
-    DatabaseReference ref;
+    DatabaseReference ref, expense_ref;
     Piggy piggy;
 
     @Override
@@ -52,7 +52,7 @@ public class AddExpense extends AppCompatActivity {
         expense_memo = findViewById(R.id.expense_memo);
 
         piggy = new Piggy();
-        ref = FirebaseDatabase.getInstance().getReference().child("Expenses");
+        ref = FirebaseDatabase.getInstance().getReference().child(user_id);
 
         // add_button
         add_button = findViewById(R.id.add_button);
@@ -63,10 +63,10 @@ public class AddExpense extends AppCompatActivity {
                 if (expense_amount.getText().toString().length() == 0) {
                     expense_amount.setError("Expense amount is required");
                 } else {
-                    piggy.setUser_id(user_id);
+                    expense_ref = ref.child("Expenses");
                     piggy.setExpense_amount(Double.parseDouble(expense_amount.getText().toString().trim()));
                     piggy.setExpense_memo(expense_memo.getText().toString().trim());
-                    ref.push().setValue(piggy);
+                    expense_ref.push().setValue(piggy);
                     Toast.makeText(getApplicationContext(),"data inserted successfully",Toast.LENGTH_SHORT).show();
 
                     // back to home page

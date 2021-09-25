@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
@@ -19,6 +20,7 @@ import com.google.firebase.database.FirebaseDatabase;
 public class AddExpense extends AppCompatActivity {
 
     ImageView back_button;
+    TextView expense_category_name;
     EditText expense_amount, expense_date, expense_memo;
     Button add_button;
     String user_id;
@@ -48,6 +50,7 @@ public class AddExpense extends AppCompatActivity {
             user_id = user.getUid();
         }
 
+        expense_category_name = findViewById(R.id.expense_category_name);
         expense_amount = findViewById(R.id.expense_amount);
         expense_memo = findViewById(R.id.expense_memo);
 
@@ -64,6 +67,7 @@ public class AddExpense extends AppCompatActivity {
                     expense_amount.setError("Expense amount is required");
                 } else {
                     expense_ref = ref.child("Expenses");
+                    piggy.setExpense_category_name(expense_category_name.getText().toString().trim());
                     piggy.setExpense_amount(Double.parseDouble(expense_amount.getText().toString().trim()));
                     piggy.setExpense_memo(expense_memo.getText().toString().trim());
                     expense_ref.push().setValue(piggy);

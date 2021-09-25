@@ -57,12 +57,12 @@
             android:id="@+id/expense_category_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="30dp"
             android:layout_centerHorizontal="true"
+            android:layout_marginTop="30dp"
             android:text="@string/catName"
+            android:textColor="@color/black"
             android:textSize="20sp"
-            android:textStyle="bold"
-            android:textColor="@color/black"/>
+            android:textStyle="bold"/>
 
         // expense amount
         <EditText

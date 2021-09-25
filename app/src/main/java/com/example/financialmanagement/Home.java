@@ -1,5 +1,6 @@
 package com.example.financialmanagement;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -14,8 +15,13 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,12 +30,50 @@ public class Home extends Fragment {
 
     FloatingActionButton add_button, add_expense_button, add_income_button;
     TextView add_expense_text, add_income_text;
+    String user_id;
+    FirebaseUser user;
+    RecyclerView recyclerView;
+    DatabaseReference database;
+    PiggyAdapter PiggyAdapter;
+    ArrayList<Piggy> list;
     boolean isFABOpen;
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.activity_home, container, false);
+
+        // get user id
+        user = FirebaseAuth.getInstance().getCurrentUser();
+        if (user != null) {
+            boolean emailVerified = user.isEmailVerified();
+            user_id = user.getUid();
+        }
+
+        // retrieve data from database
+        recyclerView = v.findViewById(R.id.recyclerView);
+        database = FirebaseDatabase.getInstance().getReference("Expenses");
+        recyclerView.setHasFixedSize(true);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+        list = new ArrayList<>();
+        PiggyAdapter = new PiggyAdapter(getActivity(),list);
+        recyclerView.setAdapter(PiggyAdapter);
+
+        database.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
+                    Piggy piggy = dataSnapshot.getValue(Piggy.class);
+                    list.add(piggy);
+                }
+                PiggyAdapter.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
 
         // test database
         Toast.makeText(getActivity(),"Firebase connection successful", Toast.LENGTH_SHORT).show();

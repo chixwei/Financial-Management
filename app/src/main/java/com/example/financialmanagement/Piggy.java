@@ -3,7 +3,7 @@ package com.example.financialmanagement;
 public class Piggy {
 
     private double expense_amount;
-    private String user_id, expense_memo;
+    private String user_id, expense_category_name, expense_memo;
 
     public Piggy() {
     }
@@ -22,6 +22,14 @@ public class Piggy {
 
     public void setUser_id(String user_id) {
         this.user_id = user_id;
+    }
+
+    public String getExpense_category_name() {
+        return expense_category_name;
+    }
+
+    public void setExpense_category_name(String expense_category_name) {
+        this.expense_category_name = expense_category_name;
     }
 
     public String getExpense_memo() {

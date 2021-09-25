@@ -53,20 +53,21 @@
         app:layout_constraintTop_toTopOf="parent">
 
         // income category name
+
         <TextView
             android:id="@+id/income_category_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="30dp"
             android:layout_centerHorizontal="true"
+            android:layout_marginTop="30dp"
             android:text="@string/catName"
+            android:textColor="@color/black"
             android:textSize="20sp"
-            android:textStyle="bold"
-            android:textColor="@color/black"/>
+            android:textStyle="bold" />
 
         // income amount
         <EditText
-            android:id="@+id/incomeAmount"
+            android:id="@+id/income_amount"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/income_category_name"
@@ -84,10 +85,10 @@
 
         // income date
         <EditText
-            android:id="@+id/incomeDate"
+            android:id="@+id/income_date"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/incomeAmount"
+            android:layout_below="@id/income_amount"
             android:layout_marginTop="30dp"
             android:layout_marginLeft="70dp"
             android:layout_marginRight="70dp"
@@ -102,10 +103,10 @@
 
         // income memo
         <EditText
-            android:id="@+id/incomeMemo"
+            android:id="@+id/income_memo"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/incomeDate"
+            android:layout_below="@id/income_date"
             android:layout_marginTop="30dp"
             android:layout_marginLeft="70dp"
             android:layout_marginRight="70dp"
@@ -120,10 +121,10 @@
 
         // income image
         <EditText
-            android:id="@+id/incomeImg"
+            android:id="@+id/income_img"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/incomeMemo"
+            android:layout_below="@id/income_memo"
             android:layout_marginTop="30dp"
             android:layout_marginLeft="70dp"
             android:layout_marginRight="70dp"
@@ -138,10 +139,10 @@
 
         // add button
         <Button
-            android:id="@+id/add_buttton"
+            android:id="@+id/add_button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/incomeImg"
+            android:layout_below="@+id/income_img"
             android:layout_marginTop="50dp"
             android:layout_marginLeft="70dp"
             android:layout_marginRight="70dp"

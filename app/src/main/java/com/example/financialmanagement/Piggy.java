@@ -2,18 +2,18 @@ package com.example.financialmanagement;
 
 public class Piggy {
 
-    private double expense_amount;
-    private String user_id, expense_category_name, expense_memo;
+    private double amount;
+    private String user_id, category_name, memo;
 
     public Piggy() {
     }
 
-    public double getExpense_amount() {
-        return expense_amount;
+    public double getAmount() {
+        return amount;
     }
 
-    public void setExpense_amount(double expense_amount) {
-        this.expense_amount = expense_amount;
+    public void setAmount(double amount) {
+        this.amount = amount;
     }
 
     public String getUser_id() {
@@ -24,19 +24,19 @@ public class Piggy {
         this.user_id = user_id;
     }
 
-    public String getExpense_category_name() {
-        return expense_category_name;
+    public String getCategory_name() {
+        return category_name;
     }
 
-    public void setExpense_category_name(String expense_category_name) {
-        this.expense_category_name = expense_category_name;
+    public void setCategory_name(String category_name) {
+        this.category_name = category_name;
     }
 
-    public String getExpense_memo() {
-        return expense_memo;
+    public String getMemo() {
+        return memo;
     }
 
-    public void setExpense_memo(String expense_memo) {
-        this.expense_memo = expense_memo;
+    public void setMemo(String memo) {
+        this.memo = memo;
     }
 }

@@ -29,9 +29,9 @@ public class PiggyAdapter extends RecyclerView.Adapter<PiggyAdapter.MyViewHolder
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
         Piggy piggy = list.get(position);
-        holder.category_name.setText(piggy.getExpense_category_name());
-        holder.record_name.setText(piggy.getExpense_memo());
-        holder.amount.setText((int) piggy.getExpense_amount());
+        holder.category_name.setText(piggy.getCategory_name());
+        holder.record_name.setText(piggy.getMemo());
+        holder.amount.setText((int) piggy.getAmount());
     }
 
     @Override

@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Spinner;
 
@@ -17,6 +18,7 @@ public class IncomeCategory extends AppCompatActivity {
 
     ImageView back_button;
     Spinner spinner;
+    Button go_to_add_income;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,6 +67,16 @@ public class IncomeCategory extends AppCompatActivity {
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
 
+            }
+        });
+
+        // go to add income **temporary**
+        go_to_add_income = findViewById(R.id.go_to_add_income);
+        go_to_add_income.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent= new Intent(IncomeCategory.this, AddIncome.class);
+                startActivity(intent);
             }
         });
     }

@@ -67,9 +67,9 @@ public class AddExpense extends AppCompatActivity {
                     expense_amount.setError("Expense amount is required");
                 } else {
                     expense_ref = ref.child("Expenses");
-                    piggy.setExpense_category_name(expense_category_name.getText().toString().trim());
-                    piggy.setExpense_amount(Double.parseDouble(expense_amount.getText().toString().trim()));
-                    piggy.setExpense_memo(expense_memo.getText().toString().trim());
+                    piggy.setCategory_name(expense_category_name.getText().toString().trim());
+                    piggy.setAmount(Double.parseDouble(expense_amount.getText().toString().trim()));
+                    piggy.setMemo(expense_memo.getText().toString().trim());
                     expense_ref.push().setValue(piggy);
                     Toast.makeText(getApplicationContext(),"data inserted successfully",Toast.LENGTH_SHORT).show();
 

@@ -56,7 +56,7 @@ public class Home extends Fragment {
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         list = new ArrayList<>();
-        PiggyAdapter = new PiggyAdapter(getActivity(),list);
+        PiggyAdapter = new PiggyAdapter(getActivity(), list);
         recyclerView.setAdapter(PiggyAdapter);
 
         database.addValueEventListener(new ValueEventListener() {

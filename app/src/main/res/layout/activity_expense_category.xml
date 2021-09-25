@@ -94,9 +94,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/food_text"
-                android:layout_marginTop="50dp"
                 android:layout_centerHorizontal="true"
-                android:text="go to add expense"/>
+                android:layout_marginTop="50dp"
+                android:text="go to add expense" />
 
         </RelativeLayout>
 

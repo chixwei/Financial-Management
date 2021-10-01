@@ -44,7 +44,7 @@ public class Expenses extends Fragment {
 
         // retrieve data from database
         recyclerView = v.findViewById(R.id.recyclerView);
-        database = FirebaseDatabase.getInstance().getReference("Expenses");
+        database = FirebaseDatabase.getInstance().getReference("User").child(user_id).child("Expenses");
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         list = new ArrayList<>();

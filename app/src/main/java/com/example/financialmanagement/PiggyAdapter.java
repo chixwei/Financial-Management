@@ -8,6 +8,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 import java.util.ArrayList;
+import java.util.Locale;
 
 public class PiggyAdapter extends RecyclerView.Adapter<PiggyAdapter.MyViewHolder> {
 
@@ -31,7 +32,7 @@ public class PiggyAdapter extends RecyclerView.Adapter<PiggyAdapter.MyViewHolder
         Piggy piggy = list.get(position);
         holder.category_name.setText(piggy.getCategory_name());
         holder.record_name.setText(piggy.getMemo());
-        holder.amount.setText((int) piggy.getAmount());
+        holder.amount.setText(String.format(Locale.US, "%.2f", piggy.getAmount()));
     }
 
     @Override

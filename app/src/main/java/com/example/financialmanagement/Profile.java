@@ -12,6 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -20,11 +21,21 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 public class Profile extends Fragment {
 
     ImageView logout_button;
+    TextView username;
     Dialog dialog;
+    String user_id;
+    FirebaseUser user;
+    DatabaseReference ref;
 
     @Nullable
     @Override
@@ -61,6 +72,29 @@ public class Profile extends Fragment {
                         startActivity(intent);
                     }
                 });
+            }
+        });
+
+        // get user id
+        user = FirebaseAuth.getInstance().getCurrentUser();
+        if (user != null) {
+            boolean emailVerified = user.isEmailVerified();
+            user_id = user.getUid();
+        }
+
+        // set username
+        username = view.findViewById(R.id.username);
+        ref = FirebaseDatabase.getInstance().getReference().child("User").child(user_id);
+        ref.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                String Uname = snapshot.child("username").getValue().toString();
+                username.setText(Uname);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
             }
         });
 

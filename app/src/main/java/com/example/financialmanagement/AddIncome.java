@@ -25,7 +25,7 @@ public class AddIncome extends AppCompatActivity {
     Button add_button;
     String user_id;
     FirebaseUser user;
-    DatabaseReference ref, user_ref, income_ref;
+    DatabaseReference ref;
     Piggy piggy;
 
     @Override
@@ -55,7 +55,7 @@ public class AddIncome extends AppCompatActivity {
         income_memo = findViewById(R.id.income_memo);
 
         piggy = new Piggy();
-        ref = FirebaseDatabase.getInstance().getReference().child("User");
+        ref = FirebaseDatabase.getInstance().getReference().child("User").child(user_id).child("Income");
 
         // add_button
         add_button = findViewById(R.id.add_button);
@@ -66,12 +66,10 @@ public class AddIncome extends AppCompatActivity {
                 if (income_amount.getText().toString().length() == 0) {
                     income_amount.setError("Income amount is required");
                 } else {
-                    user_ref = ref.child(user_id);
-                    income_ref = user_ref.child("Income");
                     piggy.setCategory_name(income_category_name.getText().toString().trim());
                     piggy.setAmount(Double.parseDouble(income_amount.getText().toString().trim()));
                     piggy.setMemo(income_memo.getText().toString().trim());
-                    income_ref.push().setValue(piggy);
+                    ref.push().setValue(piggy);
                     Toast.makeText(getApplicationContext(),"data inserted successfully",Toast.LENGTH_SHORT).show();
 
                     // back to home page

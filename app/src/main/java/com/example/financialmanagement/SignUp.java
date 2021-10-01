@@ -66,34 +66,40 @@ public class SignUp extends AppCompatActivity {
 
                 if(Email.isEmpty()) {
                     signupEmail.setError("Email is required");
+                    signupEmail.requestFocus();
                     return;
                 }
 
                 // check email pattern
                 if(!Patterns.EMAIL_ADDRESS.matcher(Email).matches()) {
                     signupEmail.setError("Please enter a valid email");
+                    signupEmail.requestFocus();
                     return;
                 }
 
                 if(Password.isEmpty()) {
                     signupPassword.setError("Password is required");
+                    signupPassword.requestFocus();
                     return;
                 }
 
                 // check password length must be >= 6
                 if(Password.length() < 6) {
                     signupPassword.setError("Minimum password length should be 6 characters");
+                    signupPassword.requestFocus();
                     return;
                 }
 
                 if(RePassword.isEmpty()) {
                     signupRePassword.setError("Please re-enter your password");
+                    signupRePassword.requestFocus();
                     return;
                 }
 
                 // 2 password must same
                 if(!Password.equals(RePassword)) {
                     signupRePassword.setError("Password do not match");
+                    signupRePassword.requestFocus();
                     return;
                 }
 

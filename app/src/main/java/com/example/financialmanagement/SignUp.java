@@ -11,6 +11,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -32,6 +33,7 @@ public class SignUp extends AppCompatActivity {
     EditText signupUname, signupEmail, signupPassword, signupRePassword;
     Button signupButton;
     TextView login_page;
+    ProgressBar progress_bar;
     FirebaseAuth fAuth;
 
     @Override
@@ -44,6 +46,7 @@ public class SignUp extends AppCompatActivity {
         signupEmail = findViewById(R.id.signupEmail);
         signupPassword = findViewById(R.id.signupPassword);
         signupRePassword = findViewById(R.id.signupRePassword);
+        progress_bar = findViewById(R.id.progress_bar);
 
         // sign up button
         signupButton = findViewById(R.id.signupButton);
@@ -109,6 +112,9 @@ public class SignUp extends AppCompatActivity {
                 // firebase
                 fAuth = FirebaseAuth.getInstance();
 
+                // set progress bar visibility
+                progress_bar.setVisibility(View.VISIBLE);
+
                 // if success
                 fAuth.createUserWithEmailAndPassword(Email, Password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                     @Override
@@ -123,13 +129,20 @@ public class SignUp extends AppCompatActivity {
                                 public void onComplete(@NonNull Task<Void> task) {
                                     if(task.isSuccessful()) {
                                         Toast.makeText(SignUp.this, "Signed Up Successfully", Toast.LENGTH_SHORT).show();
+                                        progress_bar.setVisibility(View.VISIBLE);
+
+                                        // go to main page
+                                        startActivity(new Intent(getApplicationContext(), MainActivity.class));
+                                        finish();
                                     } else {
                                         Toast.makeText(SignUp.this, "Sign Up Failed", Toast.LENGTH_SHORT).show();
+                                        progress_bar.setVisibility(View.GONE);
                                     }
                                 }
                             });
                         } else {
                             Toast.makeText(SignUp.this, "Sign Up Failed", Toast.LENGTH_SHORT).show();
+                            progress_bar.setVisibility(View.GONE);
                         }
                     }
                 });

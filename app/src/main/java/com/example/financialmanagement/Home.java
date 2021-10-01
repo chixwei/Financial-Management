@@ -52,7 +52,7 @@ public class Home extends Fragment {
 
         // retrieve data from database
         recyclerView = v.findViewById(R.id.recyclerView);
-        database = FirebaseDatabase.getInstance().getReference("Expenses");
+        database = FirebaseDatabase.getInstance().getReference("User");
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         list = new ArrayList<>();

@@ -75,9 +75,6 @@ public class Home extends Fragment {
             }
         });
 
-        // test database
-        Toast.makeText(getActivity(),"Firebase connection successful", Toast.LENGTH_SHORT).show();
-
         // define text
         add_expense_text = v.findViewById(R.id.add_expense_text);
         add_income_text = v.findViewById(R.id.add_income_text);

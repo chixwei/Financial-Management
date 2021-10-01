@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -13,13 +14,17 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+
+import java.util.regex.Pattern;
 
 public class SignUp extends AppCompatActivity {
 
@@ -34,73 +39,92 @@ public class SignUp extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_signup);
 
-        //assign variable
+        // assign variable
         signupUname = findViewById(R.id.signupUname);
         signupEmail = findViewById(R.id.signupEmail);
         signupPassword = findViewById(R.id.signupPassword);
         signupRePassword = findViewById(R.id.signupRePassword);
 
-        //sign up button
+        // sign up button
         signupButton = findViewById(R.id.signupButton);
         signupButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                //extract the data from the form
-                String Uname = signupUname.getText().toString();
-                String Email = signupEmail.getText().toString();
-                String Password = signupPassword.getText().toString();
-                String RePassword = signupRePassword.getText().toString();
+                // extract the data from the form
+                String Uname = signupUname.getText().toString().trim();
+                String Email = signupEmail.getText().toString().trim();
+                String Password = signupPassword.getText().toString().trim();
+                String RePassword = signupRePassword.getText().toString().trim();
 
-                //Error if empty
+                // error if empty
                 if(Uname.isEmpty()) {
-                    signupUname.setError("Username is Required");
+                    signupUname.setError("Username is required");
+                    signupUname.requestFocus();
                     return;
                 }
 
                 if(Email.isEmpty()) {
-                    signupEmail.setError("Email is Required");
+                    signupEmail.setError("Email is required");
+                    return;
+                }
+
+                // check email pattern
+                if(!Patterns.EMAIL_ADDRESS.matcher(Email).matches()) {
+                    signupEmail.setError("Please enter a valid email");
                     return;
                 }
 
                 if(Password.isEmpty()) {
-                    signupPassword.setError("Password is Required");
+                    signupPassword.setError("Password is required");
+                    return;
+                }
+
+                // check password length must be >= 6
+                if(Password.length() < 6) {
+                    signupPassword.setError("Minimum password length should be 6 characters");
                     return;
                 }
 
                 if(RePassword.isEmpty()) {
-                    signupRePassword.setError("Please Re-enter Your Password");
+                    signupRePassword.setError("Please re-enter your password");
                     return;
                 }
 
-                //2 password must same
+                // 2 password must same
                 if(!Password.equals(RePassword)) {
-                    signupRePassword.setError("Password Do Not Match");
+                    signupRePassword.setError("Password do not match");
                     return;
                 }
 
-                //Data is valid
-                //Register User
+                // data is valid
+                Toast.makeText(SignUp.this, "Signed Up Successfully", Toast.LENGTH_SHORT).show();
 
-                Toast.makeText(SignUp.this, "Data Validated", Toast.LENGTH_SHORT).show();
-
-                //Firebase
+                // firebase
                 fAuth = FirebaseAuth.getInstance();
-                //If Success
-                fAuth.createUserWithEmailAndPassword(Email, Password).addOnSuccessListener(new OnSuccessListener<AuthResult>() {
-                    @Override
-                    public void onSuccess(AuthResult authResult) {
-                        //Go into Main Page
-                        startActivity(new Intent(getApplicationContext(),MainActivity.class));
-                        finish();
 
-                    }
-
-                    //If Fail
-                }).addOnFailureListener(new OnFailureListener() {
+                // if success
+                fAuth.createUserWithEmailAndPassword(Email, Password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                     @Override
-                    public void onFailure(@NonNull Exception e) {
-                        Toast.makeText(SignUp.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        if(task.isSuccessful()) {
+                            User user = new User(Uname, Email);
+
+                            FirebaseDatabase.getInstance().getReference("User")
+                                    .child(FirebaseAuth.getInstance().getCurrentUser().getUid())
+                                    .setValue(user).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                @Override
+                                public void onComplete(@NonNull Task<Void> task) {
+                                    if(task.isSuccessful()) {
+                                        Toast.makeText(SignUp.this, "Signed Up Successfully", Toast.LENGTH_SHORT).show();
+                                    } else {
+                                        Toast.makeText(SignUp.this, "Sign Up Failed", Toast.LENGTH_SHORT).show();
+                                    }
+                                }
+                            });
+                        } else {
+                            Toast.makeText(SignUp.this, "Sign Up Failed", Toast.LENGTH_SHORT).show();
+                        }
                     }
                 });
             }
@@ -127,4 +151,3 @@ public class SignUp extends AppCompatActivity {
         });
     }
 }
-

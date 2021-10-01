@@ -25,7 +25,7 @@ public class AddExpense extends AppCompatActivity {
     Button add_button;
     String user_id;
     FirebaseUser user;
-    DatabaseReference ref, expense_ref;
+    DatabaseReference ref, user_ref, expense_ref;
     Piggy piggy;
 
     @Override
@@ -55,7 +55,7 @@ public class AddExpense extends AppCompatActivity {
         expense_memo = findViewById(R.id.expense_memo);
 
         piggy = new Piggy();
-        ref = FirebaseDatabase.getInstance().getReference().child(user_id);
+        ref = FirebaseDatabase.getInstance().getReference().child("User");
 
         // add_button
         add_button = findViewById(R.id.add_button);
@@ -66,7 +66,8 @@ public class AddExpense extends AppCompatActivity {
                 if (expense_amount.getText().toString().length() == 0) {
                     expense_amount.setError("Expense amount is required");
                 } else {
-                    expense_ref = ref.child("Expenses");
+                    user_ref = ref.child(user_id);
+                    expense_ref = user_ref.child("Expenses");
                     piggy.setCategory_name(expense_category_name.getText().toString().trim());
                     piggy.setAmount(Double.parseDouble(expense_amount.getText().toString().trim()));
                     piggy.setMemo(expense_memo.getText().toString().trim());

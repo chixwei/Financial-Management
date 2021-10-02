@@ -42,9 +42,6 @@
         app:layout_constraintTop_toTopOf="parent">
 
         // username
-
-        // email
-
         <EditText
             android:id="@+id/signupUname"
             android:layout_width="match_parent"
@@ -62,6 +59,7 @@
             android:padding="10dp"
             android:textColor="@color/black" />
 
+        // email
         <EditText
             android:id="@+id/signupEmail"
             android:layout_width="match_parent"
@@ -142,6 +140,7 @@
 
     </RelativeLayout>
 
+    // progress bar
     <ProgressBar
         android:id="@+id/progress_bar"
         android:layout_width="wrap_content"

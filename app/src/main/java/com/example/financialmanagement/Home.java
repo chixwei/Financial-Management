@@ -33,7 +33,7 @@ public class Home extends Fragment {
     String user_id;
     FirebaseUser user;
     RecyclerView recyclerView;
-    DatabaseReference database;
+    DatabaseReference database_expenses, database_income;
     PiggyAdapter PiggyAdapter;
     ArrayList<Piggy> list;
     boolean isFABOpen;
@@ -52,14 +52,33 @@ public class Home extends Fragment {
 
         // retrieve data from database
         recyclerView = v.findViewById(R.id.recyclerView);
-        database = FirebaseDatabase.getInstance().getReference("User");
+        database_expenses = FirebaseDatabase.getInstance().getReference("User").child(user_id).child("Expenses");
+        database_income = FirebaseDatabase.getInstance().getReference("User").child(user_id).child("Income");
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         list = new ArrayList<>();
         PiggyAdapter = new PiggyAdapter(getActivity(), list);
         recyclerView.setAdapter(PiggyAdapter);
 
-        database.addValueEventListener(new ValueEventListener() {
+        // retrieve expenses record
+        database_expenses.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
+                    Piggy piggy = dataSnapshot.getValue(Piggy.class);
+                    list.add(piggy);
+                }
+                PiggyAdapter.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
+        // retrieve income record
+        database_income.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 for (DataSnapshot dataSnapshot : snapshot.getChildren()) {

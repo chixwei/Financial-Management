@@ -5,6 +5,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.text.InputFilter;
+import android.text.Spanned;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -16,6 +18,9 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class AddIncome extends AppCompatActivity {
 
@@ -50,9 +55,13 @@ public class AddIncome extends AppCompatActivity {
             user_id = user.getUid();
         }
 
+        // define variable
         income_category_name = findViewById(R.id.income_category_name);
         income_amount = findViewById(R.id.income_amount);
         income_memo = findViewById(R.id.income_memo);
+
+        // set amount decimal to max 2
+        income_amount.setFilters(new InputFilter[]{new DecimalDigitsInputFilter(7, 2)});
 
         piggy = new Piggy();
         ref = FirebaseDatabase.getInstance().getReference().child("User").child(user_id).child("Income");
@@ -78,6 +87,20 @@ public class AddIncome extends AppCompatActivity {
                 }
             }
         });
+    }
 
+    // set decimal = 2
+    class DecimalDigitsInputFilter implements InputFilter {
+        private Pattern mPattern;
+        DecimalDigitsInputFilter(int digitsBeforeZero, int digitsAfterZero) {
+            mPattern = Pattern.compile("[0-9]{0," + (digitsBeforeZero - 1) + "}+((\\.[0-9]{0," + (digitsAfterZero - 1) + "})?)||(\\.)?");
+        }
+        @Override
+        public CharSequence filter(CharSequence source, int start, int end, Spanned dest, int dstart, int dend) {
+            Matcher matcher = mPattern.matcher(dest);
+            if (!matcher.matches())
+                return "";
+            return null;
+        }
     }
 }

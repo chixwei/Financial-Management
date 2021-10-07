@@ -133,9 +133,10 @@
             android:drawablePadding="10dp"
             android:ems="10"
             android:hint="@string/image"
-            android:inputType="text"
+            android:inputType="none"
             android:padding="10dp"
-            android:textColor="@color/black"/>
+            android:textColor="@color/black"
+            android:focusable="false"/>
 
         // add button
         <Button

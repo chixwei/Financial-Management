@@ -54,7 +54,6 @@ public class Home extends Fragment {
         recyclerView = v.findViewById(R.id.recyclerView);
         database_expenses = FirebaseDatabase.getInstance().getReference("User").child(user_id).child("Expenses");
         database_income = FirebaseDatabase.getInstance().getReference("User").child(user_id).child("Income");
-        recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         list = new ArrayList<>();
         PiggyAdapter = new PiggyAdapter(getActivity(), list);

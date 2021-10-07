@@ -3,7 +3,7 @@ package com.example.financialmanagement;
 public class Piggy {
 
     private double amount;
-    private String category_name, date, memo;
+    private String category_name, date, memo, image_url;
 
     public Piggy() {
     }
@@ -38,5 +38,13 @@ public class Piggy {
 
     public void setMemo(String memo) {
         this.memo = memo;
+    }
+
+    public String getImage_url() {
+        return image_url;
+    }
+
+    public void setImage_url(String image_url) {
+        this.image_url = image_url;
     }
 }

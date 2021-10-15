@@ -14,13 +14,14 @@
         app:layout_constraintBaseline_toTopOf="parent">
 
         <RelativeLayout
-            android:layout_width="wrap_content"
+            android:layout_width="80dp"
             android:layout_height="wrap_content">
 
             <ImageView
                 android:id="@+id/imageView"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
+                android:layout_centerHorizontal="true"
                 android:scaleType="centerCrop"/>
 
             <TextView
@@ -30,8 +31,11 @@
                 android:layout_below="@+id/imageView"
                 android:layout_marginTop="12dp"
                 android:layout_marginBottom="10dp"
-
-                android:textSize="16sp" />
+                android:layout_centerHorizontal="true"
+                android:textSize="12sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                />
 
         </RelativeLayout>
 

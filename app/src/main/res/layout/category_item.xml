@@ -33,6 +33,7 @@
                 android:layout_marginBottom="10dp"
                 android:layout_centerHorizontal="true"
                 android:textSize="12sp"
+                android:textColor="@color/black"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 />

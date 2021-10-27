@@ -22,6 +22,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -51,10 +52,33 @@ public class AddIncome extends AppCompatActivity {
     StorageReference storageReference;
     int Image_Request_Code = 7;
 
+    //TESTING----------------------------------------------------------------------------------------------
+    ImageView image;
+    TextView title;
+
+    //----------------------------------------------------------------------------------------------
+
+//    public AddIncome(String name, String imageUrl) {
+//
+//
+//    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_income);
+
+        //TESTING------------------------------------------------------------------------------------------
+        image = (ImageView)findViewById(R.id.addIncomeImage);
+        title = (TextView)findViewById(R.id.income_category_name);
+
+        String imageView = getIntent().getExtras().getString("imageView");
+        Glide.with(getApplicationContext()).load(imageView).into(image);
+//        image.setImageResource(getIntent().getIntExtra("image", 0));
+        title.setText(getIntent().getStringExtra("title"));
+        //stop 15.14
+
+        //------------------------------------------------------------------------------------------
 
         // back button
         back_button = findViewById(R.id.back_button);

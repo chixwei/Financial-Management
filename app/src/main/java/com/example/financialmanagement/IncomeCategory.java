@@ -78,7 +78,7 @@ public class IncomeCategory extends AppCompatActivity {
         GetDataFromFirebase();
 
 
-   //---------------------------------------------------------
+        //---------------------------------------------------------
 
 
 
@@ -142,7 +142,7 @@ public class IncomeCategory extends AppCompatActivity {
     }
 
     //-----------------------------------------------------------------------
-        private void GetDataFromFirebase() {
+    private void GetDataFromFirebase() {
 
         Query query = myRef.child("incomeCategory");
 
@@ -172,19 +172,19 @@ public class IncomeCategory extends AppCompatActivity {
             }
         });
 
-        }
+    }
 
-        private void ClearAll() {
-            if(categoryList != null) {
-                categoryList.clear();
+    private void ClearAll() {
+        if(categoryList != null) {
+            categoryList.clear();
 
-                if (recyclerAdapter != null) {
-                    recyclerAdapter.notifyDataSetChanged();
-                }
+            if (recyclerAdapter != null) {
+                recyclerAdapter.notifyDataSetChanged();
             }
-
-            categoryList = new ArrayList<>();
         }
+
+        categoryList = new ArrayList<>();
+    }
 
 
     //------------------------------------------------------------------------

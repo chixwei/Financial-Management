@@ -61,7 +61,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
             public void onClick(View v) {
 
                 Intent intent = new Intent(mContext, AddIncome.class);
-                intent.putExtra("imageView", temp.getImageUrl());
+                intent.putExtra("image", temp.getImageUrl());
                 intent.putExtra("title", temp.getName());
                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 mContext.startActivity(intent);

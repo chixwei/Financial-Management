@@ -7,12 +7,15 @@ import android.content.ContentResolver;
 import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.provider.OpenableColumns;
 import android.text.InputFilter;
 import android.text.Spanned;
+import android.util.Log;
 import android.view.View;
 import android.webkit.MimeTypeMap;
 import android.widget.Button;
@@ -33,6 +36,7 @@ import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.Calendar;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -53,7 +57,6 @@ public class AddIncome extends AppCompatActivity {
     int Image_Request_Code = 7;
 
     //TESTING----------------------------------------------------------------------------------------------
-    ImageView image;
     TextView title;
 
     //----------------------------------------------------------------------------------------------
@@ -63,25 +66,25 @@ public class AddIncome extends AppCompatActivity {
 //
 //    }
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_income);
 
+
         //TESTING------------------------------------------------------------------------------------------
-        image = (ImageView)findViewById(R.id.addIncomeImage);
+        //get category text
         title = (TextView)findViewById(R.id.income_category_name);
-
-        //method 1
-        String imageView = getIntent().getExtras().getString("imageView");
-        Glide.with(getApplicationContext()).load(imageView).into(image);
-
-        //method 2
-//        image.setImageResource(getIntent().getIntExtra("imageView",0));
         title.setText(getIntent().getStringExtra("title"));
-        //stop 15.14
+
+        //get category image
+        new DownloadImageTask((ImageView) findViewById(R.id.addIncomeImage))
+                .execute(getIntent().getExtras().getString("image"));
 
         //------------------------------------------------------------------------------------------
+
+
 
         // back button
         back_button = findViewById(R.id.back_button);
@@ -176,6 +179,32 @@ public class AddIncome extends AppCompatActivity {
                 }
             }
         });
+    }
+
+    //get category image
+    private class DownloadImageTask extends AsyncTask<String, Void, Bitmap> {
+        ImageView bmImage;
+
+        public DownloadImageTask(ImageView bmImage) {
+            this.bmImage = bmImage;
+        }
+
+        protected Bitmap doInBackground(String... urls) {
+            String urldisplay = urls[0];
+            Bitmap mIcon11 = null;
+            try {
+                InputStream in = new java.net.URL(urldisplay).openStream();
+                mIcon11 = BitmapFactory.decodeStream(in);
+            } catch (Exception e) {
+                Log.e("Error", e.getMessage());
+                e.printStackTrace();
+            }
+            return mIcon11;
+        }
+
+        protected void onPostExecute(Bitmap result) {
+            bmImage.setImageBitmap(result);
+        }
     }
 
     // set decimal = 2

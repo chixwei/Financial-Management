@@ -72,9 +72,12 @@ public class AddIncome extends AppCompatActivity {
         image = (ImageView)findViewById(R.id.addIncomeImage);
         title = (TextView)findViewById(R.id.income_category_name);
 
+        //method 1
         String imageView = getIntent().getExtras().getString("imageView");
         Glide.with(getApplicationContext()).load(imageView).into(image);
-//        image.setImageResource(getIntent().getIntExtra("image", 0));
+
+        //method 2
+//        image.setImageResource(getIntent().getIntExtra("imageView",0));
         title.setText(getIntent().getStringExtra("title"));
         //stop 15.14
 

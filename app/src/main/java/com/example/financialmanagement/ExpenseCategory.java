@@ -30,7 +30,7 @@ public class ExpenseCategory extends AppCompatActivity {
         back_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent= new Intent(ExpenseCategory.this, Home.class);
+                Intent intent= new Intent(ExpenseCategory.this, MainActivity.class);
                 startActivity(intent);
             }
         });

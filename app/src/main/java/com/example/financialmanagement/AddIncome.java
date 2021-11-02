@@ -18,10 +18,13 @@ import android.text.Spanned;
 import android.util.Log;
 import android.view.View;
 import android.webkit.MimeTypeMap;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -37,7 +40,9 @@ import com.google.firebase.storage.UploadTask;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -46,6 +51,8 @@ public class AddIncome extends AppCompatActivity {
     ImageView back_button;
     TextView income_category_name;
     EditText income_amount, income_date, income_memo, income_img;
+    Spinner spinner;
+    Double Amount;
     Button add_button;
     String user_id;
     FirebaseUser user;
@@ -96,6 +103,51 @@ public class AddIncome extends AppCompatActivity {
             }
         });
 
+        // category spinner
+        spinner = findViewById(R.id.spinner_category);
+        income_amount = findViewById(R.id.income_amount);
+        income_amount.setText("0");
+
+        // spinner list
+        List<String> category_list = new ArrayList<>();
+        category_list.add(0, "MYR - Malaysian Ringgit");
+        category_list.add("BGP - British Pound");
+        category_list.add("CNY - Chinese Yuan Renminbi");
+        category_list.add("SGD - Singapore Dollar");
+        category_list.add("USD - US Dollar");
+
+        ArrayAdapter<String> categoryAdapter;
+        categoryAdapter = new ArrayAdapter<>(this, R.layout.category_spinner, category_list);
+        categoryAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        // Setting the ArrayAdapter data on the Spinner
+        spinner.setAdapter(categoryAdapter);
+        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int i, long l) {
+                if (parent.getItemAtPosition(i).equals("MYR - Malaysian Ringgit")) {
+                    Amount = Double.parseDouble(income_amount.getText().toString()) / 1;
+                } else {
+                    // on selecting a spinner
+                    String item = parent.getItemAtPosition(i).toString();
+                    // link to another activity
+                    if (parent.getItemAtPosition(i).equals("BGP - British Pound")) {
+                        Amount = Double.parseDouble(income_amount.getText().toString()) / 0.176;
+                    } else if (parent.getItemAtPosition(i).equals("CNY - Chinese Yuan Renminbi")) {
+                        Amount = Double.parseDouble(income_amount.getText().toString()) / 1.547;
+                    } else if (parent.getItemAtPosition(i).equals("SGD - Singapore Dollar")) {
+                        Amount = Double.parseDouble(income_amount.getText().toString()) / 0.326;
+                    } else {
+                        Amount = Double.parseDouble(income_amount.getText().toString()) / 0.241;
+                    }
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
         // get user id
         user = FirebaseAuth.getInstance().getCurrentUser();
         if (user != null) {
@@ -105,13 +157,12 @@ public class AddIncome extends AppCompatActivity {
 
         // define variable
         income_category_name = findViewById(R.id.income_category_name);
-        income_amount = findViewById(R.id.income_amount);
         income_date = findViewById(R.id.income_date);
         income_memo = findViewById(R.id.income_memo);
         income_img = findViewById(R.id.income_img);
 
         // set amount decimal to max 2
-        income_amount.setFilters(new InputFilter[]{new DecimalDigitsInputFilter(7, 2)});
+        //income_amount.setFilters(new InputFilter[]{new DecimalDigitsInputFilter(7, 2)});
 
         // select date
         income_date.setOnClickListener(new View.OnClickListener() {
@@ -164,7 +215,8 @@ public class AddIncome extends AppCompatActivity {
                         @Override
                         public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
                             piggy.setCategory_name(income_category_name.getText().toString().trim());
-                            piggy.setAmount(Double.parseDouble(income_amount.getText().toString().trim()));
+                            //piggy.setAmount(Double.parseDouble(income_amount.getText().toString().trim()));
+                            piggy.setAmount(Amount);
                             piggy.setDate(income_date.getText().toString().trim());
                             piggy.setMemo(income_memo.getText().toString().trim());
                             piggy.setImage_url(taskSnapshot.getUploadSessionUri().toString());
@@ -172,7 +224,7 @@ public class AddIncome extends AppCompatActivity {
                             ref.child(ImageUploadId).setValue(piggy);
                             Toast.makeText(getApplicationContext(),"data inserted successfully",Toast.LENGTH_SHORT).show();
                             // back to home page
-                            Intent intent = new Intent(AddIncome.this, Home.class);
+                            Intent intent = new Intent(AddIncome.this, MainActivity.class);
                             startActivity(intent);
                         }
                     });

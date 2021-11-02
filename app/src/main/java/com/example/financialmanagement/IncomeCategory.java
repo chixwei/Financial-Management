@@ -89,7 +89,7 @@ public class IncomeCategory extends AppCompatActivity {
         back_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent= new Intent(IncomeCategory.this, Home.class);
+                Intent intent= new Intent(IncomeCategory.this, MainActivity.class);
                 startActivity(intent);
             }
         });

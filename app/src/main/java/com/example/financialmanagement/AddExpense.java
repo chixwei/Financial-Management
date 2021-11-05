@@ -8,12 +8,15 @@ import android.content.ContentResolver;
 import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.provider.OpenableColumns;
 import android.text.InputFilter;
 import android.text.Spanned;
+import android.util.Log;
 import android.view.View;
 import android.webkit.MimeTypeMap;
 import android.widget.Button;
@@ -33,6 +36,7 @@ import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.Calendar;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -52,10 +56,26 @@ public class AddExpense extends AppCompatActivity {
     StorageReference storageReference;
     int Image_Request_Code = 7;
 
+    //TESTING----------------------------------------------------------------------------------------------
+    TextView title;
+
+    //----------------------------------------------------------------------------------------------
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_expense);
+
+        //TESTING------------------------------------------------------------------------------------------
+        //get category text
+        title = (TextView)findViewById(R.id.expense_category_name);
+        title.setText(getIntent().getStringExtra("title"));
+
+        //get category image
+        new AddExpense.DownloadImageTask((ImageView) findViewById(R.id.addExpenseImage))
+                .execute(getIntent().getExtras().getString("image"));
+
+        //------------------------------------------------------------------------------------------
 
         // back button
         back_button = findViewById(R.id.back_button);
@@ -150,6 +170,32 @@ public class AddExpense extends AppCompatActivity {
                 }
             }
         });
+    }
+
+    //get category image
+    private class DownloadImageTask extends AsyncTask<String, Void, Bitmap> {
+        ImageView bmImage;
+
+        public DownloadImageTask(ImageView bmImage) {
+            this.bmImage = bmImage;
+        }
+
+        protected Bitmap doInBackground(String... urls) {
+            String urldisplay = urls[0];
+            Bitmap mIcon11 = null;
+            try {
+                InputStream in = new java.net.URL(urldisplay).openStream();
+                mIcon11 = BitmapFactory.decodeStream(in);
+            } catch (Exception e) {
+                Log.e("Error", e.getMessage());
+                e.printStackTrace();
+            }
+            return mIcon11;
+        }
+
+        protected void onPostExecute(Bitmap result) {
+            bmImage.setImageBitmap(result);
+        }
     }
 
     // set decimal = 2

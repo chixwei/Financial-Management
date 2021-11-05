@@ -19,14 +19,14 @@ import com.bumptech.glide.load.model.Model;
 
 import java.util.ArrayList;
 
-public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHolder> {
+public class ExpenseAdapter extends RecyclerView.Adapter<ExpenseAdapter.ViewHolder> {
 
     private static final String Tag = "RecycleView";
     private Context mContext;
     private ArrayList<DataModel> categoryList;
     View v;
 
-    public RecyclerAdapter(Context mContext, ArrayList<DataModel> categoryList) {
+    public ExpenseAdapter(Context mContext, ArrayList<DataModel> categoryList) {
         this.mContext = mContext;
         this.categoryList = categoryList;
     }
@@ -34,7 +34,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
 
     @NonNull
     @Override
-    public RecyclerAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public ExpenseAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
 
         View view = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.category_item, parent, false);
@@ -60,7 +60,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
             @Override
             public void onClick(View v) {
 
-                Intent intent = new Intent(mContext, AddIncome.class);
+                Intent intent = new Intent(mContext, AddExpense.class);
                 intent.putExtra("image", temp.getImageUrl());
                 intent.putExtra("title", temp.getName());
                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);

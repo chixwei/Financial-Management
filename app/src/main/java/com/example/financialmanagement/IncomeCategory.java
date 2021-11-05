@@ -46,7 +46,7 @@ public class IncomeCategory extends AppCompatActivity {
 
     //Variables
     private ArrayList<DataModel> categoryList;
-    private RecyclerAdapter recyclerAdapter;
+    private IncomeAdapter incomeAdapter;
     private Context mContext;
 
     //----------------------------------------------------------
@@ -129,16 +129,6 @@ public class IncomeCategory extends AppCompatActivity {
             }
         });
 
-        // go to add income **temporary**
-        go_to_add_income = findViewById(R.id.go_to_add_income);
-        go_to_add_income.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent= new Intent(IncomeCategory.this, AddIncome.class);
-                startActivity(intent);
-            }
-        });
-
     }
 
     //-----------------------------------------------------------------------
@@ -161,9 +151,9 @@ public class IncomeCategory extends AppCompatActivity {
                     categoryList.add(category);
                 }
 
-                recyclerAdapter = new RecyclerAdapter(getApplicationContext(), categoryList);
-                recyclerView.setAdapter(recyclerAdapter);
-                recyclerAdapter.notifyDataSetChanged();
+                incomeAdapter = new IncomeAdapter(getApplicationContext(), categoryList);
+                recyclerView.setAdapter(incomeAdapter);
+                incomeAdapter.notifyDataSetChanged();
             }
 
             @Override
@@ -178,8 +168,8 @@ public class IncomeCategory extends AppCompatActivity {
         if(categoryList != null) {
             categoryList.clear();
 
-            if (recyclerAdapter != null) {
-                recyclerAdapter.notifyDataSetChanged();
+            if (incomeAdapter != null) {
+                incomeAdapter.notifyDataSetChanged();
             }
         }
 

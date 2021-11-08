@@ -1,12 +1,16 @@
 package com.example.financialmanagement;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.bumptech.glide.Glide;
+
 import java.util.ArrayList;
 import java.util.Locale;
 
@@ -33,6 +37,22 @@ public class PiggyAdapter extends RecyclerView.Adapter<PiggyAdapter.MyViewHolder
         holder.category_name.setText(piggy.getCategory_name());
         holder.record_name.setText(piggy.getMemo());
         holder.amount.setText(String.format(Locale.US, "%.2f", piggy.getAmount()));
+
+        // on click record to view
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(context, ViewRecord.class);
+                //intent.putExtra("image", temp.getImageUrl());
+                intent.putExtra("category_name", piggy.getCategory_name());
+                String amount = Double.toString(Math.round(piggy.getAmount() * 100.0) / 100.0);
+                intent.putExtra("amount", amount);
+                intent.putExtra("date", piggy.getDate());
+                intent.putExtra("memo", piggy.getMemo());
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                context.startActivity(intent);
+            }
+        });
     }
 
     @Override

@@ -65,23 +65,54 @@
             android:textSize="25sp"
             android:textStyle="bold"/>
 
+        // expense currency
+        <RelativeLayout
+            android:id="@+id/expense_currency"
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:layout_below="@+id/expense_category_name"
+            android:layout_marginLeft="70dp"
+            android:layout_marginTop="30dp"
+            android:layout_marginRight="70dp"
+            android:background="@drawable/fill_info_bg">
+
+            <Spinner
+                android:id="@+id/spinner_category"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:paddingTop="10dp"
+                android:background="@android:color/transparent"
+                android:spinnerMode="dropdown"/>
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_gravity="center"
+                android:paddingRight="5dp"
+                android:src="@drawable/ic_down"/>
+
+        </RelativeLayout>
+
         // expense amount
         <EditText
             android:id="@+id/expense_amount"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/expense_category_name"
-            android:layout_marginTop="50dp"
+            android:layout_below="@id/expense_currency"
             android:layout_marginLeft="70dp"
+            android:layout_marginTop="30dp"
             android:layout_marginRight="70dp"
-            android:ems="10"
-            android:inputType="numberDecimal"
-            android:hint="@string/amount"
-            android:textColor="@color/black"
-            android:padding="10dp"
-            android:drawablePadding="10dp"
+            android:background="@drawable/fill_info_bg"
             android:drawableLeft="@drawable/ic_nav_income"
-            android:background="@drawable/fill_info_bg"/>
+            android:drawablePadding="10dp"
+            android:ems="10"
+            android:hint="@string/amount"
+            android:inputType="numberDecimal"
+            android:padding="10dp"
+            android:textColor="@color/black"/>
 
         // expense date
         <EditText
@@ -108,17 +139,17 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/expense_date"
-            android:layout_marginTop="30dp"
             android:layout_marginLeft="70dp"
+            android:layout_marginTop="30dp"
             android:layout_marginRight="70dp"
-            android:ems="10"
-            android:inputType="textImeMultiLine"
-            android:hint="@string/memo"
-            android:textColor="@color/black"
-            android:padding="10dp"
-            android:drawablePadding="10dp"
+            android:background="@drawable/fill_info_bg"
             android:drawableLeft="@drawable/ic_memo"
-            android:background="@drawable/fill_info_bg"/>
+            android:drawablePadding="10dp"
+            android:ems="10"
+            android:hint="@string/memo"
+            android:inputType="textImeMultiLine"
+            android:padding="10dp"
+            android:textColor="@color/black"/>
 
         // expense image
         <EditText
@@ -146,7 +177,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/expense_img"
             android:layout_marginLeft="70dp"
-            android:layout_marginTop="50dp"
+            android:layout_marginTop="30dp"
             android:layout_marginRight="70dp"
             android:background="@drawable/skip_button_bg"
             android:text="@string/add"

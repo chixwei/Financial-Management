@@ -214,6 +214,7 @@ public class AddIncome extends AppCompatActivity {
                     storageReference2.putFile(FilePathUri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                         @Override
                         public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                            piggy.setCategory("Income");
                             piggy.setCategory_name(income_category_name.getText().toString().trim());
                             //piggy.setAmount(Double.parseDouble(income_amount.getText().toString().trim()));
                             piggy.setAmount(Amount);

@@ -48,7 +48,7 @@ public class ViewRecord extends AppCompatActivity {
 
         // get record details
         record_category_name.setText(getIntent().getStringExtra("category_name"));
-        //record_category.setText(getIntent().getStringExtra("category"));
+        record_category.setText(getIntent().getStringExtra("category"));
         record_amount.setText(getIntent().getStringExtra("amount"));
         record_date.setText(getIntent().getStringExtra("date"));
         record_memo.setText(getIntent().getStringExtra("memo"));

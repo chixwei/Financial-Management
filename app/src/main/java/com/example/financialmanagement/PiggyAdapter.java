@@ -43,8 +43,8 @@ public class PiggyAdapter extends RecyclerView.Adapter<PiggyAdapter.MyViewHolder
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(context, ViewRecord.class);
-                //intent.putExtra("image", temp.getImageUrl());
                 intent.putExtra("category_name", piggy.getCategory_name());
+                intent.putExtra("category", piggy.getCategory());
                 String amount = Double.toString(Math.round(piggy.getAmount() * 100.0) / 100.0);
                 intent.putExtra("amount", amount);
                 intent.putExtra("date", piggy.getDate());

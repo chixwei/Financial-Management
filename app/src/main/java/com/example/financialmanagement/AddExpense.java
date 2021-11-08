@@ -206,6 +206,7 @@ public class AddExpense extends AppCompatActivity {
                     storageReference2.putFile(FilePathUri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                         @Override
                         public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                            piggy.setCategory("Expenses");
                             piggy.setCategory_name(expense_category_name.getText().toString().trim());
                             //piggy.setAmount(Double.parseDouble(expense_amount.getText().toString().trim()));
                             piggy.setAmount(Amount);

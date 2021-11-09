@@ -68,19 +68,10 @@ public class AddIncome extends AppCompatActivity {
     //TESTING----------------------------------------------------------------------------------------------
     TextView title;
 
-    //----------------------------------------------------------------------------------------------
-
-//    public AddIncome(String name, String imageUrl) {
-//
-//
-//    }
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_income);
-
 
         //TESTING------------------------------------------------------------------------------------------
         //get category text
@@ -92,8 +83,6 @@ public class AddIncome extends AppCompatActivity {
                 .execute(getIntent().getExtras().getString("image"));
 
         //------------------------------------------------------------------------------------------
-
-
 
         // back button
         back_button = findViewById(R.id.back_button);
@@ -254,17 +243,14 @@ public class AddIncome extends AppCompatActivity {
                                     startActivity(intent);
                                 }
                             });
-
                         }
-
-
                     });
                 }
             }
         });
     }
 
-    //get category image
+    // get category image
     private class DownloadImageTask extends AsyncTask<String, Void, Bitmap> {
         ImageView bmImage;
 

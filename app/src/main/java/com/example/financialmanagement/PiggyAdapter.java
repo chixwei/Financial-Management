@@ -1,17 +1,29 @@
 package com.example.financialmanagement;
 
+import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.net.Uri;
+import android.os.AsyncTask;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.webkit.MimeTypeMap;
 import android.widget.ImageView;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
 
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Locale;
 
@@ -50,11 +62,13 @@ public class PiggyAdapter extends RecyclerView.Adapter<PiggyAdapter.MyViewHolder
             public void onClick(View v) {
                 Intent intent = new Intent(context, ViewRecord.class);
                 intent.putExtra("category_name", piggy.getCategory_name());
+                intent.putExtra("category_image", piggy.getCategory_url());
                 intent.putExtra("category", piggy.getCategory());
                 String amount = Double.toString(Math.round(piggy.getAmount() * 100.0) / 100.0);
                 intent.putExtra("amount", amount);
                 intent.putExtra("date", piggy.getDate());
                 intent.putExtra("memo", piggy.getMemo());
+                intent.putExtra("image", piggy.getImage_url());
                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 context.startActivity(intent);
             }

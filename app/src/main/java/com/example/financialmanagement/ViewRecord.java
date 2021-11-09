@@ -3,16 +3,18 @@ package com.example.financialmanagement;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import java.io.File;
 import java.util.Locale;
 
 public class ViewRecord extends AppCompatActivity {
 
-    ImageView back_button, delete_button, record_category_image;
+    ImageView back_button, delete_button, record_category_image, record_image;
     TextView record_category_name, record_category, record_amount, record_date, record_memo;
 
     @Override
@@ -41,16 +43,20 @@ public class ViewRecord extends AppCompatActivity {
 
         // declare record details
         record_category_name = (TextView)findViewById(R.id.record_category_name);
+        record_category_image = (ImageView) findViewById(R.id.record_category_image);
         record_category = (TextView)findViewById(R.id.record_category);
         record_amount = (TextView)findViewById(R.id.record_amount);
         record_date = (TextView)findViewById(R.id.record_date);
         record_memo = (TextView)findViewById(R.id.record_memo);
+        record_image = (ImageView)findViewById(R.id.record_image);
 
         // get record details
         record_category_name.setText(getIntent().getStringExtra("category_name"));
+        //record_category_image.setImageURI(Uri.parse("category_image"));
         record_category.setText(getIntent().getStringExtra("category"));
         record_amount.setText(getIntent().getStringExtra("amount"));
         record_date.setText(getIntent().getStringExtra("date"));
         record_memo.setText(getIntent().getStringExtra("memo"));
+        //record_image.setImageURI(Uri.parse("image"));
     }
 }

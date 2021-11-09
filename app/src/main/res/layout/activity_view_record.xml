@@ -44,7 +44,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"/>
 
-    // logo
+    // category_image
     <ImageView
         android:id="@+id/record_category_image"
         android:layout_width="80dp"

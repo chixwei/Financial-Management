@@ -226,7 +226,7 @@ public class AddExpense extends AppCompatActivity {
         });
     }
 
-    //get category image
+    // get category image
     private class DownloadImageTask extends AsyncTask<String, Void, Bitmap> {
         ImageView bmImage;
 

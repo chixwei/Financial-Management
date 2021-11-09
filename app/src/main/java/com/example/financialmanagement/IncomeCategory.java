@@ -33,8 +33,6 @@ public class IncomeCategory extends AppCompatActivity {
 
     ImageView back_button;
     Spinner spinner;
-    Button go_to_add_income;
-
 
     //------------------------------------------------------
     //Widgets
@@ -50,13 +48,10 @@ public class IncomeCategory extends AppCompatActivity {
     private Context mContext;
 
     //----------------------------------------------------------
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_income_category);
-
 
 //retrieve data-----------------------------------------------
         recyclerView = findViewById(R.id.incomeGrid);
@@ -76,13 +71,6 @@ public class IncomeCategory extends AppCompatActivity {
 
         //Get Data Method
         GetDataFromFirebase();
-
-
-        //---------------------------------------------------------
-
-
-
-
 
         // back button
         back_button = findViewById(R.id.back_button);
@@ -167,16 +155,10 @@ public class IncomeCategory extends AppCompatActivity {
     private void ClearAll() {
         if(categoryList != null) {
             categoryList.clear();
-
             if (incomeAdapter != null) {
                 incomeAdapter.notifyDataSetChanged();
             }
         }
-
         categoryList = new ArrayList<>();
     }
-
-
-    //------------------------------------------------------------------------
-
 }

@@ -239,6 +239,7 @@ public class AddIncome extends AppCompatActivity {
                                     String url = uri.toString();
 
                                     piggy.setCategory_url(url);
+                                    piggy.setCategory("Income");
                                     piggy.setCategory_name(income_category_name.getText().toString().trim());
                                     //piggy.setAmount(Double.parseDouble(income_amount.getText().toString().trim()));
                                     piggy.setAmount(Amount);

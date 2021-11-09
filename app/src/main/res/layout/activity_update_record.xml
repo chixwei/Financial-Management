@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/gold"
-    tools:context=".AddExpense">
+    tools:context=".UpdateRecord">
 
     // back button
     <ImageView
@@ -19,13 +19,24 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"/>
 
-    // add expense text
+    // delete button
+    <ImageView
+        android:id="@+id/delete_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="30dp"
+        android:layout_marginTop="30dp"
+        android:src="@drawable/ic_delete"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
+
+    // details text
     <TextView
         android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="40dp"
-        android:text="Add Expense"
+        android:text="Update Details"
         android:textColor="@color/white"
         android:textSize="35dp"
         android:textStyle="bold"
@@ -35,15 +46,14 @@
 
     // logo
     <ImageView
-        android:id="@+id/addExpenseImage"
-        android:layout_width="80dp"
-        android:layout_height="80dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginTop="15dp"
         android:src="@mipmap/ic_piggy_logo_round"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView" />
+        app:layout_constraintTop_toBottomOf="@+id/textView"/>
 
     <RelativeLayout
         android:id="@+id/relativeLayout"
@@ -53,73 +63,42 @@
         android:background="@drawable/login_bg"
         app:layout_constraintTop_toTopOf="parent">
 
-        // expense category name
+        // category name
         <TextView
-            android:id="@+id/expense_category_name"
+            android:id="@+id/category_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="30dp"
             android:text="@string/catName"
             android:textColor="@color/black"
-            android:textSize="25sp"
-            android:textStyle="bold"/>
+            android:textSize="20sp"
+            android:textStyle="bold" />
 
-        // expense currency
-        <RelativeLayout
-            android:id="@+id/expense_currency"
-            android:layout_width="match_parent"
-            android:layout_height="45dp"
-            android:layout_below="@+id/expense_category_name"
-            android:layout_marginLeft="70dp"
-            android:layout_marginTop="30dp"
-            android:layout_marginRight="70dp"
-            android:background="@drawable/fill_info_bg">
-
-            <Spinner
-                android:id="@+id/spinner_category"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:paddingTop="10dp"
-                android:background="@android:color/transparent"
-                android:spinnerMode="dropdown"/>
-
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                android:layout_centerVertical="true"
-                android:layout_gravity="center"
-                android:paddingRight="5dp"
-                android:src="@drawable/ic_down"/>
-
-        </RelativeLayout>
-
-        // expense amount
+        // amount
         <EditText
-            android:id="@+id/expense_amount"
+            android:id="@+id/amount"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/expense_currency"
+            android:layout_below="@id/category_name"
+            android:layout_marginTop="50dp"
             android:layout_marginLeft="70dp"
-            android:layout_marginTop="30dp"
             android:layout_marginRight="70dp"
-            android:background="@drawable/fill_info_bg"
-            android:drawableLeft="@drawable/ic_nav_income"
-            android:drawablePadding="10dp"
             android:ems="10"
-            android:hint="@string/amount"
             android:inputType="numberDecimal"
+            android:hint="@string/amount"
+            android:textColor="@color/black"
             android:padding="10dp"
-            android:textColor="@color/black"/>
+            android:drawablePadding="10dp"
+            android:drawableLeft="@drawable/ic_nav_income"
+            android:background="@drawable/fill_info_bg"/>
 
-        // expense date
+        // date
         <EditText
-            android:id="@+id/expense_date"
+            android:id="@+id/date"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/expense_amount"
+            android:layout_below="@id/amount"
             android:layout_marginTop="30dp"
             android:layout_marginLeft="70dp"
             android:layout_marginRight="70dp"
@@ -133,30 +112,30 @@
             android:drawableLeft="@drawable/ic_date"
             android:background="@drawable/fill_info_bg"/>
 
-        // expense memo
+        // memo
         <EditText
-            android:id="@+id/expense_memo"
+            android:id="@+id/memo"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/expense_date"
-            android:layout_marginLeft="70dp"
+            android:layout_below="@id/date"
             android:layout_marginTop="30dp"
+            android:layout_marginLeft="70dp"
             android:layout_marginRight="70dp"
-            android:background="@drawable/fill_info_bg"
-            android:drawableLeft="@drawable/ic_memo"
-            android:drawablePadding="10dp"
             android:ems="10"
-            android:hint="@string/memo"
             android:inputType="textImeMultiLine"
+            android:hint="@string/memo"
+            android:textColor="@color/black"
             android:padding="10dp"
-            android:textColor="@color/black"/>
+            android:drawablePadding="10dp"
+            android:drawableLeft="@drawable/ic_memo"
+            android:background="@drawable/fill_info_bg"/>
 
-        // expense image
+        // image
         <EditText
-            android:id="@+id/expense_img"
+            android:id="@+id/img"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/expense_memo"
+            android:layout_below="@id/memo"
             android:layout_marginLeft="70dp"
             android:layout_marginTop="30dp"
             android:layout_marginRight="70dp"
@@ -170,17 +149,17 @@
             android:textColor="@color/black"
             android:focusable="false"/>
 
-        // add button
+        // update button
         <Button
-            android:id="@+id/add_button"
+            android:id="@+id/update_button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/expense_img"
+            android:layout_below="@+id/img"
             android:layout_marginLeft="70dp"
-            android:layout_marginTop="30dp"
+            android:layout_marginTop="50dp"
             android:layout_marginRight="70dp"
             android:background="@drawable/skip_button_bg"
-            android:text="@string/add"
+            android:text="update"
             android:textSize="18dp"
             app:backgroundTint="@color/gold"/>
 

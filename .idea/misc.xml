@@ -3,18 +3,30 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/vivien/AndroidStudioProjects/Financial-Management/app/src/main/res/drawable/fill_info_bg.xml" value="0.26614583333333336" />
+        <entry key="..\:/Users/vivien/AndroidStudioProjects/Financial-Management/app/src/main/res/drawable/spinner_bg.xml" value="0.26614583333333336" />
         <entry key="..\:/Users/vivien/AndroidStudioProjects/Financial-Management/app/src/main/res/layout/activity_add_expense.xml" value="0.264" />
         <entry key="..\:/Users/vivien/AndroidStudioProjects/Financial-Management/app/src/main/res/layout/activity_add_expense_category.xml" value="0.14719202898550723" />
-        <entry key="..\:/Users/vivien/AndroidStudioProjects/Financial-Management/app/src/main/res/layout/activity_add_income.xml" value="0.14221014492753623" />
+        <entry key="..\:/Users/vivien/AndroidStudioProjects/Financial-Management/app/src/main/res/layout/activity_add_income.xml" value="0.264" />
+        <entry key="..\:/Users/vivien/AndroidStudioProjects/Financial-Management/app/src/main/res/layout/activity_add_income_category.xml" value="0.12360688956433637" />
         <entry key="..\:/Users/vivien/AndroidStudioProjects/Financial-Management/app/src/main/res/layout/activity_expense_category.xml" value="0.14719202898550723" />
         <entry key="..\:/Users/vivien/AndroidStudioProjects/Financial-Management/app/src/main/res/layout/activity_expenses.xml" value="0.14719202898550723" />
         <entry key="..\:/Users/vivien/AndroidStudioProjects/Financial-Management/app/src/main/res/layout/activity_home.xml" value="0.14719202898550723" />
         <entry key="..\:/Users/vivien/AndroidStudioProjects/Financial-Management/app/src/main/res/layout/activity_income.xml" value="0.13768115942028986" />
         <entry key="..\:/Users/vivien/AndroidStudioProjects/Financial-Management/app/src/main/res/layout/activity_income_category.xml" value="0.14221014492753623" />
+        <entry key="..\:/Users/vivien/AndroidStudioProjects/Financial-Management/app/src/main/res/layout/activity_main.xml" value="0.15443840579710144" />
         <entry key="..\:/Users/vivien/AndroidStudioProjects/Financial-Management/app/src/main/res/layout/activity_profile.xml" value="0.13768115942028986" />
         <entry key="..\:/Users/vivien/AndroidStudioProjects/Financial-Management/app/src/main/res/layout/activity_signup.xml" value="0.13768115942028986" />
+        <entry key="..\:/Users/vivien/AndroidStudioProjects/Financial-Management/app/src/main/res/layout/activity_update_record.xml" value="0.2164855072463768" />
+        <entry key="..\:/Users/vivien/AndroidStudioProjects/Financial-Management/app/src/main/res/layout/activity_view_record.xml" value="0.25" />
+        <entry key="..\:/Users/vivien/AndroidStudioProjects/Financial-Management/app/src/main/res/layout/category_item.xml" value="0.18840579710144928" />
+        <entry key="..\:/Users/vivien/AndroidStudioProjects/Financial-Management/app/src/main/res/layout/category_spinner.xml" value="0.15443840579710144" />
+        <entry key="..\:/Users/vivien/AndroidStudioProjects/Financial-Management/app/src/main/res/layout/content_update_record.xml" value="0.18840579710144928" />
+        <entry key="..\:/Users/vivien/AndroidStudioProjects/Financial-Management/app/src/main/res/layout/fragment_first.xml" value="0.18840579710144928" />
+        <entry key="..\:/Users/vivien/AndroidStudioProjects/Financial-Management/app/src/main/res/layout/fragment_second.xml" value="0.25" />
         <entry key="..\:/Users/vivien/AndroidStudioProjects/Financial-Management/app/src/main/res/layout/logout.xml" value="0.12360688956433637" />
         <entry key="..\:/Users/vivien/AndroidStudioProjects/Financial-Management/app/src/main/res/layout/record_row.xml" value="0.264" />
+        <entry key="..\:/Users/vivien/AndroidStudioProjects/Financial-Management/app/src/main/res/menu/main_menu.xml" value="0.25" />
       </map>
     </option>
   </component>

@@ -2,7 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.financialmanagement">
 
-    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
     <application
@@ -12,7 +12,13 @@
         android:roundIcon="@mipmap/ic_piggy_logo_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.FinancialManagement">
-        <activity android:name=".AddIncome"></activity>
+        <activity
+            android:name=".ViewRecord"
+            android:exported="true" />
+        <activity
+            android:name=".UpdateRecord"
+            android:exported="true" />
+        <activity android:name=".AddIncome" />
         <activity android:name=".AddExpense" />
         <activity android:name=".AddIncomeCategory" />
         <activity android:name=".AddExpenseCategory" />

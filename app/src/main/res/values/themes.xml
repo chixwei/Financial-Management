@@ -14,5 +14,12 @@
         <!-- Customize your theme here. -->
 
     </style>
+    <style name="Theme.FinancialManagement.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+    <style name="Theme.FinancialManagement.AppBarOverlay"
+        parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+    <style name="Theme.FinancialManagement.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
 </resources>

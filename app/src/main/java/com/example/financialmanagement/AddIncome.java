@@ -30,6 +30,7 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
@@ -38,6 +39,7 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
@@ -48,7 +50,7 @@ import java.util.regex.Pattern;
 
 public class AddIncome extends AppCompatActivity {
 
-    ImageView back_button;
+    ImageView back_button, categoryImage;
     TextView income_category_name;
     EditText income_amount, income_date, income_memo, income_img;
     Spinner spinner;
@@ -211,22 +213,50 @@ public class AddIncome extends AppCompatActivity {
                     income_date.setError("Income date is required");
                 } else {
                     StorageReference storageReference2 = storageReference.child(System.currentTimeMillis() + "." + GetFileExtension(FilePathUri));
+
+                    //---------------------------------
+//                    StorageReference storageRef = FirebaseStorage.getInstance().getReference().child("incomeCategory/"+title+".png");
+//
+//                    storageRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>()
+//                    {
+//                        @Override
+//                        public void onSuccess(Uri downloadUrl)
+//                        {
+//                            piggy.setCategory_url(categoryImage.toString());
+//                        }
+//                    });
+
+                    //-----------------------------------
+
                     storageReference2.putFile(FilePathUri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+
                         @Override
                         public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                            piggy.setCategory_name(income_category_name.getText().toString().trim());
-                            //piggy.setAmount(Double.parseDouble(income_amount.getText().toString().trim()));
-                            piggy.setAmount(Amount);
-                            piggy.setDate(income_date.getText().toString().trim());
-                            piggy.setMemo(income_memo.getText().toString().trim());
-                            piggy.setImage_url(taskSnapshot.getUploadSessionUri().toString());
-                            String ImageUploadId = ref.push().getKey();
-                            ref.child(ImageUploadId).setValue(piggy);
-                            Toast.makeText(getApplicationContext(),"data inserted successfully",Toast.LENGTH_SHORT).show();
-                            // back to home page
-                            Intent intent = new Intent(AddIncome.this, MainActivity.class);
-                            startActivity(intent);
+                            Task<Uri> firebaseUri = taskSnapshot.getStorage().getDownloadUrl();
+                            storageReference2.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                                @Override
+                                public void onSuccess(Uri uri) {
+                                    String url = uri.toString();
+
+                                    piggy.setCategory_url(url);
+                                    piggy.setCategory_name(income_category_name.getText().toString().trim());
+                                    //piggy.setAmount(Double.parseDouble(income_amount.getText().toString().trim()));
+                                    piggy.setAmount(Amount);
+                                    piggy.setDate(income_date.getText().toString().trim());
+                                    piggy.setMemo(income_memo.getText().toString().trim());
+                                    piggy.setImage_url(taskSnapshot.getUploadSessionUri().toString());
+                                    String ImageUploadId = ref.push().getKey();
+                                    ref.child(ImageUploadId).setValue(piggy);
+                                    Toast.makeText(getApplicationContext(),"data inserted successfully",Toast.LENGTH_SHORT).show();
+                                    // back to home page
+                                    Intent intent = new Intent(AddIncome.this, MainActivity.class);
+                                    startActivity(intent);
+                                }
+                            });
+
                         }
+
+
                     });
                 }
             }

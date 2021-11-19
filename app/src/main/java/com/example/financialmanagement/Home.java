@@ -26,6 +26,7 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 
 public class Home extends Fragment {
@@ -64,7 +65,7 @@ public class Home extends Fragment {
         double income = Double.parseDouble(String.valueOf(getIncsum()));
         double expense = Double.parseDouble(String.valueOf(getExpsum()));
         double balance = income - expense;
-        total_balance.setText(String.valueOf(balance));
+        total_balance.setText(String.format(Locale.US, "%.2f", balance));
         Log.d("ADebugTag", "expensesValue: " + Double.toString(balance));
     }
 
@@ -106,7 +107,7 @@ public class Home extends Fragment {
                     double income_amount = Double.parseDouble((String.valueOf(income)));
                     incsum += income_amount;
                     setIncsum(incsum);
-                    total_income.setText(String.valueOf(incsum));
+                    total_income.setText(String.format(Locale.US, "%.2f", incsum));
                     Balance();
 
                 }
@@ -132,7 +133,7 @@ public class Home extends Fragment {
                     double expense_amount = Double.parseDouble((String.valueOf(expenses)));
                     expsum += expense_amount;
                     setExpsum(expsum);
-                    total_expenses.setText(String.valueOf(expsum));
+                    total_expenses.setText(String.format(Locale.US, "%.2f", expsum));
                     Balance();
 
                 }

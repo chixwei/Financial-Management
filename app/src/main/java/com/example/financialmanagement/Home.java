@@ -58,9 +58,9 @@ public class Home extends Fragment {
         return this.incsum;
     }
 
+
     //retrieve balance
     public void Balance(){
-
         double income = Double.parseDouble(String.valueOf(getIncsum()));
         double expense = Double.parseDouble(String.valueOf(getExpsum()));
         double balance = income - expense;
@@ -69,13 +69,10 @@ public class Home extends Fragment {
     }
 
 
-
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.activity_home, container, false);
-
-        total_balance = (TextView)v.findViewById(R.id.txt_balance_amount);
 
         // get user id
         user = FirebaseAuth.getInstance().getCurrentUser();
@@ -83,7 +80,6 @@ public class Home extends Fragment {
             boolean emailVerified = user.isEmailVerified();
             user_id = user.getUid();
         }
-
 
         // retrieve data from database
         recyclerView = v.findViewById(R.id.recyclerView);
@@ -93,33 +89,7 @@ public class Home extends Fragment {
         list = new ArrayList<>();
         PiggyAdapter = new PiggyAdapter(getActivity(), list);
         recyclerView.setAdapter(PiggyAdapter);
-
-
-        // retrieve total expenses value
-        total_expenses = (TextView)v.findViewById(R.id.txt_expense_amount);
-        database_expenses.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot snapshot) {
-                expsum = 0.0;
-
-                for(DataSnapshot ds : snapshot.getChildren()) {
-
-                    Map<String, Object> map = (Map<String,Object>) ds.getValue();
-                    Object expenses = map.get("amount");
-                    double expense_amount = Double.parseDouble((String.valueOf(expenses)));
-                    expsum += expense_amount;
-                    setExpsum(expsum);
-                    total_expenses.setText(String.valueOf(expsum));
-                    Balance();
-
-                }
-            }
-
-            @Override
-            public void onCancelled(DatabaseError error) {
-
-            }
-        });
+        total_balance = (TextView)v.findViewById(R.id.txt_balance_amount);
 
 
         //retrieve total income value
@@ -148,18 +118,31 @@ public class Home extends Fragment {
             }
         });
 
+        // retrieve total expenses value
+        total_expenses = (TextView)v.findViewById(R.id.txt_expense_amount);
+        database_expenses.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot snapshot) {
+                expsum = 0.0;
 
+                for(DataSnapshot ds : snapshot.getChildren()) {
 
+                    Map<String, Object> map = (Map<String,Object>) ds.getValue();
+                    Object expenses = map.get("amount");
+                    double expense_amount = Double.parseDouble((String.valueOf(expenses)));
+                    expsum += expense_amount;
+                    setExpsum(expsum);
+                    total_expenses.setText(String.valueOf(expsum));
+                    Balance();
 
+                }
+            }
 
-//        public double findBalance() {
-//            Intent intent = intent.getIntent();
-//            Bundle bundle = intent.getExtras();
-//            Double inc = bundle.getDouble("Evento");
-//            return key;
-//        }
+            @Override
+            public void onCancelled(DatabaseError error) {
 
-//----------------------------------------------------------------------------------------------------------------
+            }
+        });
 
         // retrieve expenses record
         database_expenses.addValueEventListener(new ValueEventListener() {
@@ -178,7 +161,6 @@ public class Home extends Fragment {
             }
         });
 
-
         // retrieve income record
         database_income.addValueEventListener(new ValueEventListener() {
             @Override
@@ -195,10 +177,6 @@ public class Home extends Fragment {
 
             }
         });
-
-
-
-
 
         // define text
         add_expense_text = v.findViewById(R.id.add_expense_text);
@@ -236,7 +214,7 @@ public class Home extends Fragment {
                 startActivity(in);
             }
         });
-
+        
         // press anywhere to close the expandable fab
         v.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -247,6 +225,7 @@ public class Home extends Fragment {
 
         return v;
     }
+
 
     // to display expandable floating action button
     private void showFABMenu(){
@@ -259,6 +238,7 @@ public class Home extends Fragment {
         // set main fab img
         add_button.setImageResource(R.drawable.ic_close);
     }
+
 
     // to not display expandable floating action button
     private void closeFABMenu(){

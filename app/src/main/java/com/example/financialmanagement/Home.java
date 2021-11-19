@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -25,11 +26,12 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 public class Home extends Fragment {
 
     FloatingActionButton add_button, add_expense_button, add_income_button;
-    TextView add_expense_text, add_income_text;
+    TextView add_expense_text, add_income_text, total_income, total_expenses, total_balance;
     String user_id;
     FirebaseUser user;
     RecyclerView recyclerView;
@@ -38,10 +40,42 @@ public class Home extends Fragment {
     ArrayList<Piggy> list;
     boolean isFABOpen;
 
+    Double expsum=0.0, incsum=0.0;
+
+    public void setExpsum(double expsum) {
+        this.expsum = expsum;
+    }
+
+    public double getExpsum() {
+        return this.expsum;
+    }
+
+    public void setIncsum(double incsum) {
+        this.incsum = incsum;
+    }
+
+    public double getIncsum() {
+        return this.incsum;
+    }
+
+    //retrieve balance
+    public void Balance(){
+
+        double income = Double.parseDouble(String.valueOf(getIncsum()));
+        double expense = Double.parseDouble(String.valueOf(getExpsum()));
+        double balance = income - expense;
+        total_balance.setText(String.valueOf(balance));
+        Log.d("ADebugTag", "expensesValue: " + Double.toString(balance));
+    }
+
+
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.activity_home, container, false);
+
+        total_balance = (TextView)v.findViewById(R.id.txt_balance_amount);
 
         // get user id
         user = FirebaseAuth.getInstance().getCurrentUser();
@@ -49,6 +83,7 @@ public class Home extends Fragment {
             boolean emailVerified = user.isEmailVerified();
             user_id = user.getUid();
         }
+
 
         // retrieve data from database
         recyclerView = v.findViewById(R.id.recyclerView);
@@ -58,6 +93,73 @@ public class Home extends Fragment {
         list = new ArrayList<>();
         PiggyAdapter = new PiggyAdapter(getActivity(), list);
         recyclerView.setAdapter(PiggyAdapter);
+
+
+        // retrieve total expenses value
+        total_expenses = (TextView)v.findViewById(R.id.txt_expense_amount);
+        database_expenses.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot snapshot) {
+                expsum = 0.0;
+
+                for(DataSnapshot ds : snapshot.getChildren()) {
+
+                    Map<String, Object> map = (Map<String,Object>) ds.getValue();
+                    Object expenses = map.get("amount");
+                    double expense_amount = Double.parseDouble((String.valueOf(expenses)));
+                    expsum += expense_amount;
+                    setExpsum(expsum);
+                    total_expenses.setText(String.valueOf(expsum));
+                    Balance();
+
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError error) {
+
+            }
+        });
+
+
+        //retrieve total income value
+        total_income = (TextView)v.findViewById(R.id.txt_income_amount);
+        database_income.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot snapshot) {
+                incsum = 0.0;
+
+                for(DataSnapshot ds : snapshot.getChildren()) {
+
+                    Map<String, Object> map = (Map<String,Object>) ds.getValue();
+                    Object income = map.get("amount");
+                    double income_amount = Double.parseDouble((String.valueOf(income)));
+                    incsum += income_amount;
+                    setIncsum(incsum);
+                    total_income.setText(String.valueOf(incsum));
+                    Balance();
+
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError error) {
+
+            }
+        });
+
+
+
+
+
+//        public double findBalance() {
+//            Intent intent = intent.getIntent();
+//            Bundle bundle = intent.getExtras();
+//            Double inc = bundle.getDouble("Evento");
+//            return key;
+//        }
+
+//----------------------------------------------------------------------------------------------------------------
 
         // retrieve expenses record
         database_expenses.addValueEventListener(new ValueEventListener() {
@@ -76,6 +178,7 @@ public class Home extends Fragment {
             }
         });
 
+
         // retrieve income record
         database_income.addValueEventListener(new ValueEventListener() {
             @Override
@@ -92,6 +195,10 @@ public class Home extends Fragment {
 
             }
         });
+
+
+
+
 
         // define text
         add_expense_text = v.findViewById(R.id.add_expense_text);

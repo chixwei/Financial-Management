@@ -1,13 +1,27 @@
 package com.example.financialmanagement;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.Dialog;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
 
 import java.io.File;
 import java.util.Locale;
@@ -16,6 +30,10 @@ public class ViewRecord extends AppCompatActivity {
 
     ImageView back_button, delete_button, record_category_image, record_image;
     TextView record_category_name, record_category, record_amount, record_date, record_memo;
+    Dialog dialog;
+    DatabaseReference ref;
+    String user_id;
+    FirebaseUser user;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,12 +50,58 @@ public class ViewRecord extends AppCompatActivity {
             }
         });
 
+        dialog = new Dialog(ViewRecord.this);
+
+        // get user id
+        user = FirebaseAuth.getInstance().getCurrentUser();
+        if (user != null) {
+            boolean emailVerified = user.isEmailVerified();
+            user_id = user.getUid();
+        }
+
         // delete button
         delete_button = findViewById(R.id.delete_button);
         delete_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                // code to delete
+                dialog.setContentView(R.layout.delete);
+                dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+                dialog.show();
+
+                // logout back button
+                Button delete_back_button = dialog.findViewById(R.id.delete_back_button);
+                delete_back_button.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        dialog.dismiss();
+                    }
+                });
+
+                // confirm logout button
+                Button confirm_delete_button = dialog.findViewById(R.id.confirm_delete_button);
+                confirm_delete_button.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        // code to delete record
+                        ref = FirebaseDatabase.getInstance().getReference().child("User");
+                        Query query = ref.child(user_id);
+                        query.addListenerForSingleValueEvent(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                                // remove the value at reference
+                                dataSnapshot.getRef().removeValue();
+                            }
+
+                            @Override
+                            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                            }
+                        });
+                        // go to home after delete
+                        Intent intent = new Intent(ViewRecord.this, MainActivity.class);
+                        startActivity(intent);
+                    }
+                });
             }
         });
 

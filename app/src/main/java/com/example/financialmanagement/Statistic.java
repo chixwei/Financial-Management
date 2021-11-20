@@ -52,7 +52,7 @@ public class Statistic extends Fragment {
 
         pieChart = v.findViewById(R.id.piechart);
         setupPieChart();
-        loadPieChartData();
+
 
         // get user id
         user = FirebaseAuth.getInstance().getCurrentUser();

@@ -124,7 +124,6 @@ public class AddExpense extends AppCompatActivity {
         // category spinner
         spinner = findViewById(R.id.spinner_category);
         expense_amount = findViewById(R.id.expense_amount);
-        expense_amount.setText("0");
 
         // spinner list
         List<String> category_list = new ArrayList<>();

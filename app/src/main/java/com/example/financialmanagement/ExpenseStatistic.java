@@ -1,5 +1,9 @@
 package com.example.financialmanagement;
 
+import androidx.annotation.Nullable;
+import androidx.annotation.RequiresApi;
+import androidx.appcompat.app.AppCompatActivity;
+
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
@@ -7,10 +11,6 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-
-import androidx.annotation.Nullable;
-import androidx.annotation.RequiresApi;
-import androidx.fragment.app.Fragment;
 
 import com.github.mikephil.charting.animation.Easing;
 import com.github.mikephil.charting.charts.PieChart;
@@ -30,11 +30,9 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
-import java.util.Locale;
 import java.util.Map;
 
-public class Statistic extends Fragment {
+public class ExpenseStatistic extends AppCompatActivity {
 
     private PieChart pieChart;
     DatabaseReference firebase;
@@ -46,11 +44,11 @@ public class Statistic extends Fragment {
     HashMap<String, Double> allCategories = new HashMap<String, Double>();
 
     @Nullable
-    @Override
+
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.activity_statistic, container, false);
 
-        pieChart = v.findViewById(R.id.piechart);
+        pieChart = v.findViewById(R.id.expensepiechart);
         setupPieChart();
 
 
@@ -119,8 +117,6 @@ public class Statistic extends Fragment {
         });
         return v;
     }
-
-
 
 
     private void setupPieChart() {

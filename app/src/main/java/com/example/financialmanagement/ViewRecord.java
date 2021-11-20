@@ -9,6 +9,7 @@ import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -83,12 +84,15 @@ public class ViewRecord extends AppCompatActivity {
                     @Override
                     public void onClick(View v) {
                         // code to delete record
-                        ref = FirebaseDatabase.getInstance().getReference().child("User");
-                        Query query = ref.child(user_id);
-                        query.addListenerForSingleValueEvent(new ValueEventListener() {
+                        ref = FirebaseDatabase.getInstance().getReference().child("User").child(user_id).child("Expenses");
+                        //Query query = ref.child(ref.getKey());
+                        ref.addListenerForSingleValueEvent(new ValueEventListener() {
                             @Override
                             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                                // remove the value at reference
+                                String key = dataSnapshot.getChildren().iterator().next().getKey();
+                                DatabaseReference ref2 = ref.child(key);
+                                Log.d("Tag", "Get Key: " +(key));
+                                // remove the record
                                 dataSnapshot.getRef().removeValue();
                             }
 
@@ -97,6 +101,7 @@ public class ViewRecord extends AppCompatActivity {
 
                             }
                         });
+
                         // go to home after delete
                         Intent intent = new Intent(ViewRecord.this, MainActivity.class);
                         startActivity(intent);

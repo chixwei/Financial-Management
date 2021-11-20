@@ -112,7 +112,6 @@ public class AddIncome extends AppCompatActivity {
         // category spinner
         spinner = findViewById(R.id.spinner_category);
         income_amount = findViewById(R.id.income_amount);
-        income_amount.setText("0");
 
         // spinner list
         List<String> category_list = new ArrayList<>();

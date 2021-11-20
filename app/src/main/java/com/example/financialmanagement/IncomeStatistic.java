@@ -1,5 +1,10 @@
 package com.example.financialmanagement;
 
+import androidx.annotation.Nullable;
+import androidx.annotation.RequiresApi;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
+
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
@@ -7,10 +12,6 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-
-import androidx.annotation.Nullable;
-import androidx.annotation.RequiresApi;
-import androidx.fragment.app.Fragment;
 
 import com.github.mikephil.charting.animation.Easing;
 import com.github.mikephil.charting.charts.PieChart;
@@ -30,11 +31,9 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
-import java.util.Locale;
 import java.util.Map;
 
-public class Statistic extends Fragment {
+public class IncomeStatistic extends Fragment {
 
     private PieChart pieChart;
     DatabaseReference firebase;
@@ -46,11 +45,11 @@ public class Statistic extends Fragment {
     HashMap<String, Double> allCategories = new HashMap<String, Double>();
 
     @Nullable
-    @Override
+
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.activity_statistic, container, false);
 
-        pieChart = v.findViewById(R.id.piechart);
+        pieChart = v.findViewById(R.id.incomepiechart);
         setupPieChart();
 
 
@@ -62,7 +61,7 @@ public class Statistic extends Fragment {
         }
 
         //take expense value
-        firebase = FirebaseDatabase.getInstance().getReference("User").child(user_id).child("Expenses");
+        firebase = FirebaseDatabase.getInstance().getReference("User").child(user_id).child("Income");
         firebase.addValueEventListener(new ValueEventListener() {
             @RequiresApi(api = Build.VERSION_CODES.N)
             @Override
@@ -75,20 +74,20 @@ public class Statistic extends Fragment {
                     Log.d("ADebugTag", "Category Name: " + (category_name));
 
                     Map<String, Object> map2 = (Map<String,Object>) ds.getValue();
-                    Object expenses = map2.get("amount");
-                    double expense_amount = Double.parseDouble((String.valueOf(expenses)));
-                    Log.d("ADebugTag", "Expense Amount: " + Double.toString(expense_amount));
+                    Object income = map2.get("amount");
+                    double income_amount = Double.parseDouble((String.valueOf(income)));
+                    Log.d("ADebugTag", "Expense Amount: " + Double.toString(income_amount));
 
                     //check if map contain the category name
                     if (allCategories.containsKey(category_name)) {
-                        Double current_expense_amount = allCategories.get(category_name);
-                        Double new_expense_amount = expense_amount + current_expense_amount;
-                        allCategories.replace(category_name, new_expense_amount);
+                        Double current_income_amount = allCategories.get(category_name);
+                        Double new_income_amount = income_amount + current_income_amount;
+                        allCategories.replace(category_name, new_income_amount);
 
                     } else {
-                        allCategories.put(category_name, expense_amount);
+                        allCategories.put(category_name, income_amount);
                     }
-                    grandTotalUnTransformed += expense_amount;
+                    grandTotalUnTransformed += income_amount;
 
 
 //                    if (category_name == category_name) {
@@ -121,14 +120,12 @@ public class Statistic extends Fragment {
     }
 
 
-
-
     private void setupPieChart() {
         pieChart.setDrawHoleEnabled(true);
         pieChart.setUsePercentValues(true);
         pieChart.setEntryLabelTextSize(12);
         pieChart.setEntryLabelColor(Color.BLACK);
-        pieChart.setCenterText("Expenses");
+        pieChart.setCenterText("Income");
         pieChart.setCenterTextSize(24);
         pieChart.getDescription().setEnabled(false);
 
@@ -167,7 +164,7 @@ public class Statistic extends Fragment {
             colors.add(color);
         }
 
-        PieDataSet dataSet = new PieDataSet(entries, "Expense Category");
+        PieDataSet dataSet = new PieDataSet(entries, "Income Category");
         dataSet.setColors(colors);
 
         //pie chart words

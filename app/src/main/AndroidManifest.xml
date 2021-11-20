@@ -12,6 +12,8 @@
         android:roundIcon="@mipmap/ic_piggy_logo_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.FinancialManagement">
+        <activity android:name=".IncomeStatistic"></activity>
+        <activity android:name=".ExpenseStatistic" />
         <activity
             android:name=".ViewRecord"
             android:exported="true" />

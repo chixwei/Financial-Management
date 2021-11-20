@@ -238,6 +238,7 @@ public class AddExpense extends AppCompatActivity {
             }
         });
         //--------------------------------------------------------
+
         // add_button
         add_button = findViewById(R.id.add_button);
         add_button.setOnClickListener(new View.OnClickListener() {

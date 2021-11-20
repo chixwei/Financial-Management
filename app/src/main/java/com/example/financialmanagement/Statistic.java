@@ -1,5 +1,8 @@
 package com.example.financialmanagement;
 
+import static com.example.financialmanagement.R.*;
+import static com.example.financialmanagement.R.drawable.stat_button_bg;
+
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
@@ -7,6 +10,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 
 import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
@@ -36,6 +40,7 @@ import java.util.Map;
 
 public class Statistic extends Fragment {
 
+    Button expenses_statistic_button, income_statistic_button;
     private PieChart pieChart;
     DatabaseReference firebase;
     FirebaseUser user;
@@ -48,11 +53,27 @@ public class Statistic extends Fragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View v = inflater.inflate(R.layout.activity_statistic, container, false);
+        View v = inflater.inflate(layout.activity_statistic, container, false);
 
+        expenses_statistic_button = v.findViewById(R.id.expenses_statistic_button);
+        expenses_statistic_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // show fragment for expense statistic
+            }
+        });
+
+        income_statistic_button = v.findViewById(id.income_statistic_button);
+        income_statistic_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // show fragment for income statistic
+            }
+        });
+
+        /* vv
         pieChart = v.findViewById(R.id.piechart);
         setupPieChart();
-
 
         // get user id
         user = FirebaseAuth.getInstance().getCurrentUser();
@@ -90,7 +111,6 @@ public class Statistic extends Fragment {
                     }
                     grandTotalUnTransformed += expense_amount;
 
-
 //                    if (category_name == category_name) {
 //                        same_amount += expense_amount;
 //                        Log.d("ADebugTag", "Same Amount: " + Double.toString(same_amount));
@@ -109,7 +129,6 @@ public class Statistic extends Fragment {
                     allCategories.replace(key, value / grandTotalUnTransformed);
                 });
                 loadPieChartData();
-
             }
 
             @Override
@@ -117,11 +136,10 @@ public class Statistic extends Fragment {
 
             }
         });
+
+        vv */
         return v;
     }
-
-
-
 
     private void setupPieChart() {
         pieChart.setDrawHoleEnabled(true);
@@ -138,10 +156,7 @@ public class Statistic extends Fragment {
         l.setOrientation(Legend.LegendOrientation.VERTICAL);
         l.setDrawInside(false);
         l.setEnabled(true);
-
     }
-
-
 
     @RequiresApi(api = Build.VERSION_CODES.N)
     private void loadPieChartData() {

@@ -12,7 +12,7 @@
         android:layout_height="200dp"
         android:background="@drawable/bg_3"
         app:layout_constraintTop_toTopOf="parent"
-        tools:layout_editor_absoluteX="0dp">
+        tools:layout_editor_absoluteX="-83dp">
 
         // statistic text
         <TextView
@@ -27,17 +27,21 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"/>
 
         // expenses statistic button
         <Button
-            android:id="@+id/expenses_statistics"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="70dp"
-            android:layout_marginLeft="70dp"
+            android:id="@+id/expenses_statistic_button"
+            android:layout_width="140dp"
+            android:layout_height="38dp"
+            android:layout_marginStart="60dp"
+            android:layout_marginLeft="60dp"
             android:layout_marginTop="30dp"
+            android:background="@drawable/stat_button_bg"
             android:text="@string/expenses"
+            android:textColor="@color/gold"
+            android:textStyle="bold"
+            app:backgroundTint="@color/white"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textview"
@@ -45,14 +49,18 @@
 
         // income statistic button
         <Button
-            android:id="@+id/income_statistics"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:id="@+id/income_statistic_button"
+            android:layout_width="140dp"
+            android:layout_height="38dp"
             android:layout_marginTop="30dp"
+            android:layout_marginEnd="60dp"
+            android:layout_marginRight="60dp"
+            android:background="@drawable/stat_button_bg"
             android:text="@string/income"
+            android:textColor="@color/gold"
+            android:textStyle="bold"
+            app:backgroundTint="@color/white"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toEndOf="@+id/expenses_statistics"
             app:layout_constraintTop_toBottomOf="@+id/textview"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>

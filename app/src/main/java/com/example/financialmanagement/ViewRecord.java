@@ -84,11 +84,7 @@ public class ViewRecord extends AppCompatActivity {
                     @Override
                     public void onClick(View v) {
                         // code to delete record
-<<<<<<< Updated upstream
-                        ref = FirebaseDatabase.getInstance().getReference().child("User").child(user_id).child("Expenses");
-=======
                         ref = FirebaseDatabase.getInstance().getReference().child("User").child(user_id).child(getIntent().getStringExtra("category"));
->>>>>>> Stashed changes
                         //Query query = ref.child(ref.getKey());
                         ref.addListenerForSingleValueEvent(new ValueEventListener() {
                             @Override
@@ -96,10 +92,7 @@ public class ViewRecord extends AppCompatActivity {
                                 String key = dataSnapshot.getChildren().iterator().next().getKey();
                                 DatabaseReference ref2 = ref.child(key);
                                 Log.d("Tag", "Get Key: " +(key));
-<<<<<<< Updated upstream
-=======
 
->>>>>>> Stashed changes
                                 // remove the record
                                 dataSnapshot.getRef().removeValue();
                             }

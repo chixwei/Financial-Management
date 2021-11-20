@@ -73,6 +73,25 @@ public class PiggyAdapter extends RecyclerView.Adapter<PiggyAdapter.MyViewHolder
                 context.startActivity(intent);
             }
         });
+
+        // on long click record to update
+        holder.itemView.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                Intent intent = new Intent(context, UpdateRecord.class);
+                intent.putExtra("category_name", piggy.getCategory_name());
+                intent.putExtra("category_image", piggy.getCategory_url());
+                intent.putExtra("category", piggy.getCategory());
+                String amount = Double.toString(Math.round(piggy.getAmount() * 100.0) / 100.0);
+                intent.putExtra("amount", amount);
+                intent.putExtra("date", piggy.getDate());
+                intent.putExtra("memo", piggy.getMemo());
+                intent.putExtra("image", piggy.getImage_url());
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                context.startActivity(intent);
+                return false;
+            }
+        });
     }
 
     @Override

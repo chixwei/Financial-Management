@@ -1,6 +1,8 @@
 package com.example.financialmanagement;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.collection.CircularArray;
 
 import android.app.DatePickerDialog;
 import android.app.ProgressDialog;
@@ -30,10 +32,14 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
@@ -43,20 +49,22 @@ import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
+import java.util.Locale;
+import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class AddExpense extends AppCompatActivity {
 
     ImageView back_button;
-    TextView expense_category_name;
+    TextView expense_category_name, catname;
     EditText expense_amount, expense_date, expense_memo, expense_img;
     Spinner spinner;
-    Double Amount;
+    Double Amount = 0.0;
     Button add_button;
     String user_id;
     FirebaseUser user;
-    DatabaseReference ref;
+    DatabaseReference ref, expenseCategory;
     Piggy piggy;
     DatePickerDialog picker;
     Uri FilePathUri;
@@ -66,6 +74,23 @@ public class AddExpense extends AppCompatActivity {
     //TESTING----------------------------------------------------------------------------------------------
     TextView title;
 
+    private String expimageurl, name;
+
+    public void setExpimageurl(String expimageurl) {
+        this.expimageurl = expimageurl;
+    }
+
+    public String getExpimageurl() {
+        return this.expimageurl;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getName() {
+        return this.name;
+    }
     //----------------------------------------------------------------------------------------------
 
     @Override
@@ -75,14 +100,16 @@ public class AddExpense extends AppCompatActivity {
 
         //TESTING------------------------------------------------------------------------------------------
         //get category text
-        title = (TextView)findViewById(R.id.expense_category_name);
+        title = (TextView) findViewById(R.id.expense_category_name);
         title.setText(getIntent().getStringExtra("title"));
+        String title_word = title.getText().toString();
 
         //get category image
         new AddExpense.DownloadImageTask((ImageView) findViewById(R.id.addExpenseImage))
                 .execute(getIntent().getExtras().getString("image"));
 
         //------------------------------------------------------------------------------------------
+
 
         // back button
         back_button = findViewById(R.id.back_button);
@@ -112,32 +139,32 @@ public class AddExpense extends AppCompatActivity {
         categoryAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         // Setting the ArrayAdapter data on the Spinner
         spinner.setAdapter(categoryAdapter);
-        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int i, long l) {
-                if (parent.getItemAtPosition(i).equals("MYR - Malaysian Ringgit")) {
-                    Amount = Double.parseDouble(expense_amount.getText().toString());
-                } else {
-                    // on selecting a spinner
-                    String item = parent.getItemAtPosition(i).toString();
-                    // link to another activity
-                    if (parent.getItemAtPosition(i).equals("BGP - British Pound")) {
-                        Amount = Double.parseDouble(expense_amount.getText().toString()) / 0.176;
-                    } else if (parent.getItemAtPosition(i).equals("CNY - Chinese Yuan Renminbi")) {
-                        Amount = Double.parseDouble(expense_amount.getText().toString()) / 1.547;
-                    } else if (parent.getItemAtPosition(i).equals("SGD - Singapore Dollar")) {
-                        Amount = Double.parseDouble(expense_amount.getText().toString()) / 0.326;
-                    } else {
-                        Amount = Double.parseDouble(expense_amount.getText().toString()) / 0.241;
-                    }
-                }
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-
-            }
-        });
+//        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+//
+//            public void onItemSelected(AdapterView<?> parent, View view, int i, long l) {
+//                if (parent.getItemAtPosition(i).equals("MYR - Malaysian Ringgit")) {
+//                    Amount = Double.parseDouble(expense_amount.getText().toString());
+//                } else {
+//                    // on selecting a spinner
+//                    String item = parent.getItemAtPosition(i).toString();
+//                    // link to another activity
+//                    if (parent.getItemAtPosition(i).equals("BGP - British Pound")) {
+//                        Amount = Double.parseDouble(expense_amount.getText().toString()) / 0.176;
+//                    } else if (parent.getItemAtPosition(i).equals("CNY - Chinese Yuan Renminbi")) {
+//                        Amount = Double.parseDouble(expense_amount.getText().toString()) / 1.547;
+//                    } else if (parent.getItemAtPosition(i).equals("SGD - Singapore Dollar")) {
+//                        Amount = Double.parseDouble(expense_amount.getText().toString()) / 0.326;
+//                    } else {
+//                        Amount = Double.parseDouble(expense_amount.getText().toString()) / 0.241;
+//                    }
+//                }
+//            }
+//
+//            @Override
+//            public void onNothingSelected(AdapterView<?> parent) {
+//
+//            }
+//        });
 
         // get user id
         user = FirebaseAuth.getInstance().getCurrentUser();
@@ -151,6 +178,7 @@ public class AddExpense extends AppCompatActivity {
         expense_date = findViewById(R.id.expense_date);
         expense_memo = findViewById(R.id.expense_memo);
         expense_img = findViewById(R.id.expense_img);
+
 
         // set amount decimal to max 2
         //expense_amount.setFilters(new InputFilter[]{new DecimalDigitsInputFilter(7, 2)});
@@ -190,7 +218,27 @@ public class AddExpense extends AppCompatActivity {
         piggy = new Piggy();
         ref = FirebaseDatabase.getInstance().getReference().child("User").child(user_id).child("Expenses");
         storageReference = FirebaseStorage.getInstance().getReference().child("User").child(user_id).child("Expenses");
+        //---------------------------------------------------
+        //get category title and icon url
+        expenseCategory = FirebaseDatabase.getInstance().getReference("expenseCategory");
+        expenseCategory.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot snapshot) {
+                for (DataSnapshot ds : snapshot.getChildren()) {
+                    //get icon url
+                    Map<String, String> map = (Map<String, String>) ds.getValue();
+                    String img = map.get("image");
+                    if (map.get("title").equals(title.getText().toString())) {
+                        setExpimageurl(img);
+                    }
+                }
+            }
 
+            @Override
+            public void onCancelled(DatabaseError error) {
+            }
+        });
+        //--------------------------------------------------------
         // add_button
         add_button = findViewById(R.id.add_button);
         add_button.setOnClickListener(new View.OnClickListener() {
@@ -199,32 +247,74 @@ public class AddExpense extends AppCompatActivity {
                 // error if empty
                 if (expense_amount.getText().toString().length() == 0) {
                     expense_amount.setError("Expense amount is required");
-                } else if (expense_date.getText().toString().length() == 0) {
-                    expense_date.setError("Expense date is required");
-                } else {
-                    StorageReference storageReference2 = storageReference.child(System.currentTimeMillis() + "." + GetFileExtension(FilePathUri));
-                    storageReference2.putFile(FilePathUri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-                        @Override
-                        public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                            piggy.setCategory("Expenses");
-                            piggy.setCategory_name(expense_category_name.getText().toString().trim());
-                            //piggy.setAmount(Double.parseDouble(expense_amount.getText().toString().trim()));
-                            piggy.setAmount(Amount);
-                            piggy.setDate(expense_date.getText().toString().trim());
-                            piggy.setMemo(expense_memo.getText().toString().trim());
-                            piggy.setImage_url(taskSnapshot.getUploadSessionUri().toString());
-                            String ImageUploadId = ref.push().getKey();
-                            ref.child(ImageUploadId).setValue(piggy);
-                            Toast.makeText(getApplicationContext(),"data inserted successfully",Toast.LENGTH_SHORT).show();
-                            // back to home page
-                            Intent intent = new Intent(AddExpense.this, MainActivity.class);
-                            startActivity(intent);
-                        }
-                    });
+                    return;
                 }
+                if (expense_date.getText().toString().length() == 0) {
+                    expense_date.setError("Expense date is required");
+                    return;
+                }
+
+                //change currency
+                String selectedCurrency = spinner.getSelectedItem().toString();
+                switch (selectedCurrency) {
+                    case "BGP - British Pound":
+                        Amount = Double.parseDouble(expense_amount.getText().toString()) / 0.176;
+                        break;
+                    case "CNY - Chinese Yuan Renminbi":
+                        Amount = Double.parseDouble(expense_amount.getText().toString()) / 1.547;
+                        break;
+                    case "SGD - Singapore Dollar":
+                        Amount = Double.parseDouble(expense_amount.getText().toString()) / 0.326;
+                        break;
+                    case "USD - US Dollar":
+                        Amount = Double.parseDouble(expense_amount.getText().toString()) / 0.241;
+                        break;
+                    default:
+                        Amount = Double.parseDouble(expense_amount.getText().toString());
+                }
+
+
+                if (FilePathUri != null && !FilePathUri.equals(Uri.EMPTY)) {
+                    StorageReference storageReference2 = storageReference.child(System.currentTimeMillis() + "." + GetFileExtension(FilePathUri));
+                    storageReference2.putFile(FilePathUri).addOnSuccessListener(taskSnapshot -> {
+
+                        piggy.setCategory(getExpimageurl());
+                        piggy.setCategory("Expenses");
+                        piggy.setCategory_name(expense_category_name.getText().toString().trim());
+                        //piggy.setAmount(Double.parseDouble(expense_amount.getText().toString().trim()));
+                        piggy.setAmount(Amount);
+                        piggy.setDate(expense_date.getText().toString().trim());
+                        piggy.setMemo(expense_memo.getText().toString().trim());
+                        piggy.setImage_url(taskSnapshot.getUploadSessionUri().toString());
+                        String ImageUploadId = ref.push().getKey();
+                        ref.child(ImageUploadId).setValue(piggy);
+                        Toast.makeText(getApplicationContext(), "data inserted successfully", Toast.LENGTH_SHORT).show();
+                        // back to home page
+                        Intent intent = new Intent(AddExpense.this, MainActivity.class);
+                        startActivity(intent);
+                    });
+                } else {
+                    piggy.setCategory_url(getExpimageurl());
+                    piggy.setCategory("Expenses");
+                    piggy.setCategory_name(expense_category_name.getText().toString().trim());
+                    //piggy.setAmount(Double.parseDouble(expense_amount.getText().toString().trim()));
+                    piggy.setAmount(Amount);
+                    piggy.setDate(expense_date.getText().toString().trim());
+                    piggy.setMemo(expense_memo.getText().toString().trim());
+                    String ImageUploadId = ref.push().getKey();
+                    ref.child(ImageUploadId).setValue(piggy);
+                    Toast.makeText(getApplicationContext(), "data inserted successfully", Toast.LENGTH_SHORT).show();
+                    // back to home page
+                    Intent intent = new Intent(AddExpense.this, MainActivity.class);
+                    startActivity(intent);
+                }
+
             }
         });
     }
+
+    ;
+
 
     // get category image
     private class DownloadImageTask extends AsyncTask<String, Void, Bitmap> {
@@ -255,9 +345,11 @@ public class AddExpense extends AppCompatActivity {
     // set decimal = 2
     class DecimalDigitsInputFilter implements InputFilter {
         private Pattern mPattern;
+
         DecimalDigitsInputFilter(int digitsBeforeZero, int digitsAfterZero) {
             mPattern = Pattern.compile("[0-9]{0," + (digitsBeforeZero - 1) + "}+((\\.[0-9]{0," + (digitsAfterZero - 1) + "})?)||(\\.)?");
         }
+
         @Override
         public CharSequence filter(CharSequence source, int start, int end, Spanned dest, int dstart, int dend) {
             Matcher matcher = mPattern.matcher(dest);
@@ -265,6 +357,7 @@ public class AddExpense extends AppCompatActivity {
                 return "";
             return null;
         }
+
     }
 
     // select image
@@ -280,8 +373,7 @@ public class AddExpense extends AppCompatActivity {
                 int nameIndex = returnCursor.getColumnIndex(OpenableColumns.DISPLAY_NAME);
                 returnCursor.moveToFirst();
                 expense_img.setText(returnCursor.getString(nameIndex));
-            }
-            catch (IOException e) {
+            } catch (IOException e) {
                 e.printStackTrace();
             }
         }
@@ -290,6 +382,6 @@ public class AddExpense extends AppCompatActivity {
     public String GetFileExtension(Uri uri) {
         ContentResolver contentResolver = getContentResolver();
         MimeTypeMap mimeTypeMap = MimeTypeMap.getSingleton();
-        return mimeTypeMap.getExtensionFromMimeType(contentResolver.getType(uri)) ;
+        return mimeTypeMap.getExtensionFromMimeType(contentResolver.getType(uri));
     }
 }

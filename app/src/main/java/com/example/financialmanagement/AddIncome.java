@@ -1,5 +1,6 @@
 package com.example.financialmanagement;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.DatePickerDialog;
@@ -33,8 +34,11 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
@@ -45,6 +49,7 @@ import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
+import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -58,7 +63,7 @@ public class AddIncome extends AppCompatActivity {
     Button add_button;
     String user_id;
     FirebaseUser user;
-    DatabaseReference ref;
+    DatabaseReference ref, incomeCategory;
     Piggy piggy;
     DatePickerDialog picker;
     Uri FilePathUri;
@@ -67,6 +72,16 @@ public class AddIncome extends AppCompatActivity {
 
     //TESTING----------------------------------------------------------------------------------------------
     TextView title;
+
+    private String incimageurl;
+
+    public void setIncimageurl(String incimageurl) {
+        this.incimageurl = incimageurl;
+    }
+
+    public String getIncimageurl() {
+        return this.incimageurl;
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -112,32 +127,32 @@ public class AddIncome extends AppCompatActivity {
         categoryAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         // Setting the ArrayAdapter data on the Spinner
         spinner.setAdapter(categoryAdapter);
-        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int i, long l) {
-                if (parent.getItemAtPosition(i).equals("MYR - Malaysian Ringgit")) {
-                    Amount = Double.parseDouble(income_amount.getText().toString()) / 1;
-                } else {
-                    // on selecting a spinner
-                    String item = parent.getItemAtPosition(i).toString();
-                    // link to another activity
-                    if (parent.getItemAtPosition(i).equals("BGP - British Pound")) {
-                        Amount = Double.parseDouble(income_amount.getText().toString()) / 0.176;
-                    } else if (parent.getItemAtPosition(i).equals("CNY - Chinese Yuan Renminbi")) {
-                        Amount = Double.parseDouble(income_amount.getText().toString()) / 1.547;
-                    } else if (parent.getItemAtPosition(i).equals("SGD - Singapore Dollar")) {
-                        Amount = Double.parseDouble(income_amount.getText().toString()) / 0.326;
-                    } else {
-                        Amount = Double.parseDouble(income_amount.getText().toString()) / 0.241;
-                    }
-                }
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-
-            }
-        });
+//        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+//            @Override
+//            public void onItemSelected(AdapterView<?> parent, View view, int i, long l) {
+//                if (parent.getItemAtPosition(i).equals("MYR - Malaysian Ringgit")) {
+//                    Amount = Double.parseDouble(income_amount.getText().toString()) / 1;
+//                } else {
+//                    // on selecting a spinner
+//                    String item = parent.getItemAtPosition(i).toString();
+//                    // link to another activity
+//                    if (parent.getItemAtPosition(i).equals("BGP - British Pound")) {
+//                        Amount = Double.parseDouble(income_amount.getText().toString()) / 0.176;
+//                    } else if (parent.getItemAtPosition(i).equals("CNY - Chinese Yuan Renminbi")) {
+//                        Amount = Double.parseDouble(income_amount.getText().toString()) / 1.547;
+//                    } else if (parent.getItemAtPosition(i).equals("SGD - Singapore Dollar")) {
+//                        Amount = Double.parseDouble(income_amount.getText().toString()) / 0.326;
+//                    } else {
+//                        Amount = Double.parseDouble(income_amount.getText().toString()) / 0.241;
+//                    }
+//                }
+//            }
+//
+//            @Override
+//            public void onNothingSelected(AdapterView<?> parent) {
+//
+//            }
+//        });
 
         // get user id
         user = FirebaseAuth.getInstance().getCurrentUser();
@@ -190,6 +205,28 @@ public class AddIncome extends AppCompatActivity {
         ref = FirebaseDatabase.getInstance().getReference().child("User").child(user_id).child("Income");
         storageReference = FirebaseStorage.getInstance().getReference().child("User").child(user_id).child("Income");
 
+        // get category title and icon url
+        incomeCategory = FirebaseDatabase.getInstance().getReference("incomeCategory");
+        incomeCategory.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot snapshot) {
+                for (DataSnapshot ds : snapshot.getChildren()) {
+                    //get icon url
+                    Map<String, String> map = (Map<String, String>) ds.getValue();
+                    String url = map.get("image");
+                    if (map.get("title").equals(title.getText().toString())) {
+                        setIncimageurl(url);
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError error) {
+
+            }
+        });
+
+
         // add_button
         add_button = findViewById(R.id.add_button);
         add_button.setOnClickListener(new View.OnClickListener() {
@@ -198,36 +235,37 @@ public class AddIncome extends AppCompatActivity {
                 // error if empty
                 if (income_amount.getText().toString().length() == 0) {
                     income_amount.setError("Income amount is required");
-                } else if (income_date.getText().toString().length() == 0) {
+                    return;
+                }
+                if (income_date.getText().toString().length() == 0) {
                     income_date.setError("Income date is required");
-                } else {
+                    return;
+                }
+
+                //change currency
+                String selectedCurrency = spinner.getSelectedItem().toString();
+                switch (selectedCurrency) {
+                    case "BGP - British Pound":
+                        Amount = Double.parseDouble(income_amount.getText().toString()) / 0.176;
+                        break;
+                    case "CNY - Chinese Yuan Renminbi":
+                        Amount = Double.parseDouble(income_amount.getText().toString()) / 1.547;
+                        break;
+                    case "SGD - Singapore Dollar":
+                        Amount = Double.parseDouble(income_amount.getText().toString()) / 0.326;
+                        break;
+                    case "USD - US Dollar":
+                        Amount = Double.parseDouble(income_amount.getText().toString()) / 0.241;
+                        break;
+                    default:
+                        Amount = Double.parseDouble(income_amount.getText().toString());
+                }
+
+                if(FilePathUri != null && !FilePathUri.equals(Uri.EMPTY)) {
                     StorageReference storageReference2 = storageReference.child(System.currentTimeMillis() + "." + GetFileExtension(FilePathUri));
+                    storageReference2.putFile(FilePathUri).addOnSuccessListener(taskSnapshot -> {
 
-                    //---------------------------------
-//                    StorageReference storageRef = FirebaseStorage.getInstance().getReference().child("incomeCategory/"+title+".png");
-//
-//                    storageRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>()
-//                    {
-//                        @Override
-//                        public void onSuccess(Uri downloadUrl)
-//                        {
-//                            piggy.setCategory_url(categoryImage.toString());
-//                        }
-//                    });
-
-                    //-----------------------------------
-
-                    storageReference2.putFile(FilePathUri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-
-                        @Override
-                        public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                            Task<Uri> firebaseUri = taskSnapshot.getStorage().getDownloadUrl();
-                            storageReference2.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
-                                @Override
-                                public void onSuccess(Uri uri) {
-                                    String url = uri.toString();
-
-                                    piggy.setCategory_url(url);
+                                    piggy.setCategory_url(getIncimageurl());
                                     piggy.setCategory("Income");
                                     piggy.setCategory_name(income_category_name.getText().toString().trim());
                                     //piggy.setAmount(Double.parseDouble(income_amount.getText().toString().trim()));
@@ -241,14 +279,29 @@ public class AddIncome extends AppCompatActivity {
                                     // back to home page
                                     Intent intent = new Intent(AddIncome.this, MainActivity.class);
                                     startActivity(intent);
-                                }
-                            });
-                        }
-                    });
+                                });
+                            } else {
+
+                                    piggy.setCategory_url(getIncimageurl());
+                                    piggy.setCategory("Income");
+                                    piggy.setCategory_name(income_category_name.getText().toString().trim());
+                                    //piggy.setAmount(Double.parseDouble(income_amount.getText().toString().trim()));
+                                    piggy.setAmount(Amount);
+                                    piggy.setDate(income_date.getText().toString().trim());
+                                    piggy.setMemo(income_memo.getText().toString().trim());
+                                    String ImageUploadId = ref.push().getKey();
+                                    ref.child(ImageUploadId).setValue(piggy);
+                                    Toast.makeText(getApplicationContext(),"data inserted successfully",Toast.LENGTH_SHORT).show();
+                                    // back to home page
+                                    Intent intent = new Intent(AddIncome.this, MainActivity.class);
+                                    startActivity(intent);
+
                 }
+
             }
         });
     }
+
 
     // get category image
     private class DownloadImageTask extends AsyncTask<String, Void, Bitmap> {

@@ -215,7 +215,7 @@ public class Home extends Fragment {
                 startActivity(in);
             }
         });
-        
+
         // press anywhere to close the expandable fab
         v.setOnClickListener(new View.OnClickListener() {
             @Override

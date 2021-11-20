@@ -19,18 +19,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"/>
 
-    // delete button
-    <ImageView
-        android:id="@+id/delete_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginRight="30dp"
-        android:layout_marginTop="30dp"
-        android:src="@drawable/ic_delete"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"/>
-
-    // details text
+    // update details text
     <TextView
         android:id="@+id/textView"
         android:layout_width="wrap_content"
@@ -44,16 +33,17 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"/>
 
-    // logo
+    // category img
     <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:id="@+id/category_logo"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
         android:layout_marginTop="15dp"
         android:src="@mipmap/ic_piggy_logo_round"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView"/>
+        app:layout_constraintTop_toBottomOf="@+id/textView" />
 
     <RelativeLayout
         android:id="@+id/relativeLayout"
@@ -72,26 +62,57 @@
             android:layout_marginTop="30dp"
             android:text="@string/catName"
             android:textColor="@color/black"
-            android:textSize="20sp"
-            android:textStyle="bold" />
+            android:textSize="25sp"
+            android:textStyle="bold"/>
+
+        // currency
+        <RelativeLayout
+            android:id="@+id/currency"
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:layout_below="@+id/category_name"
+            android:layout_marginLeft="70dp"
+            android:layout_marginTop="30dp"
+            android:layout_marginRight="70dp"
+            android:background="@drawable/fill_info_bg">
+
+            <Spinner
+                android:id="@+id/spinner_category"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:paddingTop="10dp"
+                android:background="@android:color/transparent"
+                android:spinnerMode="dropdown"/>
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_gravity="center"
+                android:paddingRight="5dp"
+                android:src="@drawable/ic_down"/>
+
+        </RelativeLayout>
 
         // amount
         <EditText
             android:id="@+id/amount"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/category_name"
-            android:layout_marginTop="50dp"
+            android:layout_below="@id/currency"
             android:layout_marginLeft="70dp"
+            android:layout_marginTop="30dp"
             android:layout_marginRight="70dp"
-            android:ems="10"
-            android:inputType="numberDecimal"
-            android:hint="@string/amount"
-            android:textColor="@color/black"
-            android:padding="10dp"
-            android:drawablePadding="10dp"
+            android:background="@drawable/fill_info_bg"
             android:drawableLeft="@drawable/ic_nav_income"
-            android:background="@drawable/fill_info_bg"/>
+            android:drawablePadding="10dp"
+            android:ems="10"
+            android:hint="@string/amount"
+            android:inputType="numberDecimal"
+            android:padding="10dp"
+            android:textColor="@color/black"/>
 
         // date
         <EditText
@@ -118,17 +139,17 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/date"
-            android:layout_marginTop="30dp"
             android:layout_marginLeft="70dp"
+            android:layout_marginTop="30dp"
             android:layout_marginRight="70dp"
-            android:ems="10"
-            android:inputType="textImeMultiLine"
-            android:hint="@string/memo"
-            android:textColor="@color/black"
-            android:padding="10dp"
-            android:drawablePadding="10dp"
+            android:background="@drawable/fill_info_bg"
             android:drawableLeft="@drawable/ic_memo"
-            android:background="@drawable/fill_info_bg"/>
+            android:drawablePadding="10dp"
+            android:ems="10"
+            android:hint="@string/memo"
+            android:inputType="textImeMultiLine"
+            android:padding="10dp"
+            android:textColor="@color/black"/>
 
         // image
         <EditText
@@ -156,7 +177,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/img"
             android:layout_marginLeft="70dp"
-            android:layout_marginTop="50dp"
+            android:layout_marginTop="30dp"
             android:layout_marginRight="70dp"
             android:background="@drawable/skip_button_bg"
             android:text="update"

@@ -6,6 +6,7 @@
         <entry key="..\:/Users/vivien/AndroidStudioProjects/Financial-Management/app/src/main/res/drawable/bg_1.xml" value="0.26614583333333336" />
         <entry key="..\:/Users/vivien/AndroidStudioProjects/Financial-Management/app/src/main/res/drawable/fab_txt_bg.xml" value="0.26614583333333336" />
         <entry key="..\:/Users/vivien/AndroidStudioProjects/Financial-Management/app/src/main/res/drawable/fill_info_bg.xml" value="0.26614583333333336" />
+        <entry key="..\:/Users/vivien/AndroidStudioProjects/Financial-Management/app/src/main/res/drawable/ic_dot.xml" value="0.26614583333333336" />
         <entry key="..\:/Users/vivien/AndroidStudioProjects/Financial-Management/app/src/main/res/drawable/ic_error.xml" value="0.26614583333333336" />
         <entry key="..\:/Users/vivien/AndroidStudioProjects/Financial-Management/app/src/main/res/drawable/login_bg.xml" value="0.26614583333333336" />
         <entry key="..\:/Users/vivien/AndroidStudioProjects/Financial-Management/app/src/main/res/drawable/skip_button_bg.xml" value="0.26614583333333336" />
@@ -32,8 +33,8 @@
         <entry key="..\:/Users/vivien/AndroidStudioProjects/Financial-Management/app/src/main/res/layout/activity_statistic.xml" value="0.1644021739130435" />
         <entry key="..\:/Users/vivien/AndroidStudioProjects/Financial-Management/app/src/main/res/layout/activity_update_record.xml" value="0.2164855072463768" />
         <entry key="..\:/Users/vivien/AndroidStudioProjects/Financial-Management/app/src/main/res/layout/activity_view_record.xml" value="0.25" />
-        <entry key="..\:/Users/vivien/AndroidStudioProjects/Financial-Management/app/src/main/res/layout/activity_welcome1.xml" value="0.1621376811594203" />
-        <entry key="..\:/Users/vivien/AndroidStudioProjects/Financial-Management/app/src/main/res/layout/activity_welcome2.xml" value="0.1634963768115942" />
+        <entry key="..\:/Users/vivien/AndroidStudioProjects/Financial-Management/app/src/main/res/layout/activity_welcome1.xml" value="0.264" />
+        <entry key="..\:/Users/vivien/AndroidStudioProjects/Financial-Management/app/src/main/res/layout/activity_welcome2.xml" value="0.264" />
         <entry key="..\:/Users/vivien/AndroidStudioProjects/Financial-Management/app/src/main/res/layout/activity_welcome3.xml" value="0.1634963768115942" />
         <entry key="..\:/Users/vivien/AndroidStudioProjects/Financial-Management/app/src/main/res/layout/category_item.xml" value="0.18840579710144928" />
         <entry key="..\:/Users/vivien/AndroidStudioProjects/Financial-Management/app/src/main/res/layout/category_spinner.xml" value="0.15443840579710144" />

@@ -1,11 +1,13 @@
 package com.example.financialmanagement;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -19,8 +21,11 @@ import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.StorageReference;
 
 import java.util.ArrayList;
@@ -144,9 +149,21 @@ public class UpdateRecord extends AppCompatActivity {
         });
 
         ref = FirebaseDatabase.getInstance().getReference().child("User").child(user_id).child(_Category);
+        ref.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                String key = snapshot.getChildren().iterator().next().getKey();
+                Log.d("Tag", "Get Key: " +(key));
+            }
 
-        /*
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
         // update button
+        update_button = findViewById(R.id.update_button);
         update_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -169,16 +186,17 @@ public class UpdateRecord extends AppCompatActivity {
                         Amount = Double.parseDouble(amount.getText().toString());
                 }
 
+                /*
                 if (isAmountChanged() || isDateChanged() || isMemoChanged()) {
                     Toast.makeText(getApplicationContext(), "Record details have been updated", Toast.LENGTH_SHORT).show();
                 } else {
                     Toast.makeText(getApplicationContext(), "Record details is same cannot be updated", Toast.LENGTH_SHORT).show();
-                }
+                }*/
             }
         });
-        */
+
     }
-    /*
+
     private boolean isAmountChanged(){
         if(!_Amount.equals(amount.getText().toString())) {
             ref.child("amount").setValue(amount.getText().toString());
@@ -208,6 +226,4 @@ public class UpdateRecord extends AppCompatActivity {
             return false;
         }
     }
-
-     */
 }

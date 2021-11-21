@@ -15,6 +15,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -89,12 +90,21 @@ public class ViewRecord extends AppCompatActivity {
                         ref.addListenerForSingleValueEvent(new ValueEventListener() {
                             @Override
                             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                               /*
+                                // get all the child key of that category
+                                for (DataSnapshot child: dataSnapshot.getChildren()) {
+                                    String key = child.getKey();
+                                    Log.d("Record key:", key);
+                                }
+                                */
+
+                                // get only the first key of child of that category
                                 String key = dataSnapshot.getChildren().iterator().next().getKey();
                                 DatabaseReference ref2 = ref.child(key);
                                 Log.d("Tag", "Get Key: " +(key));
 
                                 // remove the record
-                                dataSnapshot.getRef().removeValue();
+                                //dataSnapshot.getRef().removeValue();
                             }
 
                             @Override
@@ -122,11 +132,22 @@ public class ViewRecord extends AppCompatActivity {
 
         // get record details
         record_category_name.setText(getIntent().getStringExtra("category_name"));
-        //record_category_image.setImageURI(Uri.parse("category_image"));
         record_category.setText(getIntent().getStringExtra("category"));
         record_amount.setText(getIntent().getStringExtra("amount"));
         record_date.setText(getIntent().getStringExtra("date"));
         record_memo.setText(getIntent().getStringExtra("memo"));
         //record_image.setImageURI(Uri.parse("image"));
+
+        Glide.with(ViewRecord.this)
+                .load(getIntent().getStringExtra("category_image"))
+                .into(record_category_image);
+        Log.d("Tag", "cat_img: " +(getIntent().getStringExtra("category_image")));
+
+        /*
+        Glide.with(ViewRecord.this)
+                .load(getIntent().getStringExtra("image"))
+                .into(record_image);
+        Log.d("Tag", "rec_img: " +(getIntent().getStringExtra("image")));
+        */
     }
 }

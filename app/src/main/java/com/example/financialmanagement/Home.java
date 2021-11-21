@@ -146,7 +146,7 @@ public class Home extends Fragment {
         });
 
         // retrieve expenses record
-        database_expenses.addValueEventListener(new ValueEventListener() {
+        database_expenses.orderByChild("date").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
@@ -163,7 +163,7 @@ public class Home extends Fragment {
         });
 
         // retrieve income record
-        database_income.addValueEventListener(new ValueEventListener() {
+        database_income.orderByChild("date").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 for (DataSnapshot dataSnapshot : snapshot.getChildren()) {

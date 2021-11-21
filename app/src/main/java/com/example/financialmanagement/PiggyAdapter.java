@@ -53,7 +53,7 @@ public class PiggyAdapter extends RecyclerView.Adapter<PiggyAdapter.MyViewHolder
                 .into(holder.category_image);
         //holder.category_url.setText(piggy.getCategory_url());
         holder.category_name.setText(piggy.getCategory_name());
-        holder.record_name.setText(piggy.getMemo());
+        holder.record_date.setText(piggy.getDate());
         holder.amount.setText(String.format(Locale.US, "%.2f", piggy.getAmount()));
 
         // on click record to view
@@ -102,14 +102,14 @@ public class PiggyAdapter extends RecyclerView.Adapter<PiggyAdapter.MyViewHolder
     public static class MyViewHolder extends RecyclerView.ViewHolder{
 
         ImageView category_image;
-        TextView category_name, record_name, amount;
+        TextView category_name, record_date, amount;
 
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
 
             category_image = itemView.findViewById(R.id.category_image);
             category_name = itemView.findViewById(R.id.category_name);
-            record_name = itemView.findViewById(R.id.record_name);
+            record_date = itemView.findViewById(R.id.record_date);
             amount = itemView.findViewById(R.id.amount);
 
         }

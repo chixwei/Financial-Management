@@ -29,7 +29,6 @@ public class ExpenseCategory extends AppCompatActivity {
 
     ImageView back_button;
     Spinner spinner;
-    Button go_to_add_expense;
 
     //------------------------------------------------------
     //Widgets

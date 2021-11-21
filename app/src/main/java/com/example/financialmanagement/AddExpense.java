@@ -57,7 +57,7 @@ import java.util.regex.Pattern;
 public class AddExpense extends AppCompatActivity {
 
     ImageView back_button;
-    TextView expense_category_name, catname;
+    TextView expense_category_name;
     EditText expense_amount, expense_date, expense_memo, expense_img;
     Spinner spinner;
     Double Amount = 0.0;
@@ -278,7 +278,7 @@ public class AddExpense extends AppCompatActivity {
                     StorageReference storageReference2 = storageReference.child(System.currentTimeMillis() + "." + GetFileExtension(FilePathUri));
                     storageReference2.putFile(FilePathUri).addOnSuccessListener(taskSnapshot -> {
 
-                        piggy.setCategory(getExpimageurl());
+                        piggy.setCategory_url(getExpimageurl());
                         piggy.setCategory("Expenses");
                         piggy.setCategory_name(expense_category_name.getText().toString().trim());
                         //piggy.setAmount(Double.parseDouble(expense_amount.getText().toString().trim()));
@@ -312,9 +312,6 @@ public class AddExpense extends AppCompatActivity {
             }
         });
     }
-
-    ;
-
 
     // get category image
     private class DownloadImageTask extends AsyncTask<String, Void, Bitmap> {

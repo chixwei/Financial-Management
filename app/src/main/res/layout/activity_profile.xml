@@ -98,7 +98,7 @@
                     android:layout_marginBottom="10dp"
                     android:text="0"
                     android:textColor="@color/black"
-                    android:textSize="30dp"
+                    android:textSize="25dp"
                     android:textStyle="bold"/>
 
             </LinearLayout> // income column
@@ -141,7 +141,7 @@
                     android:layout_marginBottom="10dp"
                     android:text="0"
                     android:textColor="@color/black"
-                    android:textSize="30dp"
+                    android:textSize="25dp"
                     android:textStyle="bold"/>
             </LinearLayout> // expense column
         </LinearLayout> // expense layout
@@ -182,7 +182,7 @@
                     android:layout_marginBottom="10dp"
                     android:text="0"
                     android:textColor="@color/black"
-                    android:textSize="30dp"
+                    android:textSize="25dp"
                     android:textStyle="bold"/>
             </LinearLayout> // balance column
         </LinearLayout> // balance layout

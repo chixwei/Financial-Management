@@ -2,6 +2,7 @@ package com.example.financialmanagement;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -42,6 +43,14 @@ public class PiggyAdapter extends RecyclerView.Adapter<PiggyAdapter.MyViewHolder
         holder.category_name.setText(piggy.getCategory_name());
         holder.record_date.setText(piggy.getDate());
         holder.amount.setText(String.format(Locale.US, "%.2f", piggy.getAmount()));
+
+        // set amount text colour
+        String category = piggy.getCategory();
+        if (category.equals("Expenses")) {
+            holder.amount.setTextColor(Color.parseColor("#FF0000"));
+        } else {
+            holder.amount.setTextColor(Color.parseColor("#00A300"));
+        }
 
         // on click record to view
         holder.itemView.setOnClickListener(new View.OnClickListener() {

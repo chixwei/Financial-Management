@@ -6,6 +6,7 @@ import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.media.Image;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.ContextMenu;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -28,14 +29,45 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.Locale;
+import java.util.Map;
+
 public class Profile extends Fragment {
 
     ImageView logout_button;
-    TextView username;
+    TextView username, total_income, total_expenses, total_balance;
     Dialog dialog;
     String user_id;
     FirebaseUser user;
     DatabaseReference ref;
+    DatabaseReference database_expenses, database_income;
+
+    Double expsum = 0.0, incsum = 0.0;
+
+    public void setExpsum(double expsum) {
+        this.expsum = expsum;
+    }
+
+    public double getExpsum() {
+        return this.expsum;
+    }
+
+    public void setIncsum(double incsum) {
+        this.incsum = incsum;
+    }
+
+    public double getIncsum() {
+        return this.incsum;
+    }
+
+    //retrieve balance
+    public void Balance(){
+        double income = Double.parseDouble(String.valueOf(getIncsum()));
+        double expense = Double.parseDouble(String.valueOf(getExpsum()));
+        double balance = income - expense;
+        total_balance.setText(String.format(Locale.US, "%.2f", balance));
+        Log.d("ADebugTag", "expensesValue: " + Double.toString(balance));
+    }
 
     @Nullable
     @Override
@@ -94,6 +126,56 @@ public class Profile extends Fragment {
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
+            }
+        });
+
+        total_balance = (TextView)view.findViewById(R.id.txt_balance_amount);
+        database_expenses = FirebaseDatabase.getInstance().getReference("User").child(user_id).child("Expenses");
+        database_income = FirebaseDatabase.getInstance().getReference("User").child(user_id).child("Income");
+
+        //retrieve total income value
+        total_income = (TextView)view.findViewById(R.id.txt_income_amount);
+        database_income.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot snapshot) {
+                incsum = 0.0;
+
+                for(DataSnapshot ds : snapshot.getChildren()) {
+                    Map<String, Object> map = (Map<String,Object>) ds.getValue();
+                    Object income = map.get("amount");
+                    double income_amount = Double.parseDouble((String.valueOf(income)));
+                    incsum += income_amount;
+                    setIncsum(incsum);
+                    total_income.setText(String.format(Locale.US, "%.2f", incsum));
+                    Balance();
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError error) {
+            }
+        });
+
+        // retrieve total expenses value
+        total_expenses = (TextView)view.findViewById(R.id.txt_expense_amount);
+        database_expenses.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot snapshot) {
+                expsum = 0.0;
+
+                for(DataSnapshot ds : snapshot.getChildren()) {
+                    Map<String, Object> map = (Map<String,Object>) ds.getValue();
+                    Object expenses = map.get("amount");
+                    double expense_amount = Double.parseDouble((String.valueOf(expenses)));
+                    expsum += expense_amount;
+                    setExpsum(expsum);
+                    total_expenses.setText(String.format(Locale.US, "%.2f", expsum));
+                    Balance();
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError error) {
             }
         });
 

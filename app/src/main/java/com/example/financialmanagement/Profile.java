@@ -60,7 +60,7 @@ public class Profile extends Fragment {
         return this.incsum;
     }
 
-    //retrieve balance
+    // retrieve balance
     public void Balance(){
         double income = Double.parseDouble(String.valueOf(getIncsum()));
         double expense = Double.parseDouble(String.valueOf(getExpsum()));
@@ -133,7 +133,7 @@ public class Profile extends Fragment {
         database_expenses = FirebaseDatabase.getInstance().getReference("User").child(user_id).child("Expenses");
         database_income = FirebaseDatabase.getInstance().getReference("User").child(user_id).child("Income");
 
-        //retrieve total income value
+        // retrieve total income value
         total_income = (TextView)view.findViewById(R.id.txt_income_amount);
         database_income.addValueEventListener(new ValueEventListener() {
             @Override

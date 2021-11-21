@@ -186,6 +186,278 @@
                     android:textStyle="bold"/>
             </LinearLayout> // balance column
         </LinearLayout> // balance layout
-    </LinearLayout> // amount status layout
+    </LinearLayout>
+    // amount status layout
+
+    // currency rate text
+    <TextView
+        android:id="@+id/textview"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
+        android:text="Currency Rate"
+        android:textColor="@color/black"
+        android:textSize="20dp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/layout1"/>
+
+    // layout currency rate
+    <LinearLayout
+        android:id="@+id/layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="50dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginRight="50dp"
+        android:background="@drawable/status_bg"
+        android:backgroundTint="@color/gold"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.676"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textview">
+
+        // column 1
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginRight="10dp"
+            android:layout_weight="1.9"
+            android:orientation="vertical">
+
+            // column 1 box
+            <LinearLayout
+                android:id="@+id/layout_left"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                // 1
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="10dp"
+                    android:text=""
+                    android:textColor="@color/black"
+                    android:textSize="15dp"
+                    android:textStyle="bold"/>
+
+                // myr1
+                <ImageView
+                    android:layout_width="40dp"
+                    android:layout_height="30dp"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="15dp"
+                    android:src="@drawable/myr"/>
+
+                // bgp1
+                <ImageView
+                    android:layout_width="40dp"
+                    android:layout_height="30dp"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="10dp"
+                    android:src="@drawable/bgp"/>
+
+                // cny1
+                <ImageView
+                    android:layout_width="50dp"
+                    android:layout_height="20dp"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="17dp"
+                    android:src="@drawable/cny"/>
+
+                // sgd1
+                <ImageView
+                    android:layout_width="40dp"
+                    android:layout_height="30dp"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="15dp"
+                    android:src="@drawable/sgd"/>
+
+                // usd1
+                <ImageView
+                    android:layout_width="40dp"
+                    android:layout_height="30dp"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="10dp"
+                    android:src="@drawable/usd"/>
+
+            </LinearLayout>// column 1 column
+        </LinearLayout>// column 1
+
+        // column 2
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            // column 2 column
+            <LinearLayout
+                android:id="@+id/layout_middle"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                // 2
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="10dp"
+                    android:text=""
+                    android:textColor="@color/black"
+                    android:textSize="15dp"
+                    android:textStyle="bold"/>
+
+                // myr2
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="20dp"
+                    android:text="Malaysian Ringgit"
+                    android:textColor="@color/black"
+                    android:textSize="15dp"
+                    android:textStyle="bold"/>
+
+                // bgp2
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="20dp"
+                    android:text="British Pound"
+                    android:textColor="@color/black"
+                    android:textSize="15dp"
+                    android:textStyle="bold"/>
+
+                // cny2
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="20dp"
+                    android:text="Chinese Yuan Renminbi"
+                    android:textColor="@color/black"
+                    android:textSize="15dp"
+                    android:textStyle="bold"/>
+
+                // sgd
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="20dp"
+                    android:text="Singapore Dollar"
+                    android:textColor="@color/black"
+                    android:textSize="15dp"
+                    android:textStyle="bold"/>
+
+                // usd
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginBottom="10dp"
+                    android:text="US Dollar"
+                    android:textColor="@color/black"
+                    android:textSize="15dp"
+                    android:textStyle="bold"/>
+            </LinearLayout>// column 2 column
+        </LinearLayout>// column 2
+
+        // column 3
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:layout_weight="1.8"
+            android:orientation="vertical">
+
+            // column 3 column
+            <LinearLayout
+                android:id="@+id/layout_right"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                // 3
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="10dp"
+                    android:text="1 MYR ="
+                    android:textColor="@color/black"
+                    android:textSize="15dp"
+                    android:textStyle="bold"/>
+
+                // myr3
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="20dp"
+                    android:text="1"
+                    android:textColor="@color/black"
+                    android:textSize="15dp"
+                    android:textStyle="bold"/>
+
+                // bgp3
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="20dp"
+                    android:text="5.682"
+                    android:textColor="@color/black"
+                    android:textSize="15dp"
+                    android:textStyle="bold"/>
+
+                // cny3
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="20dp"
+                    android:text="0.646"
+                    android:textColor="@color/black"
+                    android:textSize="15dp"
+                    android:textStyle="bold"/>
+
+                // sgd3
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="20dp"
+                    android:text="3.067"
+                    android:textColor="@color/black"
+                    android:textSize="15dp"
+                    android:textStyle="bold"/>
+
+                // usd3
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginBottom="10dp"
+                    android:text="4.149"
+                    android:textColor="@color/black"
+                    android:textSize="15dp"
+                    android:textStyle="bold"/>
+            </LinearLayout>// column 3 column
+        </LinearLayout>// column 3
+    </LinearLayout>// layout
 
 </androidx.constraintlayout.widget.ConstraintLayout>

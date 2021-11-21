@@ -18,16 +18,21 @@
         <entry key="..\:/Users/vivien/AndroidStudioProjects/Financial-Management/app/src/main/res/layout/activity_add_income.xml" value="0.264" />
         <entry key="..\:/Users/vivien/AndroidStudioProjects/Financial-Management/app/src/main/res/layout/activity_add_income_category.xml" value="0.12360688956433637" />
         <entry key="..\:/Users/vivien/AndroidStudioProjects/Financial-Management/app/src/main/res/layout/activity_expense_category.xml" value="0.14719202898550723" />
+        <entry key="..\:/Users/vivien/AndroidStudioProjects/Financial-Management/app/src/main/res/layout/activity_expense_statistic.xml" value="0.25" />
         <entry key="..\:/Users/vivien/AndroidStudioProjects/Financial-Management/app/src/main/res/layout/activity_expenses.xml" value="0.14719202898550723" />
         <entry key="..\:/Users/vivien/AndroidStudioProjects/Financial-Management/app/src/main/res/layout/activity_home.xml" value="0.14719202898550723" />
         <entry key="..\:/Users/vivien/AndroidStudioProjects/Financial-Management/app/src/main/res/layout/activity_income.xml" value="0.13768115942028986" />
         <entry key="..\:/Users/vivien/AndroidStudioProjects/Financial-Management/app/src/main/res/layout/activity_income_category.xml" value="0.14221014492753623" />
+        <entry key="..\:/Users/vivien/AndroidStudioProjects/Financial-Management/app/src/main/res/layout/activity_income_statistic.xml" value="0.25" />
+        <entry key="..\:/Users/vivien/AndroidStudioProjects/Financial-Management/app/src/main/res/layout/activity_login.xml" value="0.1621376811594203" />
         <entry key="..\:/Users/vivien/AndroidStudioProjects/Financial-Management/app/src/main/res/layout/activity_main.xml" value="0.15443840579710144" />
         <entry key="..\:/Users/vivien/AndroidStudioProjects/Financial-Management/app/src/main/res/layout/activity_profile.xml" value="0.13768115942028986" />
         <entry key="..\:/Users/vivien/AndroidStudioProjects/Financial-Management/app/src/main/res/layout/activity_signup.xml" value="0.13768115942028986" />
+        <entry key="..\:/Users/vivien/AndroidStudioProjects/Financial-Management/app/src/main/res/layout/activity_splash.xml" value="0.1621376811594203" />
         <entry key="..\:/Users/vivien/AndroidStudioProjects/Financial-Management/app/src/main/res/layout/activity_statistic.xml" value="0.1644021739130435" />
         <entry key="..\:/Users/vivien/AndroidStudioProjects/Financial-Management/app/src/main/res/layout/activity_update_record.xml" value="0.2164855072463768" />
         <entry key="..\:/Users/vivien/AndroidStudioProjects/Financial-Management/app/src/main/res/layout/activity_view_record.xml" value="0.25" />
+        <entry key="..\:/Users/vivien/AndroidStudioProjects/Financial-Management/app/src/main/res/layout/activity_welcome1.xml" value="0.1621376811594203" />
         <entry key="..\:/Users/vivien/AndroidStudioProjects/Financial-Management/app/src/main/res/layout/activity_welcome2.xml" value="0.1634963768115942" />
         <entry key="..\:/Users/vivien/AndroidStudioProjects/Financial-Management/app/src/main/res/layout/activity_welcome3.xml" value="0.1634963768115942" />
         <entry key="..\:/Users/vivien/AndroidStudioProjects/Financial-Management/app/src/main/res/layout/category_item.xml" value="0.18840579710144928" />
@@ -38,6 +43,7 @@
         <entry key="..\:/Users/vivien/AndroidStudioProjects/Financial-Management/app/src/main/res/layout/fragment_second.xml" value="0.25" />
         <entry key="..\:/Users/vivien/AndroidStudioProjects/Financial-Management/app/src/main/res/layout/logout.xml" value="0.12360688956433637" />
         <entry key="..\:/Users/vivien/AndroidStudioProjects/Financial-Management/app/src/main/res/layout/record_row.xml" value="0.264" />
+        <entry key="..\:/Users/vivien/AndroidStudioProjects/Financial-Management/app/src/main/res/layout/reset_pop.xml" value="0.1621376811594203" />
         <entry key="..\:/Users/vivien/AndroidStudioProjects/Financial-Management/app/src/main/res/menu/main_menu.xml" value="0.25" />
       </map>
     </option>

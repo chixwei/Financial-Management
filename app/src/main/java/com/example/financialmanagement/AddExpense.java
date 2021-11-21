@@ -1,11 +1,8 @@
 package com.example.financialmanagement;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.collection.CircularArray;
 
 import android.app.DatePickerDialog;
-import android.app.ProgressDialog;
 import android.content.ContentResolver;
 import android.content.Intent;
 import android.database.Cursor;
@@ -21,7 +18,6 @@ import android.text.Spanned;
 import android.util.Log;
 import android.view.View;
 import android.webkit.MimeTypeMap;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
@@ -31,8 +27,6 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -42,14 +36,12 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
-import com.google.firebase.storage.UploadTask;
 
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
-import java.util.Locale;
 import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -71,9 +63,7 @@ public class AddExpense extends AppCompatActivity {
     StorageReference storageReference;
     int Image_Request_Code = 7;
 
-    //TESTING----------------------------------------------------------------------------------------------
     TextView title;
-
     private String expimageurl, name;
 
     public void setExpimageurl(String expimageurl) {
@@ -91,14 +81,12 @@ public class AddExpense extends AppCompatActivity {
     public String getName() {
         return this.name;
     }
-    //----------------------------------------------------------------------------------------------
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_expense);
 
-        //TESTING------------------------------------------------------------------------------------------
         //get category text
         title = (TextView) findViewById(R.id.expense_category_name);
         title.setText(getIntent().getStringExtra("title"));
@@ -107,9 +95,6 @@ public class AddExpense extends AppCompatActivity {
         //get category image
         new AddExpense.DownloadImageTask((ImageView) findViewById(R.id.addExpenseImage))
                 .execute(getIntent().getExtras().getString("image"));
-
-        //------------------------------------------------------------------------------------------
-
 
         // back button
         back_button = findViewById(R.id.back_button);
@@ -138,32 +123,6 @@ public class AddExpense extends AppCompatActivity {
         categoryAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         // Setting the ArrayAdapter data on the Spinner
         spinner.setAdapter(categoryAdapter);
-//        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-//
-//            public void onItemSelected(AdapterView<?> parent, View view, int i, long l) {
-//                if (parent.getItemAtPosition(i).equals("MYR - Malaysian Ringgit")) {
-//                    Amount = Double.parseDouble(expense_amount.getText().toString());
-//                } else {
-//                    // on selecting a spinner
-//                    String item = parent.getItemAtPosition(i).toString();
-//                    // link to another activity
-//                    if (parent.getItemAtPosition(i).equals("BGP - British Pound")) {
-//                        Amount = Double.parseDouble(expense_amount.getText().toString()) / 0.176;
-//                    } else if (parent.getItemAtPosition(i).equals("CNY - Chinese Yuan Renminbi")) {
-//                        Amount = Double.parseDouble(expense_amount.getText().toString()) / 1.547;
-//                    } else if (parent.getItemAtPosition(i).equals("SGD - Singapore Dollar")) {
-//                        Amount = Double.parseDouble(expense_amount.getText().toString()) / 0.326;
-//                    } else {
-//                        Amount = Double.parseDouble(expense_amount.getText().toString()) / 0.241;
-//                    }
-//                }
-//            }
-//
-//            @Override
-//            public void onNothingSelected(AdapterView<?> parent) {
-//
-//            }
-//        });
 
         // get user id
         user = FirebaseAuth.getInstance().getCurrentUser();
@@ -177,11 +136,6 @@ public class AddExpense extends AppCompatActivity {
         expense_date = findViewById(R.id.expense_date);
         expense_memo = findViewById(R.id.expense_memo);
         expense_img = findViewById(R.id.expense_img);
-
-
-        // set amount decimal to max 2
-        //expense_amount.setFilters(new InputFilter[]{new DecimalDigitsInputFilter(7, 2)});
-        //String.format("%.2f", Amount);
 
         // select date
         expense_date.setOnClickListener(new View.OnClickListener() {
@@ -258,26 +212,24 @@ public class AddExpense extends AppCompatActivity {
                 String selectedCurrency = spinner.getSelectedItem().toString();
                 switch (selectedCurrency) {
                     case "BGP - British Pound":
-                        Amount = Double.parseDouble(expense_amount.getText().toString()) / 0.176;
+                        Amount = Double.parseDouble(String.format("%.2f", Double.parseDouble(expense_amount.getText().toString()) / 0.176));
                         break;
                     case "CNY - Chinese Yuan Renminbi":
-                        Amount = Double.parseDouble(expense_amount.getText().toString()) / 1.547;
+                        Amount = Double.parseDouble(String.format("%.2f", Double.parseDouble(expense_amount.getText().toString()) / 1.547));
                         break;
                     case "SGD - Singapore Dollar":
-                        Amount = Double.parseDouble(expense_amount.getText().toString()) / 0.326;
+                        Amount = Double.parseDouble(String.format("%.2f", Double.parseDouble(expense_amount.getText().toString()) / 0.326));
                         break;
                     case "USD - US Dollar":
-                        Amount = Double.parseDouble(expense_amount.getText().toString()) / 0.241;
+                        Amount = Double.parseDouble(String.format("%.2f", Double.parseDouble(expense_amount.getText().toString()) / 0.241));
                         break;
                     default:
                         Amount = Double.parseDouble(expense_amount.getText().toString());
                 }
 
-
                 if (FilePathUri != null && !FilePathUri.equals(Uri.EMPTY)) {
                     StorageReference storageReference2 = storageReference.child(System.currentTimeMillis() + "." + GetFileExtension(FilePathUri));
                     storageReference2.putFile(FilePathUri).addOnSuccessListener(taskSnapshot -> {
-
                         piggy.setCategory_url(getExpimageurl());
                         piggy.setCategory("Expenses");
                         piggy.setCategory_name(expense_category_name.getText().toString().trim());
@@ -308,7 +260,6 @@ public class AddExpense extends AppCompatActivity {
                     Intent intent = new Intent(AddExpense.this, MainActivity.class);
                     startActivity(intent);
                 }
-
             }
         });
     }

@@ -41,7 +41,7 @@ public class Home extends Fragment {
     ArrayList<Piggy> list;
     boolean isFABOpen;
 
-    Double expsum=0.0, incsum=0.0;
+    Double expsum = 0.0, incsum = 0.0;
 
     public void setExpsum(double expsum) {
         this.expsum = expsum;
@@ -59,7 +59,6 @@ public class Home extends Fragment {
         return this.incsum;
     }
 
-
     //retrieve balance
     public void Balance(){
         double income = Double.parseDouble(String.valueOf(getIncsum()));
@@ -68,7 +67,6 @@ public class Home extends Fragment {
         total_balance.setText(String.format(Locale.US, "%.2f", balance));
         Log.d("ADebugTag", "expensesValue: " + Double.toString(balance));
     }
-
 
     @Nullable
     @Override
@@ -92,7 +90,6 @@ public class Home extends Fragment {
         recyclerView.setAdapter(PiggyAdapter);
         total_balance = (TextView)v.findViewById(R.id.txt_balance_amount);
 
-
         //retrieve total income value
         total_income = (TextView)v.findViewById(R.id.txt_income_amount);
         database_income.addValueEventListener(new ValueEventListener() {
@@ -101,7 +98,6 @@ public class Home extends Fragment {
                 incsum = 0.0;
 
                 for(DataSnapshot ds : snapshot.getChildren()) {
-
                     Map<String, Object> map = (Map<String,Object>) ds.getValue();
                     Object income = map.get("amount");
                     double income_amount = Double.parseDouble((String.valueOf(income)));
@@ -109,13 +105,11 @@ public class Home extends Fragment {
                     setIncsum(incsum);
                     total_income.setText(String.format(Locale.US, "%.2f", incsum));
                     Balance();
-
                 }
             }
 
             @Override
             public void onCancelled(DatabaseError error) {
-
             }
         });
 
@@ -127,7 +121,6 @@ public class Home extends Fragment {
                 expsum = 0.0;
 
                 for(DataSnapshot ds : snapshot.getChildren()) {
-
                     Map<String, Object> map = (Map<String,Object>) ds.getValue();
                     Object expenses = map.get("amount");
                     double expense_amount = Double.parseDouble((String.valueOf(expenses)));
@@ -135,13 +128,11 @@ public class Home extends Fragment {
                     setExpsum(expsum);
                     total_expenses.setText(String.format(Locale.US, "%.2f", expsum));
                     Balance();
-
                 }
             }
 
             @Override
             public void onCancelled(DatabaseError error) {
-
             }
         });
 
@@ -158,7 +149,6 @@ public class Home extends Fragment {
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-
             }
         });
 
@@ -175,7 +165,6 @@ public class Home extends Fragment {
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-
             }
         });
 

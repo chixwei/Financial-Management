@@ -1,6 +1,5 @@
 package com.example.financialmanagement;
 
-
 import android.content.Context;
 import android.content.Intent;
 import android.provider.ContactsContract;
@@ -31,14 +30,11 @@ public class IncomeAdapter extends RecyclerView.Adapter<IncomeAdapter.ViewHolder
         this.categoryList = categoryList;
     }
 
-
     @NonNull
     @Override
     public IncomeAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-
         View view = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.category_item, parent, false);
-
         return new ViewHolder(view);
     }
 
@@ -54,27 +50,21 @@ public class IncomeAdapter extends RecyclerView.Adapter<IncomeAdapter.ViewHolder
         Glide.with(mContext)
                 .load(categoryList.get(position).getImageUrl())
                 .into(holder.imageView);
-//TESTING-------------------------------------------------------------------------
-        holder.itemView.setOnClickListener(new View.OnClickListener() {
 
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 Intent intent = new Intent(mContext, AddIncome.class);
                 intent.putExtra("image", temp.getImageUrl());
                 intent.putExtra("title", temp.getName());
                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 mContext.startActivity(intent);
-
             }
         });
-
-        //---------------------------------------------------------------------------
     }
 
     @Override
     public int getItemCount() {
-
         return categoryList.size();
     }
 
@@ -88,8 +78,6 @@ public class IncomeAdapter extends RecyclerView.Adapter<IncomeAdapter.ViewHolder
 
             imageView = itemView.findViewById(R.id.imageView);
             textView = itemView.findViewById(R.id.textView);
-
-
         }
     }
 

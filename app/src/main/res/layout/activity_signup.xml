@@ -57,7 +57,7 @@
             android:hint="@string/uname"
             android:inputType="textPersonName"
             android:padding="10dp"
-            android:textColor="@color/black" />
+            android:textColor="@color/black"/>
 
         // email
         <EditText

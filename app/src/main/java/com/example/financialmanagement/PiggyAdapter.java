@@ -1,29 +1,17 @@
 package com.example.financialmanagement;
 
-import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.net.Uri;
-import android.os.AsyncTask;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.webkit.MimeTypeMap;
 import android.widget.ImageView;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
-import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.storage.StorageReference;
-import com.google.firebase.storage.UploadTask;
 
-import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Locale;
 
@@ -51,7 +39,6 @@ public class PiggyAdapter extends RecyclerView.Adapter<PiggyAdapter.MyViewHolder
         Glide.with(context)
                 .load(piggy.getCategory_url())
                 .into(holder.category_image);
-        //holder.category_url.setText(piggy.getCategory_url());
         holder.category_name.setText(piggy.getCategory_name());
         holder.record_date.setText(piggy.getDate());
         holder.amount.setText(String.format(Locale.US, "%.2f", piggy.getAmount()));

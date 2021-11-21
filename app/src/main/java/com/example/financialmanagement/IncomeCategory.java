@@ -34,7 +34,6 @@ public class IncomeCategory extends AppCompatActivity {
     ImageView back_button;
     Spinner spinner;
 
-    //------------------------------------------------------
     //Widgets
     RecyclerView recyclerView;
     RecyclerView.LayoutManager layoutManager;
@@ -47,13 +46,12 @@ public class IncomeCategory extends AppCompatActivity {
     private IncomeAdapter incomeAdapter;
     private Context mContext;
 
-    //----------------------------------------------------------
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_income_category);
 
-//retrieve data-----------------------------------------------
+        //retrieve data
         recyclerView = findViewById(R.id.incomeGrid);
         int numberOfColumns = 4;
         layoutManager = new GridLayoutManager(this,4);
@@ -113,32 +111,24 @@ public class IncomeCategory extends AppCompatActivity {
 
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
-
             }
         });
 
     }
 
-    //-----------------------------------------------------------------------
     private void GetDataFromFirebase() {
 
         Query query = myRef.child("incomeCategory");
-
         query.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-
                 ClearAll();
-
                 for(DataSnapshot snapshot : dataSnapshot.getChildren()) {
                     DataModel category = new DataModel();
-
                     category.setImageUrl(snapshot.child("image").getValue().toString());
                     category.setName(snapshot.child("title").getValue().toString());
-
                     categoryList.add(category);
                 }
-
                 incomeAdapter = new IncomeAdapter(getApplicationContext(), categoryList);
                 recyclerView.setAdapter(incomeAdapter);
                 incomeAdapter.notifyDataSetChanged();
@@ -146,10 +136,8 @@ public class IncomeCategory extends AppCompatActivity {
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-
             }
         });
-
     }
 
     private void ClearAll() {

@@ -1,6 +1,5 @@
 package com.example.financialmanagement;
 
-
 import android.content.Context;
 import android.content.Intent;
 import android.provider.ContactsContract;
@@ -31,20 +30,16 @@ public class ExpenseAdapter extends RecyclerView.Adapter<ExpenseAdapter.ViewHold
         this.categoryList = categoryList;
     }
 
-
     @NonNull
     @Override
     public ExpenseAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-
         View view = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.category_item, parent, false);
-
         return new ViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-
         final DataModel temp = categoryList.get(position);
 
         //TextView
@@ -54,27 +49,21 @@ public class ExpenseAdapter extends RecyclerView.Adapter<ExpenseAdapter.ViewHold
         Glide.with(mContext)
                 .load(categoryList.get(position).getImageUrl())
                 .into(holder.imageView);
-//TESTING-------------------------------------------------------------------------
-        holder.itemView.setOnClickListener(new View.OnClickListener() {
 
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 Intent intent = new Intent(mContext, AddExpense.class);
                 intent.putExtra("image", temp.getImageUrl());
                 intent.putExtra("title", temp.getName());
                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 mContext.startActivity(intent);
-
             }
         });
-
-        //---------------------------------------------------------------------------
     }
 
     @Override
     public int getItemCount() {
-
         return categoryList.size();
     }
 
@@ -88,11 +77,7 @@ public class ExpenseAdapter extends RecyclerView.Adapter<ExpenseAdapter.ViewHold
 
             imageView = itemView.findViewById(R.id.imageView);
             textView = itemView.findViewById(R.id.textView);
-
-
         }
     }
-
-
 }
 

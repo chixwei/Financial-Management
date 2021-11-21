@@ -8,7 +8,6 @@ public class DataModel {
 
     //Constructors
     public DataModel() {
-
     }
 
     public DataModel(String name, String imageUrl) {

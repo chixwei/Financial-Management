@@ -94,7 +94,6 @@ public class Profile extends Fragment {
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-
             }
         });
 

@@ -86,7 +86,7 @@
                     android:text="Income"
                     android:textColor="#605f5e"
                     android:textSize="16dp"
-                    android:textStyle="bold" />
+                    android:textStyle="bold"/>
 
                 // income amount
                 <TextView
@@ -99,7 +99,7 @@
                     android:text="0"
                     android:textColor="@color/black"
                     android:textSize="30dp"
-                    android:textStyle="bold" />
+                    android:textStyle="bold"/>
 
             </LinearLayout> // income column
         </LinearLayout> // income layout
@@ -129,7 +129,7 @@
                     android:text="Expense"
                     android:textColor="#605f5e"
                     android:textSize="16dp"
-                    android:textStyle="bold" />
+                    android:textStyle="bold"/>
 
                 // expense amount
                 <TextView
@@ -142,7 +142,7 @@
                     android:text="0"
                     android:textColor="@color/black"
                     android:textSize="30dp"
-                    android:textStyle="bold" />
+                    android:textStyle="bold"/>
             </LinearLayout> // expense column
         </LinearLayout> // expense layout
 
@@ -170,7 +170,7 @@
                     android:text="Balance"
                     android:textColor="#605f5e"
                     android:textSize="16dp"
-                    android:textStyle="bold" />
+                    android:textStyle="bold"/>
 
                 // balance amount
                 <TextView
@@ -183,7 +183,7 @@
                     android:text="0"
                     android:textColor="@color/black"
                     android:textSize="30dp"
-                    android:textStyle="bold" />
+                    android:textStyle="bold"/>
             </LinearLayout> // balance column
         </LinearLayout> // balance layout
     </LinearLayout> // amount status layout

@@ -31,7 +31,6 @@ public class Login extends AppCompatActivity {
     AlertDialog.Builder reset_alert;
     LayoutInflater inflater;
 
-
     //@Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -104,7 +103,6 @@ public class Login extends AppCompatActivity {
                                     @Override
                                     public void onSuccess(Void aVoid) {
                                         Toast.makeText(Login.this,"Reset Email Sent", Toast.LENGTH_SHORT).show();
-
                                     }
                                 }).addOnFailureListener(new OnFailureListener() {
                                     @Override
@@ -118,7 +116,6 @@ public class Login extends AppCompatActivity {
                         .create().show();
             }
         });
-
 
         // go to sign up button
         signup_button = findViewById(R.id.signupPage);
@@ -151,5 +148,3 @@ public class Login extends AppCompatActivity {
         }
     }
 }
-
-

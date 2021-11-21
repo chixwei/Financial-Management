@@ -24,6 +24,8 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 
 import java.io.File;
 import java.util.Locale;
@@ -36,6 +38,7 @@ public class ViewRecord extends AppCompatActivity {
     DatabaseReference ref;
     String user_id;
     FirebaseUser user;
+    StorageReference storageReference;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -90,18 +93,17 @@ public class ViewRecord extends AppCompatActivity {
                         ref.addListenerForSingleValueEvent(new ValueEventListener() {
                             @Override
                             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                               /*
                                 // get all the child key of that category
                                 for (DataSnapshot child: dataSnapshot.getChildren()) {
                                     String key = child.getKey();
                                     Log.d("Record key:", key);
                                 }
-                                */
 
+                                /*
                                 // get only the first key of child of that category
                                 String key = dataSnapshot.getChildren().iterator().next().getKey();
                                 DatabaseReference ref2 = ref.child(key);
-                                Log.d("Tag", "Get Key: " +(key));
+                                Log.d("Tag", "Get Key: " +(key));*/
 
                                 // remove the record
                                 //dataSnapshot.getRef().removeValue();

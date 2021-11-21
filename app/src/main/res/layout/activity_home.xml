@@ -188,7 +188,7 @@
         android:textColor="@color/black"
         android:visibility="invisible"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/add_expense_button" />
+        app:layout_constraintEnd_toStartOf="@+id/add_expense_button"/>
 
     // add expense button
     <com.google.android.material.floatingactionbutton.FloatingActionButton

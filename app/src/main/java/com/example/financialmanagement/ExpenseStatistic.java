@@ -51,7 +51,6 @@ public class ExpenseStatistic extends AppCompatActivity {
         pieChart = v.findViewById(R.id.expensepiechart);
         setupPieChart();
 
-
         // get user id
         user = FirebaseAuth.getInstance().getCurrentUser();
         if (user != null) {
@@ -136,8 +135,6 @@ public class ExpenseStatistic extends AppCompatActivity {
         l.setEnabled(true);
 
     }
-
-
 
     @RequiresApi(api = Build.VERSION_CODES.N)
     private void loadPieChartData() {

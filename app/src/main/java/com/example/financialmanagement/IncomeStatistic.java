@@ -52,7 +52,6 @@ public class IncomeStatistic extends Fragment {
         pieChart = v.findViewById(R.id.incomepiechart);
         setupPieChart();
 
-
         // get user id
         user = FirebaseAuth.getInstance().getCurrentUser();
         if (user != null) {
@@ -137,8 +136,6 @@ public class IncomeStatistic extends Fragment {
         l.setEnabled(true);
 
     }
-
-
 
     @RequiresApi(api = Build.VERSION_CODES.N)
     private void loadPieChartData() {

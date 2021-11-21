@@ -30,7 +30,6 @@ public class ExpenseCategory extends AppCompatActivity {
     ImageView back_button;
     Spinner spinner;
 
-    //------------------------------------------------------
     //Widgets
     RecyclerView recyclerView;
     RecyclerView.LayoutManager layoutManager;
@@ -43,15 +42,12 @@ public class ExpenseCategory extends AppCompatActivity {
     private ExpenseAdapter expenseAdapter;
     private Context mContext;
 
-    //----------------------------------------------------------
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_expense_category);
 
-
-        //retrieve data-----------------------------------------------
+        //retrieve data
         recyclerView = findViewById(R.id.expenseGrid);
         int numberOfColumns = 4;
         layoutManager = new GridLayoutManager(this,4);
@@ -69,9 +65,6 @@ public class ExpenseCategory extends AppCompatActivity {
 
         //Get Data Method
         GetDataFromFirebase();
-
-
-        //---------------------------------------------------------
 
         // back button
         back_button = findViewById(R.id.back_button);
@@ -114,32 +107,22 @@ public class ExpenseCategory extends AppCompatActivity {
 
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
-
             }
         });
-
     }
 
-    //-----------------------------------------------------------------------
     private void GetDataFromFirebase() {
-
         Query query = myRef.child("expenseCategory");
-
         query.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-
                 ClearAll();
-
                 for(DataSnapshot snapshot : dataSnapshot.getChildren()) {
                     DataModel category = new DataModel();
-
                     category.setImageUrl(snapshot.child("image").getValue().toString());
                     category.setName(snapshot.child("title").getValue().toString());
-
                     categoryList.add(category);
                 }
-
                 expenseAdapter = new ExpenseAdapter(getApplicationContext(), categoryList);
                 recyclerView.setAdapter(expenseAdapter);
                 expenseAdapter.notifyDataSetChanged();
@@ -147,24 +130,17 @@ public class ExpenseCategory extends AppCompatActivity {
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-
             }
         });
-
     }
 
     private void ClearAll() {
         if(categoryList != null) {
             categoryList.clear();
-
             if (expenseAdapter != null) {
                 expenseAdapter.notifyDataSetChanged();
             }
         }
-
         categoryList = new ArrayList<>();
     }
-
-
-    //------------------------------------------------------------------------
 }

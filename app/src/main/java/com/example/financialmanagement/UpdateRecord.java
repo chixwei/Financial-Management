@@ -197,10 +197,29 @@ public class UpdateRecord extends AppCompatActivity {
                         Amount = Double.parseDouble(amount.getText().toString());
                 }
 
-                if (FilePathUri != null && !FilePathUri.equals(Uri.EMPTY)) {
-                    String imageFileName = System.currentTimeMillis() + "." + GetFileExtension(FilePathUri);
-                    StorageReference storageReference2 = storageReference.child(imageFileName);
-                    storageReference2.putFile(FilePathUri).addOnSuccessListener(taskSnapshot -> {
+                if (img.getText().toString().trim().equals("")) {
+                    ref.child("amount").setValue(Amount);
+                    ref.child("date").setValue(date.getText().toString().trim());
+                    ref.child("memo").setValue(memo.getText().toString().trim());
+                    Toast.makeText(getApplicationContext(), "data updated successfully", Toast.LENGTH_SHORT).show();
+                    // back to home page
+                    Intent intent = new Intent(UpdateRecord.this, MainActivity.class);
+                    startActivity(intent);
+                } else {
+                    if (FilePathUri != null && !FilePathUri.equals(Uri.EMPTY)) {
+                        String imageFileName = System.currentTimeMillis() + "." + GetFileExtension(FilePathUri);
+                        StorageReference storageReference2 = storageReference.child(imageFileName);
+                        storageReference2.putFile(FilePathUri).addOnSuccessListener(taskSnapshot -> {
+                            ref.child("amount").setValue(Amount);
+                            ref.child("date").setValue(date.getText().toString().trim());
+                            ref.child("memo").setValue(memo.getText().toString().trim());
+                            ref.child("image_url").setValue(img.getText().toString().trim());
+                            Toast.makeText(getApplicationContext(), "data updated successfully", Toast.LENGTH_SHORT).show();
+                            // back to home page
+                            Intent intent = new Intent(UpdateRecord.this, MainActivity.class);
+                            startActivity(intent);
+                        });
+                    } /*else {
                         ref.child("amount").setValue(Amount);
                         ref.child("date").setValue(date.getText().toString().trim());
                         ref.child("memo").setValue(memo.getText().toString().trim());
@@ -209,20 +228,9 @@ public class UpdateRecord extends AppCompatActivity {
                         // back to home page
                         Intent intent = new Intent(UpdateRecord.this, MainActivity.class);
                         startActivity(intent);
-                    });
-                } else {
-                    /*
-                    ref.child("amount").setValue(Amount);
-                    ref.child("date").setValue(date.getText().toString().trim());
-                    ref.child("memo").setValue(memo.getText().toString().trim());
-                    ref.child("image_url").setValue(img.getText().toString().trim());
-                    Toast.makeText(getApplicationContext(), "data updated successfully", Toast.LENGTH_SHORT).show();
-                    // back to home page
-                    Intent intent = new Intent(UpdateRecord.this, MainActivity.class);
-                    startActivity(intent);
-
-                     */
+                    }*/
                 }
+
             }
         });
 

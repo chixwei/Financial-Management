@@ -35,14 +35,13 @@ import java.util.Map;
 public class Profile extends Fragment {
 
     ImageView logout_button;
-    TextView username, total_income, total_expenses, total_balance;
+    TextView username, total_balance, total_income, total_expenses;
     Dialog dialog;
     String user_id;
     FirebaseUser user;
-    DatabaseReference ref;
-    DatabaseReference database_expenses, database_income;
+    DatabaseReference ref, database_income, database_expenses;
 
-    Double expsum = 0.0, incsum = 0.0;
+    Double expsum=0.0, incsum=0.0;
 
     public void setExpsum(double expsum) {
         this.expsum = expsum;
@@ -60,7 +59,8 @@ public class Profile extends Fragment {
         return this.incsum;
     }
 
-    // retrieve balance
+
+    //retrieve balance
     public void Balance(){
         double income = Double.parseDouble(String.valueOf(getIncsum()));
         double expense = Double.parseDouble(String.valueOf(getExpsum()));
@@ -75,6 +75,9 @@ public class Profile extends Fragment {
         View view = inflater.inflate(R.layout.activity_profile, container, false);
 
         dialog = new Dialog(view.getContext());
+        total_balance = (TextView) view.findViewById(R.id.txt_balance_amount);
+
+
 
         // logout button
         logout_button = view.findViewById(R.id.logout_button);
@@ -176,6 +179,61 @@ public class Profile extends Fragment {
 
             @Override
             public void onCancelled(DatabaseError error) {
+            }
+        });
+
+        database_expenses = FirebaseDatabase.getInstance().getReference("User").child(user_id).child("Expenses");
+        database_income = FirebaseDatabase.getInstance().getReference("User").child(user_id).child("Income");
+
+        //retrieve total income value
+        total_income = (TextView)view.findViewById(R.id.txt_income_amount);
+        database_income.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot snapshot) {
+                incsum = 0.0;
+
+                for(DataSnapshot ds : snapshot.getChildren()) {
+
+                    Map<String, Object> map = (Map<String,Object>) ds.getValue();
+                    Object income = map.get("amount");
+                    double income_amount = Double.parseDouble((String.valueOf(income)));
+                    incsum += income_amount;
+                    setIncsum(incsum);
+                    total_income.setText(String.format(Locale.US, "%.2f", incsum));
+                    Balance();
+
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError error) {
+
+            }
+        });
+
+        // retrieve total expenses value
+        total_expenses = (TextView)view.findViewById(R.id.txt_expense_amount);
+        database_expenses.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot snapshot) {
+                expsum = 0.0;
+
+                for(DataSnapshot ds : snapshot.getChildren()) {
+
+                    Map<String, Object> map = (Map<String,Object>) ds.getValue();
+                    Object expenses = map.get("amount");
+                    double expense_amount = Double.parseDouble((String.valueOf(expenses)));
+                    expsum += expense_amount;
+                    setExpsum(expsum);
+                    total_expenses.setText(String.format(Locale.US, "%.2f", expsum));
+                    Balance();
+
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError error) {
+
             }
         });
 

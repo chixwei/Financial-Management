@@ -33,6 +33,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
+import static com.github.mikephil.charting.components.Legend.LegendForm.CIRCLE;
+
 public class IncomeStatistic extends Fragment {
 
     private PieChart pieChart;
@@ -47,7 +49,7 @@ public class IncomeStatistic extends Fragment {
     @Nullable
 
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View v = inflater.inflate(R.layout.activity_statistic, container, false);
+        View v = inflater.inflate(R.layout.activity_income_statistic, container, false);
 
         pieChart = v.findViewById(R.id.incomepiechart);
         setupPieChart();
@@ -129,11 +131,15 @@ public class IncomeStatistic extends Fragment {
         pieChart.getDescription().setEnabled(false);
 
         Legend l = pieChart.getLegend();
-        l.setVerticalAlignment(Legend.LegendVerticalAlignment.TOP);
-        l.setHorizontalAlignment(Legend.LegendHorizontalAlignment.RIGHT);
-        l.setOrientation(Legend.LegendOrientation.VERTICAL);
+        l.setVerticalAlignment(Legend.LegendVerticalAlignment.BOTTOM);
+        l.setHorizontalAlignment(Legend.LegendHorizontalAlignment.LEFT);
+        l.setOrientation(Legend.LegendOrientation.HORIZONTAL);
+        l.setTextSize(16);
         l.setDrawInside(false);
         l.setEnabled(true);
+
+        l.setForm(CIRCLE);
+
 
     }
 

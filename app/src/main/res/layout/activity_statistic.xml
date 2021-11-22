@@ -65,4 +65,32 @@
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
+
+
+
+        <FrameLayout
+            android:id="@+id/frame_statistic"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/relativeLayout"
+            android:nestedScrollingEnabled="true"
+            android:layout_marginTop="200dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/relativeLayout"
+            tools:layout_editor_absoluteX="0dp">
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:nestedScrollingEnabled="true"
+            android:layout_below="@+id/relativeLayout"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/relativeLayout"
+            tools:layout_editor_absoluteX="0dp"/>
+
+    </FrameLayout>
+
+
+
+
 </androidx.constraintlayout.widget.ConstraintLayout >

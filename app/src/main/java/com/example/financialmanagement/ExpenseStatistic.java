@@ -3,6 +3,7 @@ package com.example.financialmanagement;
 import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
 
 import android.graphics.Color;
 import android.os.Build;
@@ -15,6 +16,7 @@ import android.view.ViewGroup;
 import com.github.mikephil.charting.animation.Easing;
 import com.github.mikephil.charting.charts.PieChart;
 import com.github.mikephil.charting.components.Legend;
+import com.github.mikephil.charting.components.LegendEntry;
 import com.github.mikephil.charting.data.PieData;
 import com.github.mikephil.charting.data.PieDataSet;
 import com.github.mikephil.charting.data.PieEntry;
@@ -30,9 +32,12 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
-public class ExpenseStatistic extends AppCompatActivity {
+import static com.github.mikephil.charting.components.Legend.LegendForm.CIRCLE;
+
+public class ExpenseStatistic extends Fragment {
 
     private PieChart pieChart;
     DatabaseReference firebase;
@@ -46,7 +51,7 @@ public class ExpenseStatistic extends AppCompatActivity {
     @Nullable
 
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View v = inflater.inflate(R.layout.activity_statistic, container, false);
+        View v = inflater.inflate(R.layout.activity_expense_statistic, container, false);
 
         pieChart = v.findViewById(R.id.expensepiechart);
         setupPieChart();
@@ -121,18 +126,23 @@ public class ExpenseStatistic extends AppCompatActivity {
     private void setupPieChart() {
         pieChart.setDrawHoleEnabled(true);
         pieChart.setUsePercentValues(true);
-        pieChart.setEntryLabelTextSize(12);
+        pieChart.setEntryLabelTextSize(16);
         pieChart.setEntryLabelColor(Color.BLACK);
         pieChart.setCenterText("Expenses");
         pieChart.setCenterTextSize(24);
         pieChart.getDescription().setEnabled(false);
 
+
         Legend l = pieChart.getLegend();
-        l.setVerticalAlignment(Legend.LegendVerticalAlignment.TOP);
-        l.setHorizontalAlignment(Legend.LegendHorizontalAlignment.RIGHT);
+        l.setVerticalAlignment(Legend.LegendVerticalAlignment.BOTTOM);
+        l.setHorizontalAlignment(Legend.LegendHorizontalAlignment.CENTER);
         l.setOrientation(Legend.LegendOrientation.VERTICAL);
+        l.setTextSize(16);
         l.setDrawInside(false);
         l.setEnabled(true);
+
+
+        l.setForm(CIRCLE);
 
     }
 

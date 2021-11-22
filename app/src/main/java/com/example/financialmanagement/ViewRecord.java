@@ -136,9 +136,10 @@ public class ViewRecord extends AppCompatActivity {
                 .into(record_category_image);
         Log.d("Tag", "cat_img: " +(getIntent().getStringExtra("category_image")));
 
+        /*
         if (getIntent().getStringExtra("image").equals("null")) {
             // do ntg
-        } else {
+        } else {*/
             dumpIntent(getIntent());
             storageReference = FirebaseStorage.getInstance().getReference().child("User").child(user_id).child(getIntent().getStringExtra("category")).child(getIntent().getStringExtra("image"));
             storageReference.getDownloadUrl().addOnSuccessListener(uri -> {
@@ -149,7 +150,7 @@ public class ViewRecord extends AppCompatActivity {
                         .into(record_image);
                 Log.d("Tag", "rec_img: " + (url));
             });
-        }
+        //}
 
         // test record id
         Log.d("Tag", "record_id: " +(getIntent().getStringExtra("record_id")));

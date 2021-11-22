@@ -41,7 +41,7 @@ public class Profile extends Fragment {
     FirebaseUser user;
     DatabaseReference ref, database_income, database_expenses;
 
-    Double expsum=0.0, incsum=0.0;
+    Double expsum = 0.0, incsum = 0.0;
 
     public void setExpsum(double expsum) {
         this.expsum = expsum;
@@ -58,8 +58,7 @@ public class Profile extends Fragment {
     public double getIncsum() {
         return this.incsum;
     }
-
-
+    
     //retrieve balance
     public void Balance(){
         double income = Double.parseDouble(String.valueOf(getIncsum()));
@@ -76,9 +75,7 @@ public class Profile extends Fragment {
 
         dialog = new Dialog(view.getContext());
         total_balance = (TextView) view.findViewById(R.id.txt_balance_amount);
-
-
-
+        
         // logout button
         logout_button = view.findViewById(R.id.logout_button);
         logout_button.setOnClickListener(new View.OnClickListener() {
@@ -191,9 +188,7 @@ public class Profile extends Fragment {
             @Override
             public void onDataChange(DataSnapshot snapshot) {
                 incsum = 0.0;
-
                 for(DataSnapshot ds : snapshot.getChildren()) {
-
                     Map<String, Object> map = (Map<String,Object>) ds.getValue();
                     Object income = map.get("amount");
                     double income_amount = Double.parseDouble((String.valueOf(income)));
@@ -201,13 +196,11 @@ public class Profile extends Fragment {
                     setIncsum(incsum);
                     total_income.setText(String.format(Locale.US, "%.2f", incsum));
                     Balance();
-
                 }
             }
 
             @Override
             public void onCancelled(DatabaseError error) {
-
             }
         });
 
@@ -217,9 +210,7 @@ public class Profile extends Fragment {
             @Override
             public void onDataChange(DataSnapshot snapshot) {
                 expsum = 0.0;
-
                 for(DataSnapshot ds : snapshot.getChildren()) {
-
                     Map<String, Object> map = (Map<String,Object>) ds.getValue();
                     Object expenses = map.get("amount");
                     double expense_amount = Double.parseDouble((String.valueOf(expenses)));
@@ -227,13 +218,11 @@ public class Profile extends Fragment {
                     setExpsum(expsum);
                     total_expenses.setText(String.format(Locale.US, "%.2f", expsum));
                     Balance();
-
                 }
             }
 
             @Override
             public void onCancelled(DatabaseError error) {
-
             }
         });
 

@@ -220,19 +220,20 @@ public class AddIncome extends AppCompatActivity {
                 }
 
                 if(FilePathUri != null && !FilePathUri.equals(Uri.EMPTY)) {
-                    StorageReference storageReference2 = storageReference.child(System.currentTimeMillis() + "." + GetFileExtension(FilePathUri));
+                    String imageFileName = System.currentTimeMillis() + "." + GetFileExtension(FilePathUri);
+                    StorageReference storageReference2 = storageReference.child(imageFileName);
                     storageReference2.putFile(FilePathUri).addOnSuccessListener(taskSnapshot -> {
                         piggy.setCategory_url(getIncimageurl());
                         piggy.setCategory("Income");
                         piggy.setCategory_name(income_category_name.getText().toString().trim());
-                        //piggy.setAmount(Double.parseDouble(income_amount.getText().toString().trim()));
+                        //piggy.setAmount(Double.parseDouble(expense_amount.getText().toString().trim()));
                         piggy.setAmount(Amount);
                         piggy.setDate(income_date.getText().toString().trim());
                         piggy.setMemo(income_memo.getText().toString().trim());
-                        piggy.setImage_url(taskSnapshot.getUploadSessionUri().toString());
+                        piggy.setImage_url(imageFileName);
                         String ImageUploadId = ref.push().getKey();
                         ref.child(ImageUploadId).setValue(piggy);
-                        Toast.makeText(getApplicationContext(),"data inserted successfully",Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getApplicationContext(), "data inserted successfully", Toast.LENGTH_SHORT).show();
                         // back to home page
                         Intent intent = new Intent(AddIncome.this, MainActivity.class);
                         startActivity(intent);
@@ -245,8 +246,8 @@ public class AddIncome extends AppCompatActivity {
                     piggy.setAmount(Amount);
                     piggy.setDate(income_date.getText().toString().trim());
                     piggy.setMemo(income_memo.getText().toString().trim());
-                    String ImageUploadId = ref.push().getKey();
-                    ref.child(ImageUploadId).setValue(piggy);
+                    //String ImageUploadId = ref.push().getKey();
+                    //ref.child(ImageUploadId).setValue(piggy);
                     Toast.makeText(getApplicationContext(),"data inserted successfully",Toast.LENGTH_SHORT).show();
                     // back to home page
                     Intent intent = new Intent(AddIncome.this, MainActivity.class);

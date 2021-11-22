@@ -38,7 +38,7 @@ public class Home extends Fragment {
     RecyclerView recyclerView;
     DatabaseReference database_expenses, database_income;
     PiggyAdapter PiggyAdapter;
-    ArrayList<Piggy> list;
+    ArrayList<PiggyExtended> list;
     boolean isFABOpen;
 
     Double expsum = 0.0, incsum = 0.0;
@@ -141,7 +141,7 @@ public class Home extends Fragment {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
-                    Piggy piggy = dataSnapshot.getValue(Piggy.class);
+                    PiggyExtended piggy = dataSnapshot.getValue(PiggyExtended.class);
                     list.add(piggy);
                 }
                 PiggyAdapter.notifyDataSetChanged();
@@ -157,7 +157,7 @@ public class Home extends Fragment {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
-                    Piggy piggy = dataSnapshot.getValue(Piggy.class);
+                    PiggyExtended piggy = dataSnapshot.getValue(PiggyExtended.class);
                     list.add(piggy);
                 }
                 PiggyAdapter.notifyDataSetChanged();

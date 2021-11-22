@@ -23,7 +23,7 @@ public class Piggy {
     public void setCategory_url(String category_url) {
         this.category_url = category_url;
     }
-    
+
     public String getCategory() {
         return category;
     }
@@ -63,4 +63,16 @@ public class Piggy {
     public void setImage_url(String image_url) {
         this.image_url = image_url;
     }
+}
+
+class PiggyExtended extends Piggy {
+    public String getFirebaseID() {
+        return firebaseID;
+    }
+
+    public void setFirebaseID(String firebaseID) {
+        this.firebaseID = firebaseID;
+    }
+
+    public String firebaseID;
 }

@@ -28,7 +28,7 @@ public class Expenses extends Fragment {
     RecyclerView recyclerView;
     DatabaseReference database;
     PiggyAdapter PiggyAdapter;
-    ArrayList<Piggy> list;
+    ArrayList<PiggyExtended> list;
 
     @Nullable
     @Override
@@ -55,7 +55,7 @@ public class Expenses extends Fragment {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
-                    Piggy piggy = dataSnapshot.getValue(Piggy.class);
+                    PiggyExtended piggy = dataSnapshot.getValue(PiggyExtended.class);
                     list.add(piggy);
                 }
                 PiggyAdapter.notifyDataSetChanged();

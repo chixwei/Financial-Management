@@ -4,11 +4,17 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.DatePickerDialog;
+import android.content.ContentResolver;
 import android.content.Intent;
+import android.database.Cursor;
+import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
+import android.provider.OpenableColumns;
 import android.util.Log;
 import android.view.View;
+import android.webkit.MimeTypeMap;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
@@ -19,6 +25,7 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -26,21 +33,23 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
 public class UpdateRecord extends AppCompatActivity {
 
-    ImageView back_button, delete_button;
+    ImageView back_button, delete_button, category_image;
     TextView category_name;
     EditText amount, date, memo, img;
     Spinner spinner;
     Button update_button;
     Double Amount = 0.0;
-    String _Category_Name, _Amount, _Date, _Memo, _Img, _Category, user_id;
+    String _Category_Name, _Category_Img, _Amount, _Date, _Memo, _Img, _Category, _Record_Id, user_id;
     FirebaseUser user;
     DatabaseReference ref;
     Piggy piggy;
@@ -82,16 +91,28 @@ public class UpdateRecord extends AppCompatActivity {
 
         // get record details
         _Category_Name = getIntent().getStringExtra("category_name");
+        _Category_Img = getIntent().getStringExtra("category_img");
         _Amount = getIntent().getStringExtra("amount");
         _Date = getIntent().getStringExtra("date");
         _Memo = getIntent().getStringExtra("memo");
         _Category = getIntent().getStringExtra("category");
+        _Img = getIntent().getStringExtra("image");
+        _Record_Id = getIntent().getStringExtra("record_id");
 
         // set record details
         category_name.setText(_Category_Name);
         amount.setText(_Amount);
         date.setText(_Date);
         memo.setText(_Memo);
+        img.setText(_Img);
+        Log.d("Tag", "rec_img: " + _Img);
+
+        /*
+        // set category image
+        Glide.with(UpdateRecord.this)
+                .load(_Category_Img)
+                .into(category_image);
+        Log.d("Tag", "cat_img: " + _Category_Img);*/
 
         // get user id
         user = FirebaseAuth.getInstance().getCurrentUser();
@@ -148,19 +169,9 @@ public class UpdateRecord extends AppCompatActivity {
             }
         });
 
-        ref = FirebaseDatabase.getInstance().getReference().child("User").child(user_id).child(_Category);
-        ref.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                String key = snapshot.getChildren().iterator().next().getKey();
-                Log.d("Tag", "Get Key: " +(key));
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
-        });
+        // declare database
+        ref = FirebaseDatabase.getInstance().getReference().child("User").child(user_id).child(_Category).child("-Mp6SDBahRp9Hfj1afX-");
+        storageReference = FirebaseStorage.getInstance().getReference().child("User").child(user_id).child(_Category);
 
         // update button
         update_button = findViewById(R.id.update_button);
@@ -186,44 +197,90 @@ public class UpdateRecord extends AppCompatActivity {
                         Amount = Double.parseDouble(amount.getText().toString());
                 }
 
-                /*
-                if (isAmountChanged() || isDateChanged() || isMemoChanged()) {
-                    Toast.makeText(getApplicationContext(), "Record details have been updated", Toast.LENGTH_SHORT).show();
+                if (FilePathUri != null && !FilePathUri.equals(Uri.EMPTY)) {
+                    String imageFileName = System.currentTimeMillis() + "." + GetFileExtension(FilePathUri);
+                    StorageReference storageReference2 = storageReference.child(imageFileName);
+                    storageReference2.putFile(FilePathUri).addOnSuccessListener(taskSnapshot -> {
+                        ref.child("amount").setValue(Amount);
+                        ref.child("date").setValue(date.getText().toString().trim());
+                        ref.child("memo").setValue(memo.getText().toString().trim());
+                        ref.child("image_url").setValue(img.getText().toString().trim());
+                        Toast.makeText(getApplicationContext(), "data updated successfully", Toast.LENGTH_SHORT).show();
+                        // back to home page
+                        Intent intent = new Intent(UpdateRecord.this, MainActivity.class);
+                        startActivity(intent);
+                    });
                 } else {
-                    Toast.makeText(getApplicationContext(), "Record details is same cannot be updated", Toast.LENGTH_SHORT).show();
-                }*/
+                    /*
+                    ref.child("amount").setValue(Amount);
+                    ref.child("date").setValue(date.getText().toString().trim());
+                    ref.child("memo").setValue(memo.getText().toString().trim());
+                    ref.child("image_url").setValue(img.getText().toString().trim());
+                    Toast.makeText(getApplicationContext(), "data updated successfully", Toast.LENGTH_SHORT).show();
+                    // back to home page
+                    Intent intent = new Intent(UpdateRecord.this, MainActivity.class);
+                    startActivity(intent);
+
+                     */
+                }
             }
         });
 
     }
 
-    private boolean isAmountChanged(){
-        if(!_Amount.equals(amount.getText().toString())) {
-            ref.child("amount").setValue(amount.getText().toString());
-            _Amount = amount.getText().toString();
-            return true;
-        } else {
-            return false;
+    // select image
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == Image_Request_Code && resultCode == RESULT_OK && data != null && data.getData() != null) {
+            FilePathUri = data.getData();
+            try {
+                Bitmap bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), FilePathUri);
+                // get file name
+                Cursor returnCursor = getContentResolver().query(FilePathUri, null, null, null, null);
+                int nameIndex = returnCursor.getColumnIndex(OpenableColumns.DISPLAY_NAME);
+                returnCursor.moveToFirst();
+                img.setText(returnCursor.getString(nameIndex));
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
     }
 
-    private boolean isDateChanged(){
-        if(!_Date.equals(date.getText().toString())) {
-            ref.child("date").setValue(date.getText().toString());
-            _Date = date.getText().toString();
-            return true;
-        } else {
-            return false;
-        }
+    public String GetFileExtension(Uri uri) {
+        ContentResolver contentResolver = getContentResolver();
+        MimeTypeMap mimeTypeMap = MimeTypeMap.getSingleton();
+        return mimeTypeMap.getExtensionFromMimeType(contentResolver.getType(uri));
     }
 
-    private boolean isMemoChanged(){
-        if(!getIntent().getStringExtra("memo").equals(memo.getText().toString())) {
-            ref.child("memo").setValue(memo.getText().toString());
-            _Memo = memo.getText().toString();
-            return true;
+    /*
+    // update
+    public void UpdateRecord() {
+        if (FilePathUri != null && !FilePathUri.equals(Uri.EMPTY)) {
+            String imageFileName = System.currentTimeMillis() + "." + GetFileExtension(FilePathUri);
+            StorageReference storageReference2 = storageReference.child(imageFileName);
+            storageReference2.putFile(FilePathUri).addOnSuccessListener(taskSnapshot -> {
+                ref.child("amount").setValue(Amount);
+                ref.child("date").setValue(date.getText().toString().trim());
+                ref.child("memo").setValue(memo.getText().toString().trim());
+                ref.child("image_url").setValue(img.getText().toString().trim());
+                Toast.makeText(getApplicationContext(), "data updated successfully", Toast.LENGTH_SHORT).show();
+                // back to home page
+                Intent intent = new Intent(UpdateRecord.this, MainActivity.class);
+                startActivity(intent);
+            });
         } else {
-            return false;
+
+            ref.child("amount").setValue(Amount);
+            ref.child("date").setValue(date.getText().toString().trim());
+            ref.child("memo").setValue(memo.getText().toString().trim());
+            ref.child("image_url").setValue(img.getText().toString().trim());
+            Toast.makeText(getApplicationContext(), "data updated successfully", Toast.LENGTH_SHORT).show();
+            // back to home page
+            Intent intent = new Intent(UpdateRecord.this, MainActivity.class);
+            startActivity(intent);
+
+
         }
-    }
+    }*/
 }

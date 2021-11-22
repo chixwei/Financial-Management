@@ -215,7 +215,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/layout"
             android:layout_margin="30dp"
-            android:src="@drawable/piggy"/>
+            android:layout_centerHorizontal="true"/>
 
     </RelativeLayout>
 

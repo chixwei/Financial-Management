@@ -171,7 +171,7 @@ public class AddExpense extends AppCompatActivity {
         piggy = new Piggy();
         ref = FirebaseDatabase.getInstance().getReference().child("User").child(user_id).child("Expenses");
         storageReference = FirebaseStorage.getInstance().getReference().child("User").child(user_id).child("Expenses");
-        //---------------------------------------------------
+
         //get category title and icon url
         expenseCategory = FirebaseDatabase.getInstance().getReference("expenseCategory");
         expenseCategory.addValueEventListener(new ValueEventListener() {
@@ -191,7 +191,6 @@ public class AddExpense extends AppCompatActivity {
             public void onCancelled(DatabaseError error) {
             }
         });
-        //--------------------------------------------------------
 
         // add_button
         add_button = findViewById(R.id.add_button);
@@ -228,7 +227,8 @@ public class AddExpense extends AppCompatActivity {
                 }
 
                 if (FilePathUri != null && !FilePathUri.equals(Uri.EMPTY)) {
-                    StorageReference storageReference2 = storageReference.child(System.currentTimeMillis() + "." + GetFileExtension(FilePathUri));
+                    String imageFileName = System.currentTimeMillis() + "." + GetFileExtension(FilePathUri);
+                    StorageReference storageReference2 = storageReference.child(imageFileName);
                     storageReference2.putFile(FilePathUri).addOnSuccessListener(taskSnapshot -> {
                         piggy.setCategory_url(getExpimageurl());
                         piggy.setCategory("Expenses");
@@ -237,7 +237,7 @@ public class AddExpense extends AppCompatActivity {
                         piggy.setAmount(Amount);
                         piggy.setDate(expense_date.getText().toString().trim());
                         piggy.setMemo(expense_memo.getText().toString().trim());
-                        piggy.setImage_url(taskSnapshot.getUploadSessionUri().toString());
+                        piggy.setImage_url(imageFileName);
                         String ImageUploadId = ref.push().getKey();
                         ref.child(ImageUploadId).setValue(piggy);
                         Toast.makeText(getApplicationContext(), "data inserted successfully", Toast.LENGTH_SHORT).show();

@@ -16,6 +16,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -26,9 +28,12 @@ import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
 
 import java.io.File;
+import java.util.Iterator;
 import java.util.Locale;
+import java.util.Set;
 
 public class ViewRecord extends AppCompatActivity {
 
@@ -88,30 +93,17 @@ public class ViewRecord extends AppCompatActivity {
                     @Override
                     public void onClick(View v) {
                         // code to delete record
-                        ref = FirebaseDatabase.getInstance().getReference().child("User").child(user_id).child(getIntent().getStringExtra("category"));
-                        //Query query = ref.child(ref.getKey());
+                        ref = FirebaseDatabase.getInstance().getReference().child("User").child(user_id).child(getIntent().getStringExtra("category")).child(getIntent().getStringExtra("record_id"));
                         ref.addListenerForSingleValueEvent(new ValueEventListener() {
                             @Override
                             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                                // get all the child key of that category
-                                for (DataSnapshot child: dataSnapshot.getChildren()) {
-                                    String key = child.getKey();
-                                    Log.d("Record key:", key);
-                                }
-
-                                /*
-                                // get only the first key of child of that category
-                                String key = dataSnapshot.getChildren().iterator().next().getKey();
-                                DatabaseReference ref2 = ref.child(key);
-                                Log.d("Tag", "Get Key: " +(key));*/
-
                                 // remove the record
-                                //dataSnapshot.getRef().removeValue();
+                                Log.d("Record key:", getIntent().getStringExtra("record_id"));
+                                dataSnapshot.getRef().removeValue();
                             }
 
                             @Override
                             public void onCancelled(@NonNull DatabaseError databaseError) {
-
                             }
                         });
 
@@ -138,18 +130,42 @@ public class ViewRecord extends AppCompatActivity {
         record_amount.setText(getIntent().getStringExtra("amount"));
         record_date.setText(getIntent().getStringExtra("date"));
         record_memo.setText(getIntent().getStringExtra("memo"));
-        //record_image.setImageURI(Uri.parse("image"));
 
         Glide.with(ViewRecord.this)
                 .load(getIntent().getStringExtra("category_image"))
                 .into(record_category_image);
         Log.d("Tag", "cat_img: " +(getIntent().getStringExtra("category_image")));
 
-        /*
-        Glide.with(ViewRecord.this)
-                .load(getIntent().getStringExtra("image"))
-                .into(record_image);
-        Log.d("Tag", "rec_img: " +(getIntent().getStringExtra("image")));
-        */
+        if (getIntent().getStringExtra("image").equals("null")) {
+            // do ntg
+        } else {
+            dumpIntent(getIntent());
+            storageReference = FirebaseStorage.getInstance().getReference().child("User").child(user_id).child(getIntent().getStringExtra("category")).child(getIntent().getStringExtra("image"));
+            storageReference.getDownloadUrl().addOnSuccessListener(uri -> {
+                String url = uri.toString();
+
+                Glide.with(ViewRecord.this)
+                        .load(url)
+                        .into(record_image);
+                Log.d("Tag", "rec_img: " + (url));
+            });
+        }
+
+        // test record id
+        Log.d("Tag", "record_id: " +(getIntent().getStringExtra("record_id")));
+    }
+
+    public static void dumpIntent(Intent i) {
+        Bundle bundle = i.getExtras();
+        if (bundle != null) {
+            Set<String> keys = bundle.keySet();
+            Iterator<String> it = keys.iterator();
+            Log.e("ahhhhh", "Dumping Intent start");
+            while (it.hasNext()) {
+                String key = it.next();
+                Log.e("ahhhhh", "[" + key + "=" + bundle.get(key) + "]");
+            }
+            Log.e("ahhhhh", "Dumping Intent end");
+        }
     }
 }

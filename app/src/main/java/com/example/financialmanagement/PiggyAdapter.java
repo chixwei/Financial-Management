@@ -3,6 +3,7 @@ package com.example.financialmanagement;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,9 +20,9 @@ import java.util.Locale;
 public class PiggyAdapter extends RecyclerView.Adapter<PiggyAdapter.MyViewHolder> {
 
     Context context;
-    ArrayList<Piggy> list;
+    ArrayList<PiggyExtended> list;
 
-    public PiggyAdapter(Context context, ArrayList<Piggy> list) {
+    public PiggyAdapter(Context context, ArrayList<PiggyExtended> list) {
         this.context = context;
         this.list = list;
     }
@@ -57,6 +58,8 @@ public class PiggyAdapter extends RecyclerView.Adapter<PiggyAdapter.MyViewHolder
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(context, ViewRecord.class);
+                intent.putExtra("record_id", ((PiggyExtended) piggy).getFirebaseID());
+                Log.d("Tag", "record id test: " + ((PiggyExtended) piggy).getFirebaseID());
                 intent.putExtra("category_name", piggy.getCategory_name());
                 intent.putExtra("category_image", piggy.getCategory_url());
                 intent.putExtra("category", piggy.getCategory());
@@ -75,6 +78,8 @@ public class PiggyAdapter extends RecyclerView.Adapter<PiggyAdapter.MyViewHolder
             @Override
             public boolean onLongClick(View v) {
                 Intent intent = new Intent(context, UpdateRecord.class);
+                intent.putExtra("record_id", ((PiggyExtended) piggy).getFirebaseID());
+                Log.d("Tag", "record id test: " + ((PiggyExtended) piggy).getFirebaseID());
                 intent.putExtra("category_name", piggy.getCategory_name());
                 intent.putExtra("category_image", piggy.getCategory_url());
                 intent.putExtra("category", piggy.getCategory());

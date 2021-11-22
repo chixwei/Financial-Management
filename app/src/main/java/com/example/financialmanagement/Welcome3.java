@@ -10,7 +10,7 @@ import android.widget.ImageView;
 
 public class Welcome3 extends AppCompatActivity {
 
-    ImageView back_button;
+    ImageView back_button, dot1, dot2;
     Button login_button, signup_button;
 
     @Override
@@ -44,6 +44,26 @@ public class Welcome3 extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(Welcome3.this, SignUp.class);
+                startActivity(intent);
+            }
+        });
+
+        // dot1
+        dot1 = findViewById(R.id.dot1);
+        dot1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Welcome3.this, Welcome1.class);
+                startActivity(intent);
+            }
+        });
+
+        // dot2
+        dot2 = findViewById(R.id.dot2);
+        dot2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Welcome3.this, Welcome2.class);
                 startActivity(intent);
             }
         });

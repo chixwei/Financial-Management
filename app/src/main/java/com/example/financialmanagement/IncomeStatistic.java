@@ -122,23 +122,29 @@ public class IncomeStatistic extends Fragment {
 
 
     private void setupPieChart() {
+        //show label
+        pieChart.setDrawEntryLabels(false);
         pieChart.setDrawHoleEnabled(true);
         pieChart.setUsePercentValues(true);
-        pieChart.setEntryLabelTextSize(12);
-        pieChart.setEntryLabelColor(Color.BLACK);
+//        pieChart.setEntryLabelTextSize(16);
+//        pieChart.setEntryLabelColor(Color.WHITE);
         pieChart.setCenterText("Income");
         pieChart.setCenterTextSize(24);
         pieChart.getDescription().setEnabled(false);
 
+
         Legend l = pieChart.getLegend();
         l.setVerticalAlignment(Legend.LegendVerticalAlignment.BOTTOM);
-        l.setHorizontalAlignment(Legend.LegendHorizontalAlignment.LEFT);
+        l.setHorizontalAlignment(Legend.LegendHorizontalAlignment.CENTER);
         l.setOrientation(Legend.LegendOrientation.HORIZONTAL);
+        l.setXEntrySpace(7);
+        l.setYEntrySpace(3);
         l.setTextSize(16);
         l.setDrawInside(false);
         l.setEnabled(true);
-
         l.setForm(CIRCLE);
+        l.setWordWrapEnabled(true);
+
 
 
     }
@@ -150,6 +156,11 @@ public class IncomeStatistic extends Fragment {
         allCategories.forEach((key, value)-> {
             entries.add(new PieEntry(value.floatValue(), key));
         });
+
+//        allCategories.forEach((key,value)-> {
+//            entries.add(new PieEntry(value.floatValue()));
+//        });
+
 
 //        entries.add(new PieEntry(0.2f, "Food & Dining"));
 //        entries.add(new PieEntry(0.15f, "Medical"));
@@ -174,7 +185,7 @@ public class IncomeStatistic extends Fragment {
         PieData data = new PieData(dataSet);
         data.setDrawValues(true);
         data.setValueFormatter(new PercentFormatter(pieChart));
-        data.setValueTextSize(12f);
+        data.setValueTextSize(18f);
         data.setValueTextColor(Color.BLACK);
 
         pieChart.setData(data);

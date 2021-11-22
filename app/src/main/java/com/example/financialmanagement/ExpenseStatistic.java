@@ -124,10 +124,11 @@ public class ExpenseStatistic extends Fragment {
 
 
     private void setupPieChart() {
+        pieChart.setDrawEntryLabels(false);
         pieChart.setDrawHoleEnabled(true);
         pieChart.setUsePercentValues(true);
-        pieChart.setEntryLabelTextSize(16);
-        pieChart.setEntryLabelColor(Color.BLACK);
+//        pieChart.setEntryLabelTextSize(16);
+//        pieChart.setEntryLabelColor(Color.WHITE);
         pieChart.setCenterText("Expenses");
         pieChart.setCenterTextSize(24);
         pieChart.getDescription().setEnabled(false);
@@ -136,13 +137,15 @@ public class ExpenseStatistic extends Fragment {
         Legend l = pieChart.getLegend();
         l.setVerticalAlignment(Legend.LegendVerticalAlignment.BOTTOM);
         l.setHorizontalAlignment(Legend.LegendHorizontalAlignment.CENTER);
-        l.setOrientation(Legend.LegendOrientation.VERTICAL);
+        l.setOrientation(Legend.LegendOrientation.HORIZONTAL);
+        l.setXEntrySpace(7);
+        l.setYEntrySpace(3);
         l.setTextSize(16);
         l.setDrawInside(false);
         l.setEnabled(true);
-
-
         l.setForm(CIRCLE);
+        l.setWordWrapEnabled(true);
+
 
     }
 
@@ -177,7 +180,7 @@ public class ExpenseStatistic extends Fragment {
         PieData data = new PieData(dataSet);
         data.setDrawValues(true);
         data.setValueFormatter(new PercentFormatter(pieChart));
-        data.setValueTextSize(12f);
+        data.setValueTextSize(18f);
         data.setValueTextColor(Color.BLACK);
 
         pieChart.setData(data);

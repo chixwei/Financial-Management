@@ -246,8 +246,8 @@ public class AddIncome extends AppCompatActivity {
                     piggy.setAmount(Amount);
                     piggy.setDate(income_date.getText().toString().trim());
                     piggy.setMemo(income_memo.getText().toString().trim());
-                    //String ImageUploadId = ref.push().getKey();
-                    //ref.child(ImageUploadId).setValue(piggy);
+                    String ImageUploadId = ref.push().getKey();
+                    ref.child(ImageUploadId).setValue(piggy);
                     Toast.makeText(getApplicationContext(),"data inserted successfully",Toast.LENGTH_SHORT).show();
                     // back to home page
                     Intent intent = new Intent(AddIncome.this, MainActivity.class);

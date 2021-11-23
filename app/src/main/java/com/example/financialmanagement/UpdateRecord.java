@@ -84,6 +84,7 @@ public class UpdateRecord extends AppCompatActivity {
 
         // define variable
         category_name = findViewById(R.id.category_name);
+        category_image = findViewById(R.id.category_image);
         amount = findViewById(R.id.amount);
         date = findViewById(R.id.date);
         memo = findViewById(R.id.memo);
@@ -91,7 +92,7 @@ public class UpdateRecord extends AppCompatActivity {
 
         // get record details
         _Category_Name = getIntent().getStringExtra("category_name");
-        _Category_Img = getIntent().getStringExtra("category_img");
+        _Category_Img = getIntent().getStringExtra("category_image");
         _Amount = getIntent().getStringExtra("amount");
         _Date = getIntent().getStringExtra("date");
         _Memo = getIntent().getStringExtra("memo");
@@ -107,12 +108,11 @@ public class UpdateRecord extends AppCompatActivity {
         img.setText(_Img);
         Log.d("Tag", "rec_img: " + _Img);
 
-        /*
         // set category image
         Glide.with(UpdateRecord.this)
                 .load(_Category_Img)
                 .into(category_image);
-        Log.d("Tag", "cat_img: " + _Category_Img);*/
+        Log.d("Tag", "cat_img: " + _Category_Img);
 
         // get user id
         user = FirebaseAuth.getInstance().getCurrentUser();
@@ -151,7 +151,7 @@ public class UpdateRecord extends AppCompatActivity {
                 picker = new DatePickerDialog(UpdateRecord.this, new DatePickerDialog.OnDateSetListener() {
                     @Override
                     public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
-                        date.setText(dayOfMonth + "/" + month + "/" + year);
+                        date.setText(dayOfMonth + "/" + (month + 1) + "/" + year);
                     }
                 }, year, month, day);
                 picker.show();
@@ -170,7 +170,7 @@ public class UpdateRecord extends AppCompatActivity {
         });
 
         // declare database
-        ref = FirebaseDatabase.getInstance().getReference().child("User").child(user_id).child(_Category).child("-Mp7xgLt7BhGJ7yHVDIC");
+        ref = FirebaseDatabase.getInstance().getReference().child("User").child(user_id).child(_Category).child(_Record_Id);
         storageReference = FirebaseStorage.getInstance().getReference().child("User").child(user_id).child(_Category);
 
         // update button
@@ -197,7 +197,14 @@ public class UpdateRecord extends AppCompatActivity {
                         Amount = Double.parseDouble(amount.getText().toString());
                 }
 
-                if (isAmountChanged() || isDateChanged() || isMemoChanged() || isImageChanged()) {
+                // loop the below functions
+                ArrayList<Boolean> status = new ArrayList<>();
+                status.add(isMemoChanged());
+                status.add(isDateChanged());
+                status.add(isAmountChanged());
+                status.add(isImageChanged());
+
+                if (status.contains(true)) {
                     Toast.makeText(getApplicationContext(), "Record details have been updated", Toast.LENGTH_SHORT).show();
                     // back to home page
                     Intent intent = new Intent(UpdateRecord.this, MainActivity.class);
@@ -208,42 +215,6 @@ public class UpdateRecord extends AppCompatActivity {
                     Intent intent = new Intent(UpdateRecord.this, MainActivity.class);
                     startActivity(intent);
                 }
-
-                /*
-                if (img.getText().toString().trim().equals("")) {
-                    ref.child("amount").setValue(Amount);
-                    ref.child("date").setValue(date.getText().toString().trim());
-                    ref.child("memo").setValue(memo.getText().toString().trim());
-                    Toast.makeText(getApplicationContext(), "data updated successfully", Toast.LENGTH_SHORT).show();
-                    // back to home page
-                    Intent intent = new Intent(UpdateRecord.this, MainActivity.class);
-                    startActivity(intent);
-                } else {
-                    if (FilePathUri != null && !FilePathUri.equals(Uri.EMPTY)) {
-                        String imageFileName = System.currentTimeMillis() + "." + GetFileExtension(FilePathUri);
-                        StorageReference storageReference2 = storageReference.child(imageFileName);
-                        storageReference2.putFile(FilePathUri).addOnSuccessListener(taskSnapshot -> {
-                            ref.child("amount").setValue(Amount);
-                            ref.child("date").setValue(date.getText().toString().trim());
-                            ref.child("memo").setValue(memo.getText().toString().trim());
-                            ref.child("image_url").setValue(img.getText().toString().trim());
-                            Toast.makeText(getApplicationContext(), "data updated successfully", Toast.LENGTH_SHORT).show();
-                            // back to home page
-                            Intent intent = new Intent(UpdateRecord.this, MainActivity.class);
-                            startActivity(intent);
-                        });
-                    } /*else {
-                        ref.child("amount").setValue(Amount);
-                        ref.child("date").setValue(date.getText().toString().trim());
-                        ref.child("memo").setValue(memo.getText().toString().trim());
-                        ref.child("image_url").setValue(img.getText().toString().trim());
-                        Toast.makeText(getApplicationContext(), "data updated successfully", Toast.LENGTH_SHORT).show();
-                        // back to home page
-                        Intent intent = new Intent(UpdateRecord.this, MainActivity.class);
-                        startActivity(intent);
-                    }
-                }*/
-
             }
         });
 
@@ -276,7 +247,7 @@ public class UpdateRecord extends AppCompatActivity {
 
     private boolean isAmountChanged(){
         if(!_Amount.equals(amount.getText().toString())) {
-            ref.child("amount").setValue(amount.getText().toString());
+            ref.child("amount").setValue(Amount);
             _Amount = amount.getText().toString();
             return true;
         } else {
@@ -304,17 +275,20 @@ public class UpdateRecord extends AppCompatActivity {
         }
     }
 
-    private boolean isImageChanged(){
-        if(!getIntent().getStringExtra("image").equals(img.getText().toString())) {
-            String imageFileName = System.currentTimeMillis() + "." + GetFileExtension(FilePathUri);
-            StorageReference storageReference2 = storageReference.child(imageFileName);
-            storageReference2.putFile(FilePathUri).addOnSuccessListener(taskSnapshot -> {
+    private boolean isImageChanged() {
+        if (!img.getText().toString().equals("")) {
+            if (getIntent().getStringExtra("image") == null || !getIntent().getStringExtra("image").equals(img.getText().toString())) {
+                String imageFileName = System.currentTimeMillis() + "." + GetFileExtension(FilePathUri);
                 ref.child("image_url").setValue(imageFileName);
-                _Img = imageFileName;
-            });
-            return true;
+                StorageReference storageReference2 = storageReference.child(imageFileName);
+                storageReference2.putFile(FilePathUri).addOnSuccessListener(taskSnapshot -> {
+                    _Img = imageFileName;
+                });
+                return true;
+            }
         } else {
             return false;
         }
+        return false;
     }
 }

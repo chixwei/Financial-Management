@@ -36,7 +36,7 @@ public class PiggyAdapter extends RecyclerView.Adapter<PiggyAdapter.MyViewHolder
 
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
-        Piggy piggy = list.get(position);
+        PiggyExtended piggy = list.get(position);
 
         Glide.with(context)
                 .load(piggy.getCategory_url())
@@ -58,8 +58,8 @@ public class PiggyAdapter extends RecyclerView.Adapter<PiggyAdapter.MyViewHolder
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(context, ViewRecord.class);
-                intent.putExtra("record_id", ((PiggyExtended) piggy).getFirebaseID());
-                Log.d("Tag", "record id test: " + ((PiggyExtended) piggy).getFirebaseID());
+                intent.putExtra("record_id",  piggy.getFirebaseID());
+                Log.d("Tag", "record id test1: " + piggy.getFirebaseID());
                 intent.putExtra("category_name", piggy.getCategory_name());
                 intent.putExtra("category_image", piggy.getCategory_url());
                 intent.putExtra("category", piggy.getCategory());
@@ -78,8 +78,8 @@ public class PiggyAdapter extends RecyclerView.Adapter<PiggyAdapter.MyViewHolder
             @Override
             public boolean onLongClick(View v) {
                 Intent intent = new Intent(context, UpdateRecord.class);
-                intent.putExtra("record_id", ((PiggyExtended) piggy).getFirebaseID());
-                Log.d("Tag", "record id test: " + ((PiggyExtended) piggy).getFirebaseID());
+                intent.putExtra("record_id",  piggy.getFirebaseID());
+                Log.d("Tag", "record id test2: " + piggy.getFirebaseID());
                 intent.putExtra("category_name", piggy.getCategory_name());
                 intent.putExtra("category_image", piggy.getCategory_url());
                 intent.putExtra("category", piggy.getCategory());

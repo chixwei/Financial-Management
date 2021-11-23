@@ -116,13 +116,13 @@ public class ViewRecord extends AppCompatActivity {
         });
 
         // declare record details
-        record_category_name = (TextView)findViewById(R.id.record_category_name);
+        record_category_name = (TextView) findViewById(R.id.record_category_name);
         record_category_image = (ImageView) findViewById(R.id.record_category_image);
-        record_category = (TextView)findViewById(R.id.record_category);
-        record_amount = (TextView)findViewById(R.id.record_amount);
-        record_date = (TextView)findViewById(R.id.record_date);
-        record_memo = (TextView)findViewById(R.id.record_memo);
-        record_image = (ImageView)findViewById(R.id.record_image);
+        record_category = (TextView) findViewById(R.id.record_category);
+        record_amount = (TextView) findViewById(R.id.record_amount);
+        record_date = (TextView) findViewById(R.id.record_date);
+        record_memo = (TextView) findViewById(R.id.record_memo);
+        record_image = (ImageView) findViewById(R.id.record_image);
 
         // get record details
         record_category_name.setText(getIntent().getStringExtra("category_name"));
@@ -134,12 +134,10 @@ public class ViewRecord extends AppCompatActivity {
         Glide.with(ViewRecord.this)
                 .load(getIntent().getStringExtra("category_image"))
                 .into(record_category_image);
-        Log.d("Tag", "cat_img: " +(getIntent().getStringExtra("category_image")));
+        Log.d("Tag", "cat_img: " + (getIntent().getStringExtra("category_image")));
 
-        /*
-        if (getIntent().getStringExtra("image").equals("null")) {
-            // do ntg
-        } else {*/
+
+        if (getIntent().getStringExtra("image") != null) {
             dumpIntent(getIntent());
             storageReference = FirebaseStorage.getInstance().getReference().child("User").child(user_id).child(getIntent().getStringExtra("category")).child(getIntent().getStringExtra("image"));
             storageReference.getDownloadUrl().addOnSuccessListener(uri -> {
@@ -150,10 +148,10 @@ public class ViewRecord extends AppCompatActivity {
                         .into(record_image);
                 Log.d("Tag", "rec_img: " + (url));
             });
-        //}
+        }
 
         // test record id
-        Log.d("Tag", "record_id: " +(getIntent().getStringExtra("record_id")));
+        Log.d("Tag", "record_id: " + (getIntent().getStringExtra("record_id")));
     }
 
     public static void dumpIntent(Intent i) {

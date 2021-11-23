@@ -141,7 +141,7 @@ public class AddIncome extends AppCompatActivity {
                 picker = new DatePickerDialog(AddIncome.this, new DatePickerDialog.OnDateSetListener() {
                     @Override
                     public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
-                        income_date.setText(dayOfMonth + "/" + month + "/" + year);
+                        income_date.setText(dayOfMonth + "/" + (month + 1) + "/" + year);
                     }
                 }, year, month, day);
                 picker.show();

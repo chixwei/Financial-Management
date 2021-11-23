@@ -150,7 +150,7 @@ public class AddExpense extends AppCompatActivity {
                 picker = new DatePickerDialog(AddExpense.this, new DatePickerDialog.OnDateSetListener() {
                     @Override
                     public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
-                        expense_date.setText(dayOfMonth + "/" + month + "/" + year);
+                        expense_date.setText(dayOfMonth + "/" + (month + 1) + "/" + year);
                     }
                 }, year, month, day);
                 picker.show();

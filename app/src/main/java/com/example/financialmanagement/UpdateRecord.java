@@ -170,7 +170,7 @@ public class UpdateRecord extends AppCompatActivity {
         });
 
         // declare database
-        ref = FirebaseDatabase.getInstance().getReference().child("User").child(user_id).child(_Category).child("-Mp6SDBahRp9Hfj1afX-");
+        ref = FirebaseDatabase.getInstance().getReference().child("User").child(user_id).child(_Category).child("-Mp7xgLt7BhGJ7yHVDIC");
         storageReference = FirebaseStorage.getInstance().getReference().child("User").child(user_id).child(_Category);
 
         // update button
@@ -197,10 +197,42 @@ public class UpdateRecord extends AppCompatActivity {
                         Amount = Double.parseDouble(amount.getText().toString());
                 }
 
-                if (FilePathUri != null && !FilePathUri.equals(Uri.EMPTY)) {
-                    String imageFileName = System.currentTimeMillis() + "." + GetFileExtension(FilePathUri);
-                    StorageReference storageReference2 = storageReference.child(imageFileName);
-                    storageReference2.putFile(FilePathUri).addOnSuccessListener(taskSnapshot -> {
+                if (isAmountChanged() || isDateChanged() || isMemoChanged() || isImageChanged()) {
+                    Toast.makeText(getApplicationContext(), "Record details have been updated", Toast.LENGTH_SHORT).show();
+                    // back to home page
+                    Intent intent = new Intent(UpdateRecord.this, MainActivity.class);
+                    startActivity(intent);
+                } else {
+                    Toast.makeText(getApplicationContext(), "Record details is same cannot be updated", Toast.LENGTH_SHORT).show();
+                    // back to home page
+                    Intent intent = new Intent(UpdateRecord.this, MainActivity.class);
+                    startActivity(intent);
+                }
+
+                /*
+                if (img.getText().toString().trim().equals("")) {
+                    ref.child("amount").setValue(Amount);
+                    ref.child("date").setValue(date.getText().toString().trim());
+                    ref.child("memo").setValue(memo.getText().toString().trim());
+                    Toast.makeText(getApplicationContext(), "data updated successfully", Toast.LENGTH_SHORT).show();
+                    // back to home page
+                    Intent intent = new Intent(UpdateRecord.this, MainActivity.class);
+                    startActivity(intent);
+                } else {
+                    if (FilePathUri != null && !FilePathUri.equals(Uri.EMPTY)) {
+                        String imageFileName = System.currentTimeMillis() + "." + GetFileExtension(FilePathUri);
+                        StorageReference storageReference2 = storageReference.child(imageFileName);
+                        storageReference2.putFile(FilePathUri).addOnSuccessListener(taskSnapshot -> {
+                            ref.child("amount").setValue(Amount);
+                            ref.child("date").setValue(date.getText().toString().trim());
+                            ref.child("memo").setValue(memo.getText().toString().trim());
+                            ref.child("image_url").setValue(img.getText().toString().trim());
+                            Toast.makeText(getApplicationContext(), "data updated successfully", Toast.LENGTH_SHORT).show();
+                            // back to home page
+                            Intent intent = new Intent(UpdateRecord.this, MainActivity.class);
+                            startActivity(intent);
+                        });
+                    } /*else {
                         ref.child("amount").setValue(Amount);
                         ref.child("date").setValue(date.getText().toString().trim());
                         ref.child("memo").setValue(memo.getText().toString().trim());
@@ -209,20 +241,9 @@ public class UpdateRecord extends AppCompatActivity {
                         // back to home page
                         Intent intent = new Intent(UpdateRecord.this, MainActivity.class);
                         startActivity(intent);
-                    });
-                } else {
-                    /*
-                    ref.child("amount").setValue(Amount);
-                    ref.child("date").setValue(date.getText().toString().trim());
-                    ref.child("memo").setValue(memo.getText().toString().trim());
-                    ref.child("image_url").setValue(img.getText().toString().trim());
-                    Toast.makeText(getApplicationContext(), "data updated successfully", Toast.LENGTH_SHORT).show();
-                    // back to home page
-                    Intent intent = new Intent(UpdateRecord.this, MainActivity.class);
-                    startActivity(intent);
+                    }
+                }*/
 
-                     */
-                }
             }
         });
 
@@ -253,34 +274,47 @@ public class UpdateRecord extends AppCompatActivity {
         return mimeTypeMap.getExtensionFromMimeType(contentResolver.getType(uri));
     }
 
-    /*
-    // update
-    public void UpdateRecord() {
-        if (FilePathUri != null && !FilePathUri.equals(Uri.EMPTY)) {
+    private boolean isAmountChanged(){
+        if(!_Amount.equals(amount.getText().toString())) {
+            ref.child("amount").setValue(amount.getText().toString());
+            _Amount = amount.getText().toString();
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    private boolean isDateChanged(){
+        if(!_Date.equals(date.getText().toString())) {
+            ref.child("date").setValue(date.getText().toString());
+            _Date = date.getText().toString();
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    private boolean isMemoChanged(){
+        if(!getIntent().getStringExtra("memo").equals(memo.getText().toString())) {
+            ref.child("memo").setValue(memo.getText().toString());
+            _Memo = memo.getText().toString();
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    private boolean isImageChanged(){
+        if(!getIntent().getStringExtra("image").equals(img.getText().toString())) {
             String imageFileName = System.currentTimeMillis() + "." + GetFileExtension(FilePathUri);
             StorageReference storageReference2 = storageReference.child(imageFileName);
             storageReference2.putFile(FilePathUri).addOnSuccessListener(taskSnapshot -> {
-                ref.child("amount").setValue(Amount);
-                ref.child("date").setValue(date.getText().toString().trim());
-                ref.child("memo").setValue(memo.getText().toString().trim());
-                ref.child("image_url").setValue(img.getText().toString().trim());
-                Toast.makeText(getApplicationContext(), "data updated successfully", Toast.LENGTH_SHORT).show();
-                // back to home page
-                Intent intent = new Intent(UpdateRecord.this, MainActivity.class);
-                startActivity(intent);
+                ref.child("image_url").setValue(imageFileName);
+                _Img = imageFileName;
             });
+            return true;
         } else {
-
-            ref.child("amount").setValue(Amount);
-            ref.child("date").setValue(date.getText().toString().trim());
-            ref.child("memo").setValue(memo.getText().toString().trim());
-            ref.child("image_url").setValue(img.getText().toString().trim());
-            Toast.makeText(getApplicationContext(), "data updated successfully", Toast.LENGTH_SHORT).show();
-            // back to home page
-            Intent intent = new Intent(UpdateRecord.this, MainActivity.class);
-            startActivity(intent);
-
-
+            return false;
         }
-    }*/
+    }
 }

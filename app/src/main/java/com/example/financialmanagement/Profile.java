@@ -12,6 +12,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -34,12 +35,13 @@ import java.util.Map;
 
 public class Profile extends Fragment {
 
-    ImageView logout_button;
+    ImageView logout_button, edit_username;
     TextView username, total_balance, total_income, total_expenses;
     Dialog dialog;
-    String user_id;
+    String user_id, Uname;
     FirebaseUser user;
     DatabaseReference ref, database_income, database_expenses;
+    EditText new_username;
 
     Double expsum = 0.0, incsum = 0.0;
 
@@ -120,7 +122,7 @@ public class Profile extends Fragment {
         ref.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                String Uname = snapshot.child("username").getValue().toString();
+                Uname = snapshot.child("username").getValue().toString();
                 username.setText(Uname);
             }
 
@@ -226,6 +228,53 @@ public class Profile extends Fragment {
             }
         });
 
+        // edit username
+        edit_username = view.findViewById(R.id.edit_username);
+        edit_username.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.setContentView(R.layout.edit_username);
+                dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+                dialog.show();
+
+                new_username = dialog.findViewById(R.id.new_username);
+                new_username.setText(Uname);
+
+                // edit close button
+                ImageView close_button = dialog.findViewById(R.id.close_button);
+                close_button.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        dialog.dismiss();
+                    }
+                });
+
+                // confirm edit button
+                Button update_button = dialog.findViewById(R.id.update_button);
+                update_button.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        if (isUsernameChanged()) {
+                            Toast.makeText(getActivity(), "Username has been updated", Toast.LENGTH_SHORT).show();
+                            dialog.dismiss();
+                        } else {
+                            Toast.makeText(getActivity(), "Username has not been updated", Toast.LENGTH_SHORT).show();
+                            dialog.dismiss();
+                        }
+                    }
+                });
+            }
+        });
+
         return view;
+    }
+
+    private boolean isUsernameChanged() {
+        if(!Uname.equals(new_username.getText().toString())) {
+            ref.child("username").setValue(new_username.getText().toString());
+            return true;
+        } else {
+            return false;
+        }
     }
 }

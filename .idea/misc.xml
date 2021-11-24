@@ -6,8 +6,12 @@
         <entry key="..\:/Users/vivien/AndroidStudioProjects/Financial-Management/app/src/main/res/drawable/bg_1.xml" value="0.26614583333333336" />
         <entry key="..\:/Users/vivien/AndroidStudioProjects/Financial-Management/app/src/main/res/drawable/fab_txt_bg.xml" value="0.26614583333333336" />
         <entry key="..\:/Users/vivien/AndroidStudioProjects/Financial-Management/app/src/main/res/drawable/fill_info_bg.xml" value="0.26614583333333336" />
+        <entry key="..\:/Users/vivien/AndroidStudioProjects/Financial-Management/app/src/main/res/drawable/ic_close.xml" value="0.26614583333333336" />
         <entry key="..\:/Users/vivien/AndroidStudioProjects/Financial-Management/app/src/main/res/drawable/ic_dot.xml" value="0.26614583333333336" />
+        <entry key="..\:/Users/vivien/AndroidStudioProjects/Financial-Management/app/src/main/res/drawable/ic_edit_gold.xml" value="0.26614583333333336" />
         <entry key="..\:/Users/vivien/AndroidStudioProjects/Financial-Management/app/src/main/res/drawable/ic_error.xml" value="0.26614583333333336" />
+        <entry key="..\:/Users/vivien/AndroidStudioProjects/Financial-Management/app/src/main/res/drawable/ic_memo.xml" value="0.26614583333333336" />
+        <entry key="..\:/Users/vivien/AndroidStudioProjects/Financial-Management/app/src/main/res/drawable/ic_user.xml" value="0.26614583333333336" />
         <entry key="..\:/Users/vivien/AndroidStudioProjects/Financial-Management/app/src/main/res/drawable/login_bg.xml" value="0.26614583333333336" />
         <entry key="..\:/Users/vivien/AndroidStudioProjects/Financial-Management/app/src/main/res/drawable/skip_button_bg.xml" value="0.26614583333333336" />
         <entry key="..\:/Users/vivien/AndroidStudioProjects/Financial-Management/app/src/main/res/drawable/spinner_bg.xml" value="0.26614583333333336" />
@@ -27,7 +31,7 @@
         <entry key="..\:/Users/vivien/AndroidStudioProjects/Financial-Management/app/src/main/res/layout/activity_income_statistic.xml" value="0.25" />
         <entry key="..\:/Users/vivien/AndroidStudioProjects/Financial-Management/app/src/main/res/layout/activity_login.xml" value="0.1621376811594203" />
         <entry key="..\:/Users/vivien/AndroidStudioProjects/Financial-Management/app/src/main/res/layout/activity_main.xml" value="0.15443840579710144" />
-        <entry key="..\:/Users/vivien/AndroidStudioProjects/Financial-Management/app/src/main/res/layout/activity_profile.xml" value="0.4" />
+        <entry key="..\:/Users/vivien/AndroidStudioProjects/Financial-Management/app/src/main/res/layout/activity_profile.xml" value="0.264" />
         <entry key="..\:/Users/vivien/AndroidStudioProjects/Financial-Management/app/src/main/res/layout/activity_signup.xml" value="0.13768115942028986" />
         <entry key="..\:/Users/vivien/AndroidStudioProjects/Financial-Management/app/src/main/res/layout/activity_splash.xml" value="0.1621376811594203" />
         <entry key="..\:/Users/vivien/AndroidStudioProjects/Financial-Management/app/src/main/res/layout/activity_statistic.xml" value="0.1644021739130435" />
@@ -40,9 +44,10 @@
         <entry key="..\:/Users/vivien/AndroidStudioProjects/Financial-Management/app/src/main/res/layout/category_spinner.xml" value="0.15443840579710144" />
         <entry key="..\:/Users/vivien/AndroidStudioProjects/Financial-Management/app/src/main/res/layout/content_update_record.xml" value="0.18840579710144928" />
         <entry key="..\:/Users/vivien/AndroidStudioProjects/Financial-Management/app/src/main/res/layout/delete.xml" value="0.25" />
+        <entry key="..\:/Users/vivien/AndroidStudioProjects/Financial-Management/app/src/main/res/layout/edit_username.xml" value="0.25" />
         <entry key="..\:/Users/vivien/AndroidStudioProjects/Financial-Management/app/src/main/res/layout/fragment_first.xml" value="0.18840579710144928" />
         <entry key="..\:/Users/vivien/AndroidStudioProjects/Financial-Management/app/src/main/res/layout/fragment_second.xml" value="0.25" />
-        <entry key="..\:/Users/vivien/AndroidStudioProjects/Financial-Management/app/src/main/res/layout/logout.xml" value="0.12360688956433637" />
+        <entry key="..\:/Users/vivien/AndroidStudioProjects/Financial-Management/app/src/main/res/layout/logout.xml" value="0.264" />
         <entry key="..\:/Users/vivien/AndroidStudioProjects/Financial-Management/app/src/main/res/layout/record_row.xml" value="0.264" />
         <entry key="..\:/Users/vivien/AndroidStudioProjects/Financial-Management/app/src/main/res/layout/reset_pop.xml" value="0.1621376811594203" />
         <entry key="..\:/Users/vivien/AndroidStudioProjects/Financial-Management/app/src/main/res/menu/main_menu.xml" value="0.25" />

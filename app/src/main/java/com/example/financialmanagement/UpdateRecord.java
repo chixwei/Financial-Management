@@ -129,6 +129,10 @@ public class UpdateRecord extends AppCompatActivity {
         category_list.add(0, "MYR - Malaysian Ringgit");
         category_list.add("BGP - British Pound");
         category_list.add("CNY - Chinese Yuan Renminbi");
+        category_list.add("EUR - Euro");
+        category_list.add("INR - Indian Rupee");
+        category_list.add("JPY - Japanese Yen");
+        category_list.add("KRW - South Korean Won");
         category_list.add("SGD - Singapore Dollar");
         category_list.add("USD - US Dollar");
 
@@ -182,16 +186,28 @@ public class UpdateRecord extends AppCompatActivity {
                 String selectedCurrency = spinner.getSelectedItem().toString();
                 switch (selectedCurrency) {
                     case "BGP - British Pound":
-                        Amount = Double.parseDouble(amount.getText().toString()) / 0.176;
+                        Amount = Double.parseDouble(String.format("%.2f", Double.parseDouble(amount.getText().toString()) / 0.178));
                         break;
                     case "CNY - Chinese Yuan Renminbi":
-                        Amount = Double.parseDouble(amount.getText().toString()) / 1.547;
+                        Amount = Double.parseDouble(String.format("%.2f", Double.parseDouble(amount.getText().toString()) / 1.517));
+                        break;
+                    case "EUR - Euro":
+                        Amount = Double.parseDouble(String.format("%.2f", Double.parseDouble(amount.getText().toString()) / 0.212));
+                        break;
+                    case "INR - Indian Rupee":
+                        Amount = Double.parseDouble(String.format("%.2f", Double.parseDouble(amount.getText().toString()) / 17.669));
+                        break;
+                    case "JPY - Japanese Yen":
+                        Amount = Double.parseDouble(String.format("%.2f", Double.parseDouble(amount.getText().toString()) / 27.318));
+                        break;
+                    case "KRW - South Korean Won":
+                        Amount = Double.parseDouble(String.format("%.2f", Double.parseDouble(amount.getText().toString()) / 282.036));
                         break;
                     case "SGD - Singapore Dollar":
-                        Amount = Double.parseDouble(amount.getText().toString()) / 0.326;
+                        Amount = Double.parseDouble(String.format("%.2f", Double.parseDouble(amount.getText().toString()) / 0.325));
                         break;
                     case "USD - US Dollar":
-                        Amount = Double.parseDouble(amount.getText().toString()) / 0.241;
+                        Amount = Double.parseDouble(String.format("%.2f", Double.parseDouble(amount.getText().toString()) / 0.234));
                         break;
                     default:
                         Amount = Double.parseDouble(amount.getText().toString());

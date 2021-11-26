@@ -186,6 +186,16 @@ public class UpdateRecord extends AppCompatActivity {
         update_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                // error if empty
+                if (amount.getText().toString().length() == 0) {
+                    amount.setError("Amount is required");
+                    return;
+                }
+                if (date.getText().toString().length() == 0) {
+                    date.setError("Date is required");
+                    return;
+                }
+
                 //change currency
                 String selectedCurrency = spinner.getSelectedItem().toString();
                 switch (selectedCurrency) {

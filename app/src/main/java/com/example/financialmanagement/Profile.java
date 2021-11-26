@@ -254,6 +254,12 @@ public class Profile extends Fragment {
                 update_button.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
+                        // error if empty
+                        if (new_username.getText().toString().length() == 0) {
+                            new_username.setError("Username is required");
+                            return;
+                        }
+
                         if (isUsernameChanged()) {
                             Toast.makeText(getActivity(), "Username has been updated", Toast.LENGTH_SHORT).show();
                             dialog.dismiss();

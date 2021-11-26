@@ -56,6 +56,7 @@ public class Income extends Fragment {
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
                     PiggyExtended piggy = dataSnapshot.getValue(PiggyExtended.class);
+                    piggy.setFirebaseID(dataSnapshot.getKey());
                     list.add(piggy);
                 }
                 PiggyAdapter.notifyDataSetChanged();

@@ -68,7 +68,7 @@ public class UpdateRecord extends AppCompatActivity {
         back_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(UpdateRecord.this, Home.class);
+                Intent intent = new Intent(UpdateRecord.this, MainActivity.class);
                 startActivity(intent);
             }
         });
@@ -172,6 +172,10 @@ public class UpdateRecord extends AppCompatActivity {
                 startActivityForResult(Intent.createChooser(intent, "Select Image"), Image_Request_Code);
             }
         });
+
+        Log.d("Tag", "user id test!: " + user_id);
+        Log.d("Tag", "category test!: " + _Category);
+        Log.d("Tag", "record id test!: " + _Record_Id);
 
         // declare database
         ref = FirebaseDatabase.getInstance().getReference().child("User").child(user_id).child(_Category).child(_Record_Id);

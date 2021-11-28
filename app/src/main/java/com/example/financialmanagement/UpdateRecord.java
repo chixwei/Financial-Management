@@ -4,10 +4,13 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.DatePickerDialog;
+import android.app.Dialog;
 import android.content.ContentResolver;
 import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Bitmap;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
@@ -57,6 +60,7 @@ public class UpdateRecord extends AppCompatActivity {
     Uri FilePathUri;
     StorageReference storageReference;
     int Image_Request_Code = 7;
+    Dialog dialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -70,15 +74,6 @@ public class UpdateRecord extends AppCompatActivity {
             public void onClick(View view) {
                 Intent intent = new Intent(UpdateRecord.this, MainActivity.class);
                 startActivity(intent);
-            }
-        });
-
-        // delete button
-        delete_button = findViewById(R.id.delete_button);
-        delete_button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // code to delete record
             }
         });
 

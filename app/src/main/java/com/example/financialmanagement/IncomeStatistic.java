@@ -40,8 +40,7 @@ public class IncomeStatistic extends Fragment {
     private PieChart pieChart;
     DatabaseReference firebase;
     FirebaseUser user;
-    String user_id, category_name;
-    Double same_amount = 0.0;
+    String user_id;
     double grandTotalUnTransformed = 0;
 
     HashMap<String, Double> allCategories = new HashMap<String, Double>();
@@ -90,20 +89,6 @@ public class IncomeStatistic extends Fragment {
                     }
                     grandTotalUnTransformed += income_amount;
 
-
-//                    if (category_name == category_name) {
-//                        same_amount += expense_amount;
-//                        Log.d("ADebugTag", "Same Amount: " + Double.toString(same_amount));
-//                    } else {
-//                        Double dif_amount = expense_amount;
-//                        Log.d("ADebugTag", "Dif Amount: " + Double.toString(dif_amount));
-//                    }
-
-//                    expsum += expense_amount;
-//                    setExpsum(expsum);
-//                    total_expenses.setText(String.format(Locale.US, "%.2f", expsum));
-//                    Balance();
-
                 }
                 allCategories.forEach((key, value) -> {
                     allCategories.replace(key, value / grandTotalUnTransformed);
@@ -126,8 +111,6 @@ public class IncomeStatistic extends Fragment {
         pieChart.setDrawEntryLabels(false);
         pieChart.setDrawHoleEnabled(true);
         pieChart.setUsePercentValues(true);
-//        pieChart.setEntryLabelTextSize(16);
-//        pieChart.setEntryLabelColor(Color.WHITE);
         pieChart.setCenterText("Income");
         pieChart.setCenterTextSize(24);
         pieChart.getDescription().setEnabled(false);
@@ -156,17 +139,6 @@ public class IncomeStatistic extends Fragment {
         allCategories.forEach((key, value)-> {
             entries.add(new PieEntry(value.floatValue(), key));
         });
-
-//        allCategories.forEach((key,value)-> {
-//            entries.add(new PieEntry(value.floatValue()));
-//        });
-
-
-//        entries.add(new PieEntry(0.2f, "Food & Dining"));
-//        entries.add(new PieEntry(0.15f, "Medical"));
-//        entries.add(new PieEntry(0.10f, "Entertainment"));
-//        entries.add(new PieEntry(0.25f, "Electricity and Gas"));
-//        entries.add(new PieEntry(0.3f, "Housing"));
 
         //colors
         ArrayList<Integer> colors = new ArrayList<>();
